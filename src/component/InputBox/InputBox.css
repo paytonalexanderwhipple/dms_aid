@@ -1,0 +1,10 @@
+.InputBox {
+    height: 250px;
+    width: 375px;
+    position: absolute;
+    right: -375px;
+    transition: .65s;
+}
+.RevealInputBox {
+    right: 0px;
+}

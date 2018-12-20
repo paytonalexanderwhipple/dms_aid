@@ -1,0 +1,26 @@
+.Login {
+    height: 100px;
+    width: 100px;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+    grid-template-areas: 
+        "username username"
+        "password password"
+        "login register";
+}
+
+.username-input {
+    grid-area: username;
+}
+.password-input {
+    grid-area: password;
+}
+.login-button {
+    grid-area: login;
+}
+.register-button {
+    grid-area: register;
+}
