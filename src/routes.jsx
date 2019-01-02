@@ -8,7 +8,7 @@ import CampaignLanding from './component/CampaignLanding/CampaignLanding.jsx';
 export default (
     <Switch>
         <Route exact path='/' component={Login}/>
-        <Route path='/landing' component={Landing}/>
-        <Route path='/landing/campaign' component={CampaignLanding}/> 
+        <Route exact path='/landing' component={Landing}/>
+        <Route path='/landing/campaign/:id/:name' component={CampaignLanding}/> 
     </Switch>
 );

@@ -1,0 +1,11 @@
+.InviteBox {
+    height: 250px;
+    width: 375px;
+    position: absolute;
+    right: -375px;
+    top: 250px;
+    transition: .65s;
+}
+.RevealInviteBox {
+    right: 0px;
+}

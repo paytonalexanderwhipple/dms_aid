@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 
 module.exports={
-    login: async (req, res) => {
+login: async (req, res) => {
         const { username, password } = req.body;
         const db = req.app.get('db');
         const result = await db.check_for_user([username]);
@@ -14,7 +14,7 @@ module.exports={
                 res.status(401).send('Incorrect Password');
             }
         } else {
-            res.status(404).send('Incorrect Username');
+            res.status(404).send('Username does not exist');
         }
     },
     register: async (req, res) => {

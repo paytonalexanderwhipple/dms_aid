@@ -3,12 +3,12 @@
 -- 2, 2
 -- 3, 3
 -----> fake campaign
-INSERT INTO campaign (name, img, class_restrictions, level_limits, description)
-    VALUES ('1', '', 'false', 'false', 'described');
-INSERT INTO campaign (name, img, class_restrictions, level_limits, description)
-    VALUES ('2', '', 'true', 'false', 'described well with details');
-INSERT INTO campaign (name, img, class_restrictions, level_limits, description)
-    VALUES ('3', '', 'true', 'true', '');
+INSERT INTO campaign (name, img, level_limits, description)
+    VALUES ('campaign 1', '', 'false', 'described');
+INSERT INTO campaign (name, img, level_limits, description)
+    VALUES ('campaign 2', '', 'false', 'described well with details');
+INSERT INTO campaign (name, img, level_limits, description)
+    VALUES ('campaign 3', '', 'true', '');
 
 INSERT INTO campaign_user (campaign_id, user_id, is_dm)
     VALUES (1, 1, 'true');
@@ -22,22 +22,33 @@ INSERT INTO campaign_user (campaign_id, user_id, is_dm)
     VALUES (2, 2, 'false');
 INSERT INTO campaign_user (campaign_id, user_id, is_dm)
     VALUES (3, 3, 'true');
------> chars for fake campaign
-INSERT INTO character (user_id, name, title, race, temp_level, temp_hp, alignment, stats, weight, height, age, sex, eyes, hair, description, inventory, treasure, coinage, notes, special_abilities, img)
-    VALUES (2, 'name2', 'title1', 'Human', 0, 0, 'Neutral', '{12, 13, 15, 13, 18, 14}', 1000, 156, 12334, 'male', 'blue', 'blonde', '', '', '', '{0, 0, 0, 0, 0}', '', '', '');
-INSERT INTO character (user_id, name, title, race, temp_level, temp_hp, alignment, stats, weight, height, age, sex, eyes, hair, description, inventory, treasure, coinage, notes, special_abilities, img)
-    VALUES (3, 'name3', 'title2', 'Human', 0, 0, 'Neutral', '{12, 13, 15, 13, 18, 14}', 1000, 156, 12334, 'male', 'blue', 'blonde', '', '', '', '{0, 0, 0, 0, 0}', '', '', '');
-INSERT INTO character (user_id, name, title, race, temp_level, temp_hp, alignment, stats, weight, height, age, sex, eyes, hair, description, inventory, treasure, coinage, notes, special_abilities, img)
-    VALUES (2, 'name4', 'title3', 'Human', 0, 0, 'Neutral', '{12, 13, 15, 13, 18, 14}', 1000, 156, 12334, 'male', 'blue', 'blonde', '', '', '', '{0, 0, 0, 0, 0}', '', '', '');
 
-INSERT INTO character_class (character_id, class_name, hp, xp)
-    VALUES (1, 'Magic-User', '{2}', 123);
-INSERT INTO character_class (character_id, class_name, hp, xp)
-    VALUES (1, 'Fighter', '{8}', 123);
-INSERT INTO character_class (character_id, class_name, hp, xp)
-    VALUES (2, 'Magic-User', '{6, 3}', 3234);
-INSERT INTO character_class (character_id, class_name, hp, xp)
-    VALUES (3, 'Magic-User', '{1}', 231);
+--> dummy invites
+INSERT INTO join_request_invite (campaign_id, user_id, request_type, message)
+    VALUES (3, 1, 'invite', 'Lets go man!!!!');
+    
+--> join requests
+INSERT INTO join_request_invite (campaign_id, user_id, request_type, message)
+    VALUES (1, 4, 'join', 'Im so exited!!!');
+
+-----> chars for fake campaign
+INSERT INTO character (user_id, name, title, race, temp_hp, alignment, stats, saving_throw_adj, proficiencies, languages, weight, height, age, sex, eyes, hair, description, inventory, treasure, coinage, notes, dm_notes, special_abilities, img)
+    VALUES (2, 'Elrohir', '', 'Half-Elf', 0, 'Neutral Good', '{18, 15, 11, 9, 18, 10, 55}', 5,'{Long-Sword, Long-bow, Sling, Spear}', '{}', 1900, 172, 35134, 'male', 'blue', 'blonde', '', '', '', '{0, 0, 123, 0, 0}', '', '', '', '');
+INSERT INTO character (user_id, name, title, race, temp_hp, alignment, stats, saving_throw_adj, proficiencies, languages, weight, height, age, sex, eyes, hair, description, inventory, treasure, coinage, notes, dm_notes, special_abilities, img)
+    VALUES (3, 'Darin', 'Presdidigitator', 'Human', 0, 'Chaotic Evil', '{5, 13, 15, 8, 4, 14, 0}', 2,'{Staff}', '{}', 1050, 156, 12334, 'male', 'blue', 'blonde', '', '', '', '{510, 2000, 501, 5000, 200}', '', '', '', '');
+INSERT INTO character (user_id, name, title, race, temp_hp, alignment, stats, saving_throw_adj, proficiencies, languages, weight, height, age, sex, eyes, hair, description, inventory, treasure, coinage, notes, dm_notes, special_abilities, img)
+    VALUES (2, 'Shmargris', 'Butt kicker', 'Dwarf', 10, 'Chaotic Neutral', '{18, 5, 12, 17, 18, 7, 0}', 0,'{Dagger, Heavy-War-Hammer, Light-War-Hammer, Two-Handed-Sword}', '{}', 900, 105, 12334, 'male', 'blue', 'blonde', '', '', '', '{230, 120, 1, 24, 10}', '', '', '', '');
+
+INSERT INTO character_class (character_id, class_name, hp, xp, og_class)
+    VALUES (1, 'Magic-User', '{2}', 2123, 'true');
+INSERT INTO character_class (character_id, class_name, hp, xp, og_class)
+    VALUES (1, 'Fighter', '{8, 9}', 2123, 'true');
+INSERT INTO character_class (character_id, class_name, hp, xp, og_class)
+    VALUES (2, 'Magic-User', '{6, 3, 3, 4, 5}', 30234, 'true');
+INSERT INTO character_class (character_id, class_name, hp, xp, og_class)
+    VALUES (2, 'Assassin', '{0, 0, 0, 0, 0}', 3234, 'false');
+INSERT INTO character_class (character_id, class_name, hp, xp, og_class)
+    VALUES (3, 'Thief', '{4}', 231, 'true');
 
 INSERT INTO campaign_character (campaign_id, character_id)
     VALUES (1, 2);
@@ -47,3 +58,37 @@ INSERT INTO campaign_character (campaign_id, character_id)
     VALUES (1, 3);
 INSERT INTO campaign_character (campaign_id, character_id)
     VALUES (2, 2);
+--> weapons
+INSERT INTO character_weapon (character_id, weapon_name, attack_adj, damage_adj, is_proficient)
+    VALUES (1, 'Long-Sword', 0, 0, 'true');
+INSERT INTO character_weapon (character_id, weapon_name, attack_adj, damage_adj, is_proficient)
+    VALUES (1, 'Long-Bow', 0, 0, 'true');
+INSERT INTO character_weapon (character_id, weapon_name, attack_adj, damage_adj, is_proficient)
+    VALUES (1, 'Club', 0, 0, 'false');
+INSERT INTO character_weapon (character_id, weapon_name, attack_adj, damage_adj, is_proficient)
+    VALUES (1, 'Dagger', 0, 0, 'true');
+INSERT INTO character_weapon (character_id, weapon_name, attack_adj, damage_adj, is_proficient)
+    VALUES (1, 'Sling', 0, 0, 'true');
+INSERT INTO character_weapon (character_id, weapon_name, attack_adj, damage_adj, is_proficient)
+    VALUES (2, 'Staff', 0, 0, 'true');
+INSERT INTO character_weapon (character_id, weapon_name, attack_adj, damage_adj, is_proficient)
+    VALUES (3, 'Dagger', 0, 0, 'true');
+-->ammo
+INSERT INTO character_weapon_ammo (character_weapon_id, ammo_name, attack_adj, damage_adj, quantity)
+    VALUES (2, 'Long-Bow-Arrow', 0, 0, 12);
+INSERT INTO character_weapon_ammo (character_weapon_id, ammo_name, attack_adj, damage_adj, quantity)
+    VALUES (5, 'Sling-Stone', 0, 0, 20);
+INSERT INTO character_weapon_ammo (character_weapon_id, ammo_name, attack_adj, damage_adj, quantity)
+    VALUES (5, 'Sling-Bullet', 0, 0, 7);
+INSERT INTO character_weapon_ammo (character_weapon_id, ammo_name, attack_adj, damage_adj, quantity)
+    VALUES (7, 'Dagger', 0, 0, 5);
+
+--> armor
+INSERT INTO character_armor (character_id, armor_name, ac_adj)
+    VALUES (1, 'Chain', 0);
+INSERT INTO character_armor (character_id, armor_name, ac_adj)
+    VALUES (1, 'Large-Shield', 0);
+INSERT INTO character_armor (character_id, armor_name, ac_adj)
+    VALUES (2, 'None', 0);
+INSERT INTO character_armor (character_id, armor_name, ac_adj)
+    VALUES (3, 'None', 0);

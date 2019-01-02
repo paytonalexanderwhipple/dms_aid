@@ -9,8 +9,8 @@ CREATE TABLE "users" (
   OIDS=FALSE
 );
 
-DROP TABLE IF EXISTS "message" CASCADE;
-CREATE TABLE "message" (
+DROP TABLE IF EXISTS "messages" CASCADE;
+CREATE TABLE "messages" (
 	"message_id" serial NOT NULL,
 	"user_id" integer NOT NULL,
 	"campaign_id" integer NOT NULL,
@@ -18,7 +18,7 @@ CREATE TABLE "message" (
 	"is_image" BOOLEAN NOT NULL,
 	"likes" integer NOT NULL,
 	"dislikes" integer NOT NULL,
-	CONSTRAINT message_pk PRIMARY KEY ("message_id")
+	CONSTRAINT messages_pk PRIMARY KEY ("message_id")
 ) WITH (
   OIDS=FALSE
 );
@@ -30,10 +30,12 @@ CREATE TABLE "character" (
 	"name" varchar(50) NOT NULL,
 	"title" varchar(50) NOT NULL,
 	"race" text NOT NULL,
-	"temp_level" integer NOT NULL,
 	"temp_hp" integer NOT NULL,
 	"alignment" varchar(20) NOT NULL,
 	"stats" integer[] NOT NULL,
+	"saving_throw_adj" integer NOT NULL,
+	"proficiencies" text[] NOT NULL,
+	"languages" text[] NOT NULL,
 	"weight" integer NOT NULL,--in gp (lbs*10)
 	"height" integer NOT NULL,--in inches
 	"age" integer NOT NULL,--in days the front end will do the convertion
@@ -45,6 +47,7 @@ CREATE TABLE "character" (
 	"treasure" varchar(500) NOT NULL,
 	"coinage" integer[] NOT NULL,--array containing cp, sp, ep, gp, pp.
 	"notes" TEXT NOT NULL,
+	"dm_notes" TEXT NOT NULL,
 	"special_abilities" TEXT NOT NULL,
 	"img" TEXT NOT NULL,
 	CONSTRAINT character_pk PRIMARY KEY ("character_id")
@@ -52,12 +55,23 @@ CREATE TABLE "character" (
   OIDS=FALSE
 );
 
+DROP TABLE IF EXISTS "item" CASCADE;
+CREATE TABLE "item" (
+	"name" VARCHAR(30) NOT NULL,
+	"encumbrance" integer NOT NULL,
+	"character_id" integer NOT NULL,
+	"campaign_id" integer NOT NULL,
+	"item_id" serial NOT NULL,
+	CONSTRAINT item_pk PRIMARY KEY ("item_id")
+) WITH (
+	OIDS=FALSE
+);
+
 DROP TABLE IF EXISTS "campaign" CASCADE;
 CREATE TABLE "campaign" (
 	"campaign_id" serial NOT NULL,
-	"name" varchar(144) NOT NULL,
+	"name" varchar(144) NOT NULL UNIQUE,
 	"img" TEXT NOT NULL,
-	"class_restrictions" BOOLEAN NOT NULL,
 	"level_limits" BOOLEAN NOT NULL,
 	"description" VARCHAR(144) NOT NULL,
 	CONSTRAINT campaign_pk PRIMARY KEY ("campaign_id")
@@ -88,14 +102,16 @@ CREATE TABLE "campaign_user" (
 
 DROP TABLE IF EXISTS "class_abilities_fixed" CASCADE;
 CREATE TABLE "class_abilities_fixed" (
-	"name" TEXT NOT NULL,
+	"class_name" TEXT NOT NULL,
 	"min_stats" integer[] NOT NULL,
 	"bonus_xp_stats" integer[] NOT NULL,
 	"weapons" text[] NOT NULL,
 	"armor" text[] NOT NULL,
 	"non_proficiency_penalty" integer NOT NULL,
-	"hd" integer NOT NULL,
-	CONSTRAINT class_abilities_fixed_pk PRIMARY KEY ("name")
+	"hd_type" integer NOT NULL,
+	"primary_stat" text NOT NULL,
+	"alignment_restriction" text[] NOT NULL,
+	CONSTRAINT class_abilities_fixed_pk PRIMARY KEY ("class_name")
 ) WITH (
   OIDS=FALSE
 );
@@ -115,36 +131,9 @@ CREATE TABLE "race" (
 	"max_stats" integer[] NOT NULL,
 	"add_languages" integer NOT NULL,
 	"starting_age" text[] NOT NULL,
-	"classes" integer[] NOT NULL,
+	"class_options" text[] NOT NULL,
+	"racial_languages" text[] NOT NULL,
 	CONSTRAINT race_pk PRIMARY KEY ("name")
-) WITH (
-  OIDS=FALSE
-);
-
-DROP TABLE IF EXISTS "language" CASCADE;
-CREATE TABLE "language" (
-	"name" TEXT NOT NULL,
-	CONSTRAINT language_pk PRIMARY KEY ("name")
-) WITH (
-  OIDS=FALSE
-);
-
-DROP TABLE IF EXISTS "character_language" CASCADE;
-CREATE TABLE "character_language" (
-	"character_id" integer NOT NULL,
-	"language_name" TEXT NOT NULL,
-	"character_language_id" serial NOT NULL,
-	CONSTRAINT character_language_pk PRIMARY KEY ("character_language_id")
-) WITH (
-  OIDS=FALSE
-);
-
-DROP TABLE IF EXISTS "race_language" CASCADE;
-CREATE TABLE "race_language" (
-	"language_name" TEXT NOT NULL,
-	"race_name" TEXT NOT NULL,
-	"race_langauge_id" serial NOT NULL,
-	CONSTRAINT race_language_pk PRIMARY KEY ("race_langauge_id")
 ) WITH (
   OIDS=FALSE
 );
@@ -154,12 +143,40 @@ CREATE TABLE "weapon" (
 	"name" TEXT NOT NULL,
 	"damage_small_medium" TEXT NOT NULL,
 	"damage_large" TEXT NOT NULL,
-	"range" TEXT NOT NULL,
-	"fire_rate" TEXT NOT NULL,
+	"ammo_types" TEXT[] NOT NULL,
+	"encumbrance" integer NOT NULL,
 	CONSTRAINT weapon_pk PRIMARY KEY ("name")
 ) WITH (
   OIDS=FALSE
 );
+
+DROP TABLE IF EXISTS "ammo" CASCADE;
+CREATE TABLE "ammo" (
+	"type" TEXT NOT NULL,
+	"name" TEXT NOT NULL,
+	"damage_small_medium" TEXT NOT NULL,
+	"damage_large" TEXT NOT NULL,
+	"rate_of_fire" TEXT NOT NULL,
+	"range" integer NOT NULL,
+	"encumbrance" integer NOT NULL,
+	CONSTRAINT ammo_pk PRIMARY KEY ("type")
+) WITH (
+	OIDS=FALSE
+);
+
+DROP TABLE IF EXISTS "character_weapon_ammo" CASCADE;
+CREATE TABLE "character_weapon_ammo" (
+	"character_weapon_id" integer NOT NULL,
+	"ammo_name" TEXT NOT NULL,
+	"character_weapon_ammo_id" serial NOT NULL,
+	"attack_adj" integer NOT NULL,
+	"damage_adj" integer NOT NULL,
+	"quantity" integer NOT NULL,
+	CONSTRAINT character_weapon_ammo_pk PRIMARY KEY ("character_weapon_ammo_id")
+) WITH (
+	OIDS=FALSE
+);
+
 
 DROP TABLE IF EXISTS "character_weapon" CASCADE;
 CREATE TABLE "character_weapon" (
@@ -168,6 +185,7 @@ CREATE TABLE "character_weapon" (
 	"character_weapon_id" serial NOT NULL,
 	"attack_adj" integer NOT NULL,
 	"damage_adj" integer NOT NULL,
+	"is_proficient" BOOLEAN NOT NULL,
 	CONSTRAINT character_weapon_pk PRIMARY KEY ("character_weapon_id")
 ) WITH (
   OIDS=FALSE
@@ -177,10 +195,9 @@ DROP TABLE IF EXISTS "character_armor" CASCADE;
 CREATE TABLE "character_armor" (
 	"character_id" integer NOT NULL,
 	"armor_name" TEXT NOT NULL,
-	"has_shield" BOOLEAN NOT NULL,
-	"character_armor" serial NOT NULL,
+	"character_armor_id" serial NOT NULL,
 	"ac_adj" integer NOT NULL,
-	CONSTRAINT character_armor_pk PRIMARY KEY ("character_armor")
+	CONSTRAINT character_armor_pk PRIMARY KEY ("character_armor_id")
 ) WITH (
   OIDS=FALSE
 );
@@ -201,9 +218,12 @@ CREATE TABLE "class_abilities_variable" (
 	"class_name" TEXT NOT NULL,
 	"level" integer NOT NULL,
 	"xp_range" int4range NOT NULL,
-	"spells" integer[] NOT NULL,--[1st, 2nd, 3rd, 4th, 5th, 6th, 7th, 8th, 9th]
+	"cleric_spells" integer[] NOT NULL,--[1st, 2nd, 3rd, 4th, 5th, 6th, 7th, 8th, 9th]
+	"druid_spells" integer[] NOT NULL,
+	"illusionist_spells" integer[] NOT NULL,
+	"magic_user_spells" integer[] NOT NULL,
 	"thief_skills" integer[] NOT NULL,--[Climb Walls, Find Traps, Hear Noise, Hide in Shadows, Move Quietly, Open Locks, Pick Pockets, Read Languages]
-	"turn_undead" integer[] NOT NULL,--[Skeleton, Zombie, Ghoul, Shadow, Wight, Ghast, Wraith, Mummy, Spectre, Vampire, Ghost, Lich, Fiend]
+	"turn_undead" text[] NOT NULL,--[Skeleton, Zombie, Ghoul, Shadow, Wight, Ghast, Wraith, Mummy, Spectre, Vampire, Ghost, Lich, Fiend]
 	"thac" integer[] NOT NULL,--[10, 9, ...]
 	"saving_throws" integer[] NOT NULL,--[Rod Staff Wand, Breath Weapons, Death Paralysis Poison, Petrification Polymorph, Spells]
 	"proficiencies" integer NOT NULL,
@@ -222,6 +242,7 @@ CREATE TABLE "character_class" (
 	"class_name" TEXT NOT NULL,
 	"hp" integer[] NOT NULL,--[...each hit dice for each level]
 	"xp" integer NOT NULL,
+	"og_class" BOOLEAN NOT NULL,
 	"character_class_id" serial NOT NULL,
 	CONSTRAINT character_class_pk PRIMARY KEY ("character_class_id")
 ) WITH (
@@ -232,8 +253,8 @@ DROP TABLE IF EXISTS "join_request_invite" CASCADE;
 CREATE TABLE "join_request_invite" (
 	"campaign_id" integer NOT NULL,
 	"user_id" integer NOT NULL,
-	"type" text NOT NULL,
-	"text" VARCHAR(144),
+	"request_type" text NOT NULL,
+	"message" VARCHAR(144),
 	"join_request_id" serial NOT NULL,
 	CONSTRAINT join_request_invite_pk PRIMARY KEY ("join_request_id")
 ) WITH (
@@ -258,11 +279,6 @@ ALTER TABLE "campaign_user" ADD CONSTRAINT "campaign_user_fk1" FOREIGN KEY ("use
 
 
 ALTER TABLE "character_language" ADD CONSTRAINT "character_language_fk0" FOREIGN KEY ("character_id") REFERENCES "character"("character_id");
-ALTER TABLE "character_language" ADD CONSTRAINT "character_language_fk1" FOREIGN KEY ("language_name") REFERENCES "language"("name");
-
-
-ALTER TABLE "race_language" ADD CONSTRAINT "race_language_fk0" FOREIGN KEY ("language_name") REFERENCES "language"("name");
-ALTER TABLE "race_language" ADD CONSTRAINT "race_language_fk1" FOREIGN KEY ("race_name") REFERENCES "race"("name");
 
 
 ALTER TABLE "character_weapon" ADD CONSTRAINT "character_weapon_fk0" FOREIGN KEY ("character_id") REFERENCES "character"("character_id");
@@ -270,11 +286,16 @@ ALTER TABLE "character_weapon" ADD CONSTRAINT "character_weapon_fk1" FOREIGN KEY
 
 
 ALTER TABLE "character_armor" ADD CONSTRAINT "character_armor_fk0" FOREIGN KEY ("character_id") REFERENCES "character"("character_id");
+ALTER TABLE "character_armor" ADD CONSTRAINT "character_armor_fk1" FOREIGN KEY ("armor_name") REFERENCES "armor"("name");
 
 
 ALTER TABLE "character_class" ADD CONSTRAINT "character_class_fk0" FOREIGN KEY ("character_id") REFERENCES "character"("character_id");
-ALTER TABLE "character_class" ADD CONSTRAINT "character_class_fk1" FOREIGN KEY ("class_name") REFERENCES "class_abilities_fixed"("name");
+ALTER TABLE "character_class" ADD CONSTRAINT "character_class_fk1" FOREIGN KEY ("class_name") REFERENCES "class_abilities_fixed"("class_name");
 
 
 ALTER TABLE "join_request_invite" ADD CONSTRAINT "join_request_invite_fk0" FOREIGN KEY ("campaign_id") REFERENCES "campaign"("campaign_id");
 ALTER TABLE "join_request_invite" ADD CONSTRAINT "join_request_invite_fk1" FOREIGN KEY ("user_id") REFERENCES "users"("user_id");
+
+
+ALTER TABLE "character_weapon_ammo" ADD CONSTRAINT "character_weapon_ammo_fk0" FOREIGN KEY ("ammo_name") REFERENCES "ammo"("type");
+ALTER TABLE "character_weapon_ammo" ADD CONSTRAINT "character_weapon_ammo_fk1" FOREIGN KEY ("character_weapon_id") REFERENCES "character_weapon"("character_weapon_id");

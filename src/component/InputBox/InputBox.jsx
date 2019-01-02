@@ -11,7 +11,6 @@ class InputBox extends Component {
         this.state = {
             campaignName: '',
             text: '',
-            classRestrictions: false,
             levelLimits: false,
             description: '',
         }
@@ -23,23 +22,34 @@ class InputBox extends Component {
     }
 
     clear = () => {
-        this.setState({campaignName: '', text: '', img: '', classRestrictions: false, levelLimits: false, description: ''});
+        this.setState({campaignName: '', text: '', img: '', levelLimits: false, description: ''});
         this.props.toggleInput();
     }
     
     handleCheckBoxes = (name) => {
-        if (name === 'classRestrictions' && this.state.classRestrictions) {
-            this.setState({levelLimits: false});
-        }
         this.setState({[name]: !this.state[name]});
     }
 
     createCampaign = () => {
-        const { campaignName, text, classRestrictions, levelLimits, description } = this.state;
-        axios.post('/api/campaign', { campaignName, text, classRestrictions, levelLimits, description })
+        const { campaignName, text, levelLimits, description } = this.state;
+        axios.post('/api/campaign', { campaignName, text, levelLimits, description })
             .then(res => {
                 this.clear();
                 this.props.getCampaignList();
+            }).catch(err => {
+                alert(err.response.request.response);
+                console.log(`InputBox.createCampaign ${err}`);
+            })
+    }
+
+    createJoin = () => {
+        const { campaignName, text } = this.state;
+        axios.post('/api/campaign/join', { campaignName, text, type: 'join' })
+            .then(res => {
+                this.clear();
+            }).catch(err => {
+                console.log(`InputBox.createJoin ${err}`);
+                alert(err.response.request.response);
             })
     }
 
@@ -52,7 +62,7 @@ class InputBox extends Component {
                 <div>
                     <input onChange={this.handleInput} value={this.state.campaignName} name='campaignName' maxLength='144'/>
                     <input onChange={this.handleInput} value={this.state.text} name='text' maxLength='144'/>
-                    <button>Send</button>
+                    <button onClick={this.createJoin}>Send</button>
                     <button onClick={this.clear}>Cancel</button>
                 </div>
             )
@@ -61,12 +71,8 @@ class InputBox extends Component {
                 <div>
                     <input onChange={this.handleInput} value={this.state.campaignName} name='campaignName' maxLength='144'/>
                     <input onChange={this.handleInput} value={this.state.text} name='text'/>
-                    <p>Racial Class Restriction</p><input onChange={() => this.handleCheckBoxes('classRestrictions')} type="checkbox"/>
                     <p>Racial Level Restriction</p>
-                        {this.state.classRestrictions
-                        ?  <input onChange={() => this.handleCheckBoxes('levelLimits')} type="checkbox"/>
-                        :  <input type="checkbox" disabled/>
-                        }
+                    <input onChange={() => this.handleCheckBoxes('levelLimits')} type="checkbox"/>
                     <textarea row='3' column='50' onChange={this.handleInput} value={this.state.description} name='description' maxLength='144'/>
                     <button onClick={this.createCampaign}>Create</button>
                     <button onClick={this.clear}>Cancel</button>

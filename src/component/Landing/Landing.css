@@ -1,0 +1,23 @@
+.Boxes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.Drag-Box {
+    margin: 25px;
+    border: 5px gray solid;
+    height: 350px;
+    width: 95%;
+}
+.Staging-Box {
+    border: gray 5px solid;
+    height: 250px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.Campaign-List {
+    display: flex;
+    justify-content: space-around;
+}

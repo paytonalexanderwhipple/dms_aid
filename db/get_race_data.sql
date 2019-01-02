@@ -1,0 +1,1 @@
+SELECT name, min_stats, max_stats, starting_age, class_options, stat_adj FROM race;

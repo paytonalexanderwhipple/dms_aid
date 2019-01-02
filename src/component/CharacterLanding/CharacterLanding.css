@@ -1,0 +1,15 @@
+.Character-Box {
+    position: absolute;
+    left: 42%;
+    right: 42%;
+    top: 35%;
+    bottom: 35%;
+    width: 10%;
+    height: 10%;
+}
+.Background {
+    opacity: .5;
+}
+.Foreground {
+    opacity: 1;
+}
