@@ -42,7 +42,8 @@ class CharacterCreationLanding extends Component {
                 <input type="text"
                     onChange={this.handleInput}
                     name='name'
-                    value={this.props.characterCreation.name}/>
+                    value={this.props.characterCreation.name}
+                    maxLength="50"/>
                 <h1>Alignment:</h1>
                 <select name="alignment"
                     onChange={this.handleInput}

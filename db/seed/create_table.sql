@@ -27,7 +27,7 @@ DROP TABLE IF EXISTS "character" CASCADE;
 CREATE TABLE "character" (
 	"character_id" serial NOT NULL,
 	"user_id" integer NOT NULL,
-	"name" varchar(50) NOT NULL,
+	"name" varchar(50) NOT NULL UNIQUE,
 	"title" varchar(50) NOT NULL,
 	"race" text NOT NULL,
 	"temp_hp" integer NOT NULL,

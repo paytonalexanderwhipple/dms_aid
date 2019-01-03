@@ -8,8 +8,10 @@ class ProficienciesDropdown extends Component {
         const { name, value } = event.target;
         const { index } = this.props;
         const proficiencies = [ ...this.props.characterCreation.proficiencies ]; 
-        proficiencies[index] = value;
-        this.props.handleCreationInput(name, proficiencies);
+        if (!proficiencies.includes(value)) {
+            proficiencies[index] = value;
+            this.props.handleCreationInput(name, proficiencies);
+        }
     }
     
     render() {

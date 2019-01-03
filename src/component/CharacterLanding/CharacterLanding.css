@@ -7,6 +7,14 @@
     width: 10%;
     height: 10%;
 }
+.bigbox {
+    position: relative;
+    top: -100px;
+    left: -100px;
+    height: 350px;
+    width: 350px;
+    border: 5px solid gray;
+}
 .Background {
     opacity: .5;
 }

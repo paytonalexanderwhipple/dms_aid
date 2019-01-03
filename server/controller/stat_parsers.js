@@ -1,8 +1,8 @@
 module.exports = {
     str: (str, classes, exeptionalStrength) => {
-        if (classes.includes('Fighter') || classes.includes('Paladin') || classes.includes('Ranger') && str === 18) {
+        if (classes.includes('Fighter') || classes.includes('Paladin') || classes.includes('Ranger') && str >= 18) {
 
-                if ( 99 < exeptionalStrength ) return {toHit: 3, damage: 6, encumbranceAdj: 3000, minorTest: 5, minorTestEx: 1, majorTest: 40};
+                if ( 99 < exeptionalStrength || str === 19 ) return {toHit: 3, damage: 6, encumbranceAdj: 3000, minorTest: 5, minorTestEx: 1, majorTest: 40};
                 else if ( 90 < exeptionalStrength ) return {toHit: 2, damage: 5, encumbranceAdj: 2000, minorTest: 4, minorTestEx: 1, majorTest: 35};
                 else if ( 75 < exeptionalStrength ) return {toHit: 2, damage: 4, encumbranceAdj: 1500, minorTest: 4, minorTestEx: 0, majorTest: 30};
                 else if ( 50 < exeptionalStrength ) return {toHit: 2, damage: 3, encumbranceAdj: 1250, minorTest: 4, minorTestEx: 0, majorTest: 25};

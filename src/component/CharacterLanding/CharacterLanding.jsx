@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import CharacterBlock from '../CharacterBlock/CharacterBlock.jsx';
 import CharacterCreation from '../CharacterCreation/CharacterCreation.jsx';
+import CharacterSheetWrapper from '../CharacterSheetWrapper/CharacterSheetWrapper.jsx';
 import './CharacterLanding.css'
 
 class CharacterLanding extends Component {
@@ -14,6 +15,8 @@ class CharacterLanding extends Component {
              obscured: false,
              importName: '',
              characterCreateRevealed: false,
+             characterSheetRevealed: false,
+             currentCharacter: 0,
         }
     }
 
@@ -32,9 +35,9 @@ class CharacterLanding extends Component {
             })
     }
 
-    toggle = (event) => {
-        const { name } = event.target; 
-        this.setState({[name]: !this.state[name], obscured: !this.state.obscured});
+    toggle = (event, character_id = 0) => {
+        const { name } = event.target;
+        this.setState({[name]: !this.state[name], obscured: !this.state.obscured, currentCharacter: character_id});
     }
 
     handleInput = (event) => {
@@ -48,14 +51,14 @@ class CharacterLanding extends Component {
             if (this.props.currentCampaign.campaignDetails.is_dm) {
                 return (
                     <div>
-                        <CharacterBlock character={character}/>
+                        <CharacterBlock campaign_id={this.props.currentCampaign.campaignDetails.campaign_id} campaign_name={this.props.currentCampaign.campaignDetails.name} character={character} toggle={this.toggle}/>
                     </div>
                 )
             } else {
                 if (character.user_id === this.props.currentCampaign.user_id) {
                     return (
                         <div>
-                            <CharacterBlock character={character}/>
+                            <CharacterBlock campaign_id={this.props.currentCampaign.campaignDetails.campaign_id} campaign_name={this.props.currentCampaign.campaignDetails.name} character={character} toggle={this.toggle}/>
                         </div>
                     )
                 }
@@ -108,6 +111,14 @@ class CharacterLanding extends Component {
                             : 'none'
                         }}>
                         <CharacterCreation toggle={this.toggle}/>
+                    </div>
+                    <div
+                        className='Character-Box'
+                        style={{display: this.state.characterSheetRevealed
+                            ? ''
+                            : 'none'
+                        }}>
+                        <CharacterSheetWrapper toggle={this.toggle} character_id={this.state.currentCharacter}/>
                     </div>
             </div>
         )

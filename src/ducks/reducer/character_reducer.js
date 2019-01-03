@@ -11,6 +11,14 @@ const initialState = {
         cha: 10,
         proficiencies: [],
     },
+    characterChanges: {
+            personalDetails: {},
+            combat: {},
+            Magic: {},
+            Inventory: {},
+            Notes: {},
+            abilities: {},
+    },
     loading: false,
     rerenderCreation: false,
 };
@@ -24,6 +32,9 @@ const CLEAR_CLASS_DATA = 'CLEAR_CLASS_DATA';
 const SUBMIT_CHARACTER = 'SUBMIT_CHARACTER';
 const SUBMIT_CHARACTER_PENDING = 'SUBMIT_CHARACTER_PENDING';
 const SUBMIT_CHARACTER_FULFILLED = 'SUBMIT_CHARACTER_FULFILLED';
+const SUBMIT_CHARACTER_REJECTED = 'SUBMIT_CHARACTER_REJECTED';
+const INPUT_CHARACTER_EDITS = 'INPUT_CHARACTER_EDITS';
+const CLEAR_CHARACTER_EDITS = 'CLEAR_CHARACTER_EDITS';
 
 
 // *** REDUCER *** //
@@ -39,11 +50,18 @@ export default function reducer(state = initialState, action) {
         case RERENDER_CREATION:
             return { ...state, rerenderCreation: !state.rerenderCreation};
         case CLEAR_CLASS_DATA:
-            return { ...state, characterCreation: { ...state.characterCreation, proficiencies: [], startingGold: 0}}
+            return { ...state, characterCreation: { ...state.characterCreation, proficiencies: [], startingGold: 0, exeptionalStrength: 0}};
         case SUBMIT_CHARACTER_PENDING:
-            return { ...initialState, loading: true }
+            return { ...state, loading: true };
         case SUBMIT_CHARACTER_FULFILLED:
-            return { ...initialState }
+            return { ...initialState };
+        case SUBMIT_CHARACTER_REJECTED:
+            alert(action.payload.response.request.response);
+            return { ...state, loading: false };
+        case INPUT_CHARACTER_EDITS:
+            return { ...state, characterChanges: { ...state.characterChanges, [action.payload.group]: {...state.characterChanges[action.payload.group], [action.payload.key]: action.payload.data }}};           
+        case CLEAR_CHARACTER_EDITS:
+            return { ...state, characterChanges: { ...initialState.characterChanges }};
         default: 
             return {...state};
     }
@@ -86,9 +104,23 @@ export function clearClassData() {
     }
 }
 
-export function submitCharacter(body) {
+export function submitCharacter(body, campaign_id) {
     return {
         type: SUBMIT_CHARACTER,
-        payload: axios.post('/api/character', body)
+        payload: axios.post('/api/character', { ...body, campaign_id}),
+    }
+}
+
+export function inputCharacterEdits(group, key, data) {
+    return {
+        type: INPUT_CHARACTER_EDITS,
+        payload: {group, key, data}
+    }
+}
+
+export function clearCharacterEdits() {
+    return {
+        type: CLEAR_CHARACTER_EDITS,
+        payload: '',
     }
 }

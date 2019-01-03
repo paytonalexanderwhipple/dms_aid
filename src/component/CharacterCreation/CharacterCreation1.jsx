@@ -28,23 +28,23 @@ class CharacterCreation1 extends Component {
         return (
             <div>
                 <h1>STR <p>{str}</p></h1>
-                        <button onClick={this.handleInput} name='str' value='+'>+</button>
                         <button onClick={this.handleInput} name='str' value='-'>-</button>
+                        <button onClick={this.handleInput} name='str' value='+'>+</button>
                 <h1>INT <p>{int}</p></h1>
-                        <button onClick={this.handleInput} name='int' value='+'>+</button>
                         <button onClick={this.handleInput} name='int' value='-'>-</button>
+                        <button onClick={this.handleInput} name='int' value='+'>+</button>
                 <h1>WIS <p>{wis}</p></h1>
-                        <button onClick={this.handleInput} name='wis' value='+'>+</button>
                         <button onClick={this.handleInput} name='wis' value='-'>-</button>
+                        <button onClick={this.handleInput} name='wis' value='+'>+</button>
                 <h1>DEX <p>{dex}</p></h1>
-                        <button onClick={this.handleInput} name='dex' value='+'>+</button>
                         <button onClick={this.handleInput} name='dex' value='-'>-</button>
+                        <button onClick={this.handleInput} name='dex' value='+'>+</button>
                 <h1>CON <p>{con}</p></h1>
-                        <button onClick={this.handleInput} name='con' value='+'>+</button>
                         <button onClick={this.handleInput} name='con' value='-'>-</button>
+                        <button onClick={this.handleInput} name='con' value='+'>+</button>
                 <h1>CHA <p>{cha}</p></h1>
-                        <button onClick={this.handleInput} name='cha' value='+'>+</button>
                         <button onClick={this.handleInput} name='cha' value='-'>-</button>        
+                        <button onClick={this.handleInput} name='cha' value='+'>+</button>
                 <Link to={`/landing/campaign/${campaign_id}/${name}`}>
                     <button
                         onClick={this.props.rerenderCreation}>

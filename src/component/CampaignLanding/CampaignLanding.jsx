@@ -25,6 +25,8 @@ class CampaignLanding extends Component {
         const { id } = this.props.match.params;
         const res = await axios.get(`/api/campaign?campaign_id=${id}`);
         this.props.setCurrentCampaign(res.data);
+        const { campaign_id, name } = this.props.currentCampaign.campaignDetails
+        this.props.history.push(`/landing/campaign/${campaign_id}/${name}`);
     }
 
     handleView = (event) => {

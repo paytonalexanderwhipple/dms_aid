@@ -11,17 +11,34 @@ class CharacterCreation4 extends Component {
         
         this.state = {
             advance: false,
+            exeptionalStrength: false,
         }
     }
 
     componentDidMount = () => {
-        const { proficiencies, startingGold } = this.props.characterCreation
+        const { proficiencies, startingGold, str, cLass } = this.props.characterCreation
         if (proficiencies && startingGold && !this.state.advance) {
             this.setState({advance: true});
+        } 
+        if (str === 18 && !this.state.exeptionalStrength && /Fighter/gi.test(cLass) || /Ranger/gi.test(cLass) || /Paladin/gi.test(cLass)) {
+            this.setState({exeptionalStrength: true});
         }
     }
 
     handleInput = (event) => {
+        const { name, value } = event.target;
+        let exeptionalStrength = this.props.characterCreation[name] || 0;
+        if (value === '+') {
+            exeptionalStrength += 1
+        } else {
+            exeptionalStrength -= 1
+        }
+        if ( 1 <= exeptionalStrength && exeptionalStrength <= 100 ) {
+            this.props.handleCreationInput(name, exeptionalStrength);
+        }
+    }
+
+    handleGoldInput = (event) => {
         const { name, value } = event.target;
         let range = name.match(/\d+/gi);
         let gp = this.props.characterCreation.startingGold || +range[0];
@@ -67,7 +84,7 @@ class CharacterCreation4 extends Component {
         const characterClasses = this.props.characterCreation.cLass.split('/');
         
         let { classes } = this.props.characterData;
-        const { race } = this.props.characterCreation;
+        const { race, str } = this.props.characterCreation;
         let numOfProficiencies = 0;
 
         classes = characterClasses.map((className, i) => {
@@ -149,6 +166,15 @@ class CharacterCreation4 extends Component {
                         <p>{this.props.characterCreation[`${cLass.class_name}hp2`] || 0}</p>
                         <button onClick={(event) => this.handleButtonInput(event, cLass.hd_type)} name={`${cLass.class_name}hp2`} value="-">-</button>
                         <button onClick={(event) => this.handleButtonInput(event, cLass.hd_type)} name={`${cLass.class_name}hp2`} value="+">+</button>
+                        <div style={{display: this.state.exeptionalStrength
+                            ? ''
+                            : 'none'
+                            }}>
+                            <h1>Exeptional Strength</h1>
+                            <p>{this.props.characterCreation.exeptionalStrength || 0}</p>
+                            <button onClick={this.handleInput} name='exeptionalStrength' value='-'>-</button>
+                            <button onClick={this.handleInput} name='exeptionalStrength' value='+'>+</button>
+                        </div>
                     </div>
                 )
             } else {
@@ -158,6 +184,15 @@ class CharacterCreation4 extends Component {
                         <p>{this.props.characterCreation[`${cLass.class_name}hp`] || 0}</p>
                         <button onClick={(event) => this.handleButtonInput(event, cLass.hd_type)} name={`${cLass.class_name}hp`} value="-">-</button>
                         <button onClick={(event) => this.handleButtonInput(event, cLass.hd_type)} name={`${cLass.class_name}hp`} value="+">+</button>
+                        <div style={{display: this.state.exeptionalStrength
+                            ? ''
+                            : 'none'
+                            }}>
+                            <h1>Exeptional Strength</h1>
+                            <p>{this.props.characterCreation.exeptionalStrength || 0}</p>
+                            <button onClick={this.handleInput} name='exeptionalStrength' value='-'>-</button>
+                            <button onClick={this.handleInput} name='exeptionalStrength' value='+'>+</button>
+                        </div>
                     </div>
                 )
             }
@@ -169,8 +204,8 @@ class CharacterCreation4 extends Component {
                 {proficiencies}
                 <h1>Starting Gold: {startingGoldRange}</h1>
                 <p>{this.props.characterCreation.startingGold || startingGoldRange.match(/\d+/)[0]}</p>
-                <button name={startingGoldRange} onClick={this.handleInput} value='-'>-</button>
-                <button name={startingGoldRange} onClick={this.handleInput} value='+'>+</button>
+                <button name={startingGoldRange} onClick={this.handleGoldInput} value='-'>-</button>
+                <button name={startingGoldRange} onClick={this.handleGoldInput} value='+'>+</button>
                 {hd}
                 <Link to={`/landing/campaign/${campaign_id}/${name}/create/3`}>
                     <button
@@ -185,8 +220,7 @@ class CharacterCreation4 extends Component {
                             : 'none'
                         }}
                         onClick={() => {
-                            console.log(this.props.characterCreation);
-                            this.props.submitCharacter(this.props.characterCreation)}
+                            this.props.submitCharacter(this.props.characterCreation, this.props.currentCampaign.campaignDetails.campaign_id)}
                         }>
                             Submit
                         </button>
