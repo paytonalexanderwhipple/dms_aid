@@ -4,7 +4,76 @@
     position: absolute;
     right: -375px;
     transition: .65s;
+    background-color: var(--color0);
+    z-index: 1;
 }
 .RevealInputBox {
     right: 0px;
+}
+.newCampaign {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 10px 1fr 1fr;
+    grid-template-areas: 
+    ". . . . ."
+    ". campaign . desc ."
+    ". image . desc ."
+    ". limit . desc ."
+    ". . . . ."
+    ". send . cancel ."
+    ". . . . ."
+}
+.campaignNew {
+    grid-area: campaign;
+}
+.imgNew {
+    grid-area: image;
+}
+.levelNew {
+    grid-area: limit;
+}
+.textNew {
+    grid-area: desc;
+}
+.sendNew {
+    grid-area: send;
+}
+.cancelNew {
+    grid-area: cancel;
+}
+#newCampaignButton {
+    height: 20px;
+}
+#newCampaignButton2 {
+    height: 20px;    
+}
+.inviteSend {
+    display: grid;
+    grid-template-rows: 15px 1fr 1fr 1fr 15px 1fr 1fr;
+    grid-template-columns: 50px 1fr 1fr 50px;
+    grid-template-areas: 
+    ". . . ."
+    ". . . ."
+    ". campaign campaign ."
+    ". text text ."
+    ". . . ."
+    ". send cancel ."
+    ". . . .";
+}
+.campaignJoin {
+    grid-area: campaign;
+}
+.textJoin {
+    grid-area: text;
+}
+.sendJoin {
+    grid-area: send;
+}
+.cancelJoin {
+    grid-area: cancel;
+    justify-self: end;
+}
+
+@media (min-width: 415px) {
+
 }

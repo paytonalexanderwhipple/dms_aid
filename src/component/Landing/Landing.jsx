@@ -103,21 +103,24 @@ class Landing extends Component {
         <div className="Landing">
             <InputBox revealed={this.state.joinRevealed} currentView={this.state.currentView} toggleInput={this.toggleInput}/>
             <InviteBox revealed={this.state.inviteRevealed} toggleInvite={this.toggleInvite}/>
-            <button onClick={this.logout}>Logout</button>
-            <button onClick={this.toggleView} name='player'>Player</button>
-            <button onClick={this.toggleView} name='dm'>Dungeon Master</button>
+            <button id='logout' className='button' onClick={this.logout}>Logout</button>
+            <button id='viewButton' className='button' onClick={this.toggleView} name='player'>Player</button>
+            <button id='viewButton2' className='button' onClick={this.toggleView} name='dm'>DM</button>
             <button 
-                className = 'Toggle-Input'
+                className = 'button'
+                id='create-join'
                 onClick={this.toggleInput}>
-                {currentView === 'player' ? 'Join Campaign' : 'Create Campaign'}
+                {currentView === 'player' ? 'Join Campaign' : 'New Campaign'}
             </button>
-            <button     
+            <button    
+                className='button'
+                id='invite' 
                 onClick={this.toggleInvite}
                 style={{display: this.state.currentView === 'player' ? '' : 'none'}}>
                 Invite List</button>
             <div className='Boxes'>
                 <div 
-                    className='Drag-Box'
+                    className='Drag-Box paper'
                     onDragOver={this.onDragOver}
                     onDrop={this.onDropInit}>
                     <div className='Campaign-List'>
@@ -125,15 +128,18 @@ class Landing extends Component {
                     </div>
                 </div>
                 <div
-                    className='Staging-Box'
+                    className='Staging-Box paper'
                     onDragOver={this.onDragOver}
                     onDrop={this.onDropStage}>
-                    {stagedCampaign}
+                    <div className='stageingBox'>
+                        {stagedCampaign}
+                    </div>
                     <Link to={`/landing/campaign/${campaign_id}/${name}`}>
                         <button
+                            className='stageButton button'
                             style={{display: this.state.stagedCampaign.name ? '' : 'none'}}
                             onClick={this.stageCampaign}>
-                                Enter {this.state.stagedCampaign.name}
+                                Load Campaign
                         </button>
                     </Link>
                 </div>

@@ -1,30 +1,95 @@
 .Login {
-    background-color: var(--color3);
+    background-color: var(--color0);
     height: 100vh;
     width: 100%;
     display: grid;
-    grid-template-rows: 1fr 30px 30px 30px 20px 30px 1fr;
-    grid-template-columns: 1fr 40px 30px 40px 1fr;
+    grid-template-rows: 50px 1fr 200px 1fr 50px;
+    grid-template-columns: 50px 1fr 200px 1fr 50px;
     grid-column-gap: 5px;
     grid-row-gap: 5px;
     grid-template-areas: 
+        "TL . . . TR"
         ". . . . ."
-        ". username username username ."
-        ". password password password ."
-        ". . login . ."
+        ". . paper . ."
         ". . . . ."
-        ". . register . ."
-        ". . . . .";
+        "BL . . . BR";
 }
 .username-input {
     grid-area: username;
+    justify-self: center;
 }
 .password-input {
     grid-area: password;
+    justify-self: center;
 }
 .login-button {
     grid-area: login;
+    justify-self: center;
 }
 .register-button {
     grid-area: register;
+    justify-self: center;
+}
+.brown {
+    background-color: var(--color5);
+}
+.c1 {
+    grid-area: TL;
+}
+.c2 {
+    grid-area: TR;
+}
+.c3 {
+    grid-area: BL;
+}
+.c4 {
+    grid-area: BR;
+}
+.TL {
+    grid-area: TL;
+}
+.TR {
+    grid-area: TR;
+}
+.BL {
+    grid-area: BL;
+}
+.BR {
+    grid-area: BR;
+}
+.LoginPaper {
+    height: 200px;
+    width: 200px;
+    grid-area: paper;
+    justify-self: center;
+    display: grid;
+    grid-template-rows: 1fr 30px 30px 30px 30px 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-row-gap: 15px;
+    grid-template-areas: 
+    ". . ."
+    ". username ."
+    ". password ."
+    ". login ."
+    ". register ."
+    ". . ."
+}
+.corner {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+    "TL TR"
+    "BL BR"
+}
+@media (min-width: 415px) {
+    .Login {
+        grid-template-rows: 50px 1fr 400px 1fr 50px;
+    }
+    .LoginPaper {
+        grid-row-gap: 30px;
+        grid-template-rows: 1fr 30px 30px 30px 30px 2fr;
+        height: 400px;
+        width: 400px;
+    }
 }

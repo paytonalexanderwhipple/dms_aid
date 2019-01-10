@@ -1,23 +1,90 @@
+.Landing {
+    background: var(--color0);
+    height: 100vh;
+}
 .Boxes {
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: auto;
+}
+#create-join {
+    position: absolute;
+    right: 80px;
+    top: 25px;
+    height: 20px;
+    width: 100px;
+}
+#invite {
+    height: 20px;
+    width: 100px;
+    position: absolute;
+    top: 25px;
+    right: auto;
+    left: 80px;
+}
+#logout {
+    margin: 8px;
+    height: 20px;
+    width: 60px;
+}
+#viewButton {
+    position: absolute;
+    height: 15px;
+    width: 50px;
+    top: 55px;
+    left: 20px;
+}
+#viewButton2 {
+    position: absolute;
+    height: 15px;
+    width: 50px;
+    top: 55px;
+    right: 20px;
 }
 .Drag-Box {
+    background: var(--color-1);
     margin: 25px;
-    border: 5px gray solid;
-    height: 350px;
+    height: 300px;
     width: 95%;
 }
 .Staging-Box {
-    border: gray 5px solid;
-    height: 250px;
-    width: 350px;
+    background: var(--color-1);
+    height: 275px;
+    width: 250px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+.stageingBox {
+    height: 150px;
+    width: 210px;
+    background-color: var(--color0);
+    border: 10px var(--color3) inset;
+    margin-top: 15px;
+}
+.stageButton {
+    background-color: var(--color1);
+    margin-top: 30px;
+}
 .Campaign-List {
     display: flex;
     justify-content: space-around;
+}
+@media (min-width: 415px) {
+    #viewButton {
+        left: 60px;
+    }
+    #viewButton2 {
+        left: 120px;
+    }
+    #invite {
+        top: 33px;
+        right: 50px;
+        left: auto;
+    }
+    #create-join {
+        top: 6px;
+        right: 50px;
+    }
 }

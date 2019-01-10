@@ -1,9 +1,23 @@
+@import url('https://fonts.googleapis.com/css?family=Forum');
+
 :root {
-    --color1: #ddd;
-    --color2: #F1ECE1;
-    --color3: #C6B392;
-    --color4: #5A3516;
-    --color5: #412306;
+    --color-1: rgb(255, 247, 230);
+    --color0: #F1ECE1;
+    --color1: #FFD2AB;
+    --color2: #D79E6D;
+    --color3: #AC6F3B;
+    --color4: #834917;
+    --color5: #582901;
+    --color6: #351900;
+    --color7: #1A0C00;
+    --color8: #ddd;
+    --color9: #bbb;
+    --color10: #333;
+}
+body {
+    font-family: 'Forum', serif;
+    height: 100vh;
+    width: 100vw;
 }
 .sup {
     vertical-align: super;
@@ -14,13 +28,43 @@
     white-space: pre-wrap;
 }
 .button {
-
+    border: none;
+    border-radius: 3px;
+    background-color: var(--color4);
+    height: 30px;
+    width: 100px;
+    font-family: 'Forum', serif;
+    color: var(--color8);
+}
+.button:hover {
+    background: var(--color3);
+}
+.button:focus {
+    outline: none;
+    background: var(--color3);
 }
 .input {
-    background-color: var(--color3);
+    background-color: var(--color0);
     border: none;
-    border-bottom: var(--color2) 1px solid;
+    border-bottom: var(--color9) 1px solid;
+    font-family: 'Forum', serif;
+    color: var(--color10);
 }
 .input:focus {
     outline: none;
+}
+.textarea {
+    background-color: var(--color-1);
+    border: none;
+}
+.textarea:focus {
+    outline: none;
+}
+.paper {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+@media (min-width: 415px) {
+    .button {
+        border-radius: 5px;
+    }
 }

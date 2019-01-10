@@ -42,20 +42,42 @@ class Login extends Component {
     render() {
         return (
             <div className='Login'>
-                <input
-                    className='username-input input'
-                    type="text"
-                    name='username'
-                    placeholder='Username'
-                    onChange={this.handleInput}/>
-                <input 
-                    className='password-input input'
-                    type="text"
-                    name='password'
-                    placeholder='Password'
-                    onChange={this.handleInput}/>
-                <button onClick={this.login} className='login-button'>Login</button>
-                <button onClick={this.register} className='register-button'>Register</button>
+                <div className='corner TL'>
+                    <div className='brown c1'/>
+                    <div className='brown c2'/>
+                    <div className='brown c3'/>
+                </div>
+                <div className='corner TR'>
+                    <div className='brown c1'/>
+                    <div className='brown c2'/>
+                    <div className='brown c4'/>
+                </div>
+                <div className='LoginPaper paper'>
+                    <input
+                        className='username-input input'
+                        type="text"
+                        name='username'
+                        placeholder='Username'
+                        onChange={this.handleInput}/>
+                    <input 
+                        className='password-input input'
+                        type="text"
+                        name='password'
+                        placeholder='Password'
+                        onChange={this.handleInput}/>
+                    <button onClick={this.login} className='login-button button'>Login</button>
+                    <button onClick={this.register} className='register-button button'>Register</button>
+                </div>
+                <div className='corner BL'>
+                    <div className='brown c1'/>
+                    <div className='brown c3'/>
+                    <div className='brown c4'/>
+                </div>
+                <div className='corner BR'>
+                    <div className='brown c2'/>
+                    <div className='brown c3'/>
+                    <div className='brown c4'/>
+                </div>
             </div>
         );
     };

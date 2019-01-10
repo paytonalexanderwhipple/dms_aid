@@ -80,29 +80,31 @@ class InputBox extends Component {
 
         if (this.props.currentView === 'player') {
             render = (
-                <div>
-                    <input onChange={this.handleInput} value={this.state.campaignName} name='campaignName' maxLength='144'/>
-                    <input onChange={this.handleInput} value={this.state.text} name='text' maxLength='144'/>
-                    <button onClick={this.createJoin}>Send</button>
-                    <button onClick={this.clear}>Cancel</button>
+                <div className='inviteSend'>
+                    <input className="campaignJoin input" placeholder='Campaign Name' onChange={this.handleInput} value={this.state.campaignName} name='campaignName' maxLength='144'/>
+                    <input className="textJoin input" placeholder='Message' onChange={this.handleInput} value={this.state.text} name='text' maxLength='144'/>
+                    <button className="sendJoin button" onClick={this.createJoin}>Send</button>
+                    <button className="cancelJoin button" onClick={this.clear}>Cancel</button>
                 </div>
             )
         } else {
             render = (
-                <div>
-                    <input onChange={this.handleInput} value={this.state.campaignName} name='campaignName' maxLength='144'/>
-                    <input onChange={this.handleInput} value={this.state.text} name='text'/>
-                    <p>Racial Level Restriction</p>
-                    <input onChange={() => this.handleCheckBoxes('levelLimits')} type="checkbox"/>
-                    <textarea row='3' column='50' onKeyDown={this.handleTab} ref={this.textarea} onChange={this.handleInput} value={this.state.description} name='description' maxLength='144'/>
-                    <button onClick={this.createCampaign}>Create</button>
-                    <button onClick={this.clear}>Cancel</button>
+                <div className='newCampaign'>
+                    <input className='input campaignNew' placeholder='Campaign Name' onChange={this.handleInput} value={this.state.campaignName} name='campaignName' maxLength='144'/>
+                    <input className='input imgNew' placeholder='Img Url' onChange={this.handleInput} value={this.state.text} name='text'/>
+                    <div className='levelNew'>
+                        <p>Level Limits</p>
+                        <input className='input' onChange={() => this.handleCheckBoxes('levelLimits')} type="checkbox"/>
+                    </div>
+                    <textarea className='paper textNew textarea' row='3' column='50' placeholder='Description' onKeyDown={this.handleTab} ref={this.textarea} onChange={this.handleInput} value={this.state.description} name='description' maxLength='144'/>
+                    <button id='newCampaignButton' className='sendNew button' onClick={this.createCampaign}>Create</button>
+                    <button id='newCampaignButton2' className='cancelNew button' onClick={this.clear}>Cancel</button>
                 </div>
             )
         }
 
         return (
-            <div className={this.props.revealed ? 'InputBox RevealInputBox' : 'InputBox'}>
+            <div className={this.props.revealed ? 'InputBox paper RevealInputBox' : 'paper InputBox'}>
                 {render}
             </div>
         )
