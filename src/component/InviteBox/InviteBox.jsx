@@ -48,7 +48,7 @@ class InviteBox extends Component {
             return (
                 <div key={i}>
                     <h1>{invite.name}</h1>
-                    <p>{invite.message}</p>
+                    <p className='MultilineDisplay'>{invite.message}</p>
                     <button onClick={() => this.acceptInvite(invite.name, invite.join_request_id)}>Accept</button>
                     <button onClick={() => this.declineInvite(invite.join_request_id)}>Decline</button>
                 </div>

@@ -2,7 +2,6 @@ import React ,{ Component } from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
     import { saveCharacterData, clearCreation, rerenderCreation } from  '../../ducks/reducer/character_reducer.js';
-import axios from 'axios';
 import CharacterCreationLanding from './CharacterCreationLanding.jsx';
 import CharacterCreation1 from './CharacterCreation1.jsx';
 import CharacterCreation2 from './CharacterCreation2.jsx';
@@ -10,13 +9,6 @@ import CharacterCreation3 from './CharacterCreation3.jsx';
 import CharacterCreation4 from './CharacterCreation4.jsx';
 
 class CharacterCreation extends Component {
-    
-    componentDidMount = async () => {
-        const { name, campaign_id } = this.props.currentCampaign.campaignDetails
-        const res = await axios.get('/api/character/creation')
-        this.props.saveCharacterData(res.data);
-        this.props.history.push(`/landing/campaign/${campaign_id}/${name}`)
-    }
 
     cancel = (event) => {
         const { name, campaign_id } = this.props.currentCampaign.campaignDetails

@@ -1,23 +1,24 @@
 import React ,{ Component } from 'react';
 import { connect } from 'react-redux';
+    import { toggle, saveCharacterData } from '../../ducks/reducer/character_reducer.js';
 import axios from 'axios';
 import CharacterBlock from '../CharacterBlock/CharacterBlock.jsx';
 import CharacterCreation from '../CharacterCreation/CharacterCreation.jsx';
 import CharacterSheetWrapper from '../CharacterSheetWrapper/CharacterSheetWrapper.jsx';
-import './CharacterLanding.css'
+import './CharacterLanding.css';
 
 class CharacterLanding extends Component {
     constructor() {
         super()
         
         this.state = {
-             importRevealed: false,
-             obscured: false,
              importName: '',
-             characterCreateRevealed: false,
-             characterSheetRevealed: false,
-             currentCharacter: 0,
         }
+    }
+
+    componentWillMount = async () => {
+        const res = await axios.get('/api/character/creation');
+        this.props.saveCharacterData(res.data);
     }
 
     importCharacter = () => {
@@ -28,16 +29,11 @@ class CharacterLanding extends Component {
                         name: 'importRevealed'
                     }
                 }
-                this.toggle(event);
+                this.props.toggle(event);
             }).catch(err => {
                 alert(err.response.request.response);
                 console.log(`CharacterLanding.importCharacter ${err}`);
             })
-    }
-
-    toggle = (event, character_id = 0) => {
-        const { name } = event.target;
-        this.setState({[name]: !this.state[name], obscured: !this.state.obscured, currentCharacter: character_id});
     }
 
     handleInput = (event) => {
@@ -51,14 +47,14 @@ class CharacterLanding extends Component {
             if (this.props.currentCampaign.campaignDetails.is_dm) {
                 return (
                     <div>
-                        <CharacterBlock campaign_id={this.props.currentCampaign.campaignDetails.campaign_id} campaign_name={this.props.currentCampaign.campaignDetails.name} character={character} toggle={this.toggle}/>
+                        <CharacterBlock campaign_id={this.props.currentCampaign.campaignDetails.campaign_id} campaign_name={this.props.currentCampaign.campaignDetails.name} character={character}/>
                     </div>
                 )
             } else {
                 if (character.user_id === this.props.currentCampaign.user_id) {
                     return (
                         <div>
-                            <CharacterBlock campaign_id={this.props.currentCampaign.campaignDetails.campaign_id} campaign_name={this.props.currentCampaign.campaignDetails.name} character={character} toggle={this.toggle}/>
+                            <CharacterBlock campaign_id={this.props.currentCampaign.campaignDetails.campaign_id} campaign_name={this.props.currentCampaign.campaignDetails.name} character={character}/>
                         </div>
                     )
                 }
@@ -68,7 +64,7 @@ class CharacterLanding extends Component {
         return (
             <div>
                 <div
-                    className={this.state.obscured 
+                    className={this.props.obscured 
                         ? 'Background'
                         : 'Foreground'
                         }>
@@ -80,7 +76,7 @@ class CharacterLanding extends Component {
                             ? 'none'
                             : ''
                             }}
-                            onClick={this.toggle}
+                            onClick={this.props.toggle}
                             name='characterCreateRevealed'>
                             +</button>
                         <button
@@ -88,37 +84,37 @@ class CharacterLanding extends Component {
                             ? 'none'
                             : ''
                             }}
-                            onClick={this.toggle}
+                            onClick={this.props.toggle}
                             name='importRevealed'>
                             Import</button>
                     </div>
                 </div>
                     <div
                         className="Character-Box Box"
-                        style={{display: this.state.importRevealed 
+                        style={{display: this.props.importRevealed 
                             ? ''
                             : 'none'
                         }}>
                         Import Character
                         <input type="text" placeholder="Name" name='importName' onChange={this.handleInput}/>
                         <button onClick={this.importCharacter}>Submit</button>
-                        <button onClick={this.toggle} name="importRevealed">Cancel</button>
+                        <button onClick={this.props.toggle} name="importRevealed">Cancel</button>
                     </div>
                     <div
                         className='Character-Box Box'
-                        style={{display: this.state.characterCreateRevealed
+                        style={{display: this.props.characterCreateRevealed
                             ? ''
                             : 'none'
                         }}>
-                        <CharacterCreation toggle={this.toggle}/>
+                        <CharacterCreation toggle={this.props.toggle}/>
                     </div>
                     <div
                         className='Character-Box'
-                        style={{display: this.state.characterSheetRevealed
+                        style={{display: this.props.characterSheetRevealed
                             ? ''
                             : 'none'
                         }}>
-                        <CharacterSheetWrapper toggle={this.toggle} character_id={this.state.currentCharacter}/>
+                        <CharacterSheetWrapper toggle={this.props.toggle}/>
                     </div>
             </div>
         )
@@ -127,9 +123,14 @@ class CharacterLanding extends Component {
 
 function mapStateToProps(state) {
     const { currentCampaign } = state.campaign;
+    const { characterCreateRevealed, characterSheetRevealed, importRevealed, obscured } = state.character;
     return {
         currentCampaign,
+        characterCreateRevealed,
+        characterSheetRevealed,
+        importRevealed,
+        obscured,
     }
 }
 
-export default connect(mapStateToProps)(CharacterLanding);
+export default connect(mapStateToProps, { toggle, saveCharacterData })(CharacterLanding);

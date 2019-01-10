@@ -1,17 +1,21 @@
 .Login {
-    height: 100px;
-    width: 100px;
+    background-color: var(--color3);
+    height: 100vh;
+    width: 100%;
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 30px 30px 30px 20px 30px 1fr;
+    grid-template-columns: 1fr 40px 30px 40px 1fr;
     grid-column-gap: 5px;
     grid-row-gap: 5px;
     grid-template-areas: 
-        "username username"
-        "password password"
-        "login register";
+        ". . . . ."
+        ". username username username ."
+        ". password password password ."
+        ". . login . ."
+        ". . . . ."
+        ". . register . ."
+        ". . . . .";
 }
-
 .username-input {
     grid-area: username;
 }

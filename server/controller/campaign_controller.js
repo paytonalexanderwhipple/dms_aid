@@ -87,6 +87,7 @@ module.exports = {
         const { user_id } = req.session.user;
         const db = req.app.get('db');
         const campaignData = await db.get_current_campaign([campaign_id, user_id]);
+            const users = await db.get_current_users([campaign_id]);
             const inviteJoin = await db.get_current_invites([campaign_id]);
             const messages = await db.get_current_messages([campaign_id]);
         const characterData = await db.get_current_characters([campaign_id, user_id]);
@@ -158,7 +159,7 @@ module.exports = {
             };
             return character;
         }));
-        campaign = { user_id, campaignDetails: campaignData[0], characterDetails, inviteJoin, messages };
+        campaign = { user_id, campaignDetails: campaignData[0], characterDetails, inviteJoin, messages, users };
         res.status(200).send(campaign);
     },
     update: async(req, res) => {
@@ -187,4 +188,12 @@ module.exports = {
         await db.leave_campaign([ campaign_id, user_id ]);
         res.sendStatus(200);
     },
+    removePlayer: async(req, res) => {
+        const { campaign_user_id, campaign_id, user_id } = req.query;
+        console.log(campaign_id, user_id);
+        const db = req.app.get('db');
+        await db.campaign_user.destroy({campaign_user_id});
+        await db.remove_characters([campaign_id, user_id]);
+        res.sendStatus(200);
+    }
 }

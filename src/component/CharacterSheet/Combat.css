@@ -1,0 +1,25 @@
+.quantityMarker {
+    height: 5px;
+    width: 5px;
+    flex-shrink: 0;
+    background: #444;
+    border: #222 solid 1px;
+    border-radius: 50%;
+    margin: 1px 1px 0px 0px
+}
+.qm100 {
+    background: gold
+}
+.qm20 {
+    background: silver;
+}
+.qm5 {
+    background: burlywood;
+}
+.quantityBox {
+    height: 12px;
+    width: 60px;
+    display: flex;
+    flex-wrap: wrap-reverse;
+    align-content: flex-start;
+}

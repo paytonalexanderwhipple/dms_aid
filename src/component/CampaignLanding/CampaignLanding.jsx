@@ -3,12 +3,14 @@ import Message from '../Message/Message.jsx';
 import CharacterLanding from '../CharacterLanding/CharacterLanding.jsx';
 import { connect } from 'react-redux';
     import { setCurrentCampaign } from '../../ducks/reducer/campaign_reducer.js';
+    import { saveCharacterData } from '../../ducks/reducer/character_reducer.js';
 import { Link } from 'react-router-dom';
 import EditCampaign from '../EditCampaign/EditCampaign.jsx';
 import DeleteCampaign from '../DeleteCampaign/DeleteCampaign.jsx';
 import LeaveCampaign from '../LeaveCampaign/LeaveCampaign.jsx';
 import Invite from '../Invite/Invite.jsx';
 import Requests from '../Requests/Requests.jsx';
+import RemovePlayer from '../RemovePlayer/RemovePlayer.jsx';
 import './CampaignLanding.css';
 import axios from 'axios';
 
@@ -23,8 +25,10 @@ class CampaignLanding extends Component {
 
     componentDidMount = async () => {
         const { id } = this.props.match.params;
-        const res = await axios.get(`/api/campaign?campaign_id=${id}`);
+        let res = await axios.get(`/api/campaign?campaign_id=${id}`);
         this.props.setCurrentCampaign(res.data);
+        res = await axios.get('/api/character/creation');
+        this.props.saveCharacterData(res.data);
         const { campaign_id, name } = this.props.currentCampaign.campaignDetails
         this.props.history.push(`/landing/campaign/${campaign_id}/${name}`);
     }
@@ -79,6 +83,11 @@ class CampaignLanding extends Component {
                         style={{display: is_dm ? "none" : ""}}>
                         <LeaveCampaign campaign_id={campaign_id}/>    
                     </div>
+                    <div 
+                        className="Box"
+                        style={{display: is_dm ? "" : "none"}}>
+                        <RemovePlayer campaign_id={campaign_id}/>    
+                    </div>
                     <Link to="/landing">
                         <button>Return To Landing</button>
                     </Link>
@@ -120,4 +129,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { setCurrentCampaign })(CampaignLanding);
+export default connect(mapStateToProps, { setCurrentCampaign, saveCharacterData })(CampaignLanding);

@@ -1,46 +1,48 @@
 module.exports = {
     str: (str, classes, exeptionalStrength) => {
-        if (classes.includes('Fighter') || classes.includes('Paladin') || classes.includes('Ranger') && str >= 18) {
+        if (classes.includes('Fighter') || classes.includes('Paladin') || classes.includes('Ranger') && str == 18) {
 
-                if ( 99 < exeptionalStrength || str === 19 ) return {toHit: 3, damage: 6, encumbranceAdj: 3000, minorTest: 5, minorTestEx: 1, majorTest: 40};
-                else if ( 90 < exeptionalStrength ) return {toHit: 2, damage: 5, encumbranceAdj: 2000, minorTest: 4, minorTestEx: 1, majorTest: 35};
-                else if ( 75 < exeptionalStrength ) return {toHit: 2, damage: 4, encumbranceAdj: 1500, minorTest: 4, minorTestEx: 0, majorTest: 30};
-                else if ( 50 < exeptionalStrength ) return {toHit: 2, damage: 3, encumbranceAdj: 1250, minorTest: 4, minorTestEx: 0, majorTest: 25};
-                else return {toHit: 1, damage: 3, encumbranceAdj: 1000, minorTest: 3, minorTestEx: 0, majorTest: 20};
+                if ( 99 < exeptionalStrength ) return {toHit: 3, damage: 6, encumbranceAdj: 3000, minorTest: '5 in 6', minorTestEx: 1, majorTest: 40};
+                else if ( 90 < exeptionalStrength ) return {toHit: 2, damage: 5, encumbranceAdj: 2000, minorTest: '4 in 6', minorTestEx: 1, majorTest: 35};
+                else if ( 75 < exeptionalStrength ) return {toHit: 2, damage: 4, encumbranceAdj: 1500, minorTest: '4 in 6', minorTestEx: 0, majorTest: 30};
+                else if ( 50 < exeptionalStrength ) return {toHit: 2, damage: 3, encumbranceAdj: 1250, minorTest: '4 in 6', minorTestEx: 0, majorTest: 25};
+                else return {toHit: 1, damage: 3, encumbranceAdj: 1000, minorTest: '3 in 6', minorTestEx: 0, majorTest: 20};
         };
         switch(str) {
             case 3:
-                return {toHit: -3, damage: -1, encumbranceAdj: -350, minorTest: 1, minorTestEx: 0, majorTest: 0};
+                return {toHit: -3, damage: -1, encumbranceAdj: -350, minorTest: '1 in 6', minorTestEx: 0, majorTest: 0};
             case 4:
-                return {toHit:-2, damage:-1, encumbranceAdj: -250, minorTest:1, minorTestEx: 0, majorTest: 0};
+                return {toHit:-2, damage:-1, encumbranceAdj: -250, minorTest: '1 in 6', minorTestEx: 0, majorTest: 0};
             case 5:
-                return {toHit:-2, damage:-1, encumbranceAdj: -250, minorTest:1, minorTestEx: 0, majorTest: 0};
+                return {toHit:-2, damage:-1, encumbranceAdj: -250, minorTest: '1 in 6', minorTestEx: 0, majorTest: 0};
             case 6:
-                return {toHit: -1, damage: 0, encumbranceAdj: -150, minorTest: 1, minorTestEx: 0, majorTest: 0};
+                return {toHit: -1, damage: 0, encumbranceAdj: -150, minorTest: '1 in 6', minorTestEx: 0, majorTest: 0};
             case 7:
-                return {toHit: -1, damage: 0, encumbranceAdj: -150, minorTest: 1, minorTestEx: 0, majorTest: 0};
+                return {toHit: -1, damage: 0, encumbranceAdj: -150, minorTest: '1 in 6', minorTestEx: 0, majorTest: 0};
             case 8:
-                return {toHit: 0, damage: 0, encumbranceAdj: 0, minorTest: 2, minorTestEx: 0, majorTest: 1};
+                return {toHit: 0, damage: 0, encumbranceAdj: 0, minorTest: '2 in 6', minorTestEx: 0, majorTest: 1};
             case 9:
-                return {toHit: 0, damage: 0, encumbranceAdj: 0, minorTest: 2, minorTestEx: 0, majorTest: 1};
+                return {toHit: 0, damage: 0, encumbranceAdj: 0, minorTest: '2 in 6', minorTestEx: 0, majorTest: 1};
             case 10:
-                return {toHit: 0, damage: 0, encumbranceAdj: 0, minorTest: 2, minorTestEx: 0, majorTest: 2};
+                return {toHit: 0, damage: 0, encumbranceAdj: 0, minorTest: '2 in 6', minorTestEx: 0, majorTest: 2};
             case 11:
-                return {toHit: 0, damage: 0, encumbranceAdj: 0, minorTest: 2, minorTestEx: 0, majorTest: 2};
+                return {toHit: 0, damage: 0, encumbranceAdj: 0, minorTest: '2 in 6', minorTestEx: 0, majorTest: 2};
             case 12:
-                return {toHit: 0, damage: 0, encumbranceAdj: 100, minorTest: 2, minorTestEx: 0, majorTest: 4};
+                return {toHit: 0, damage: 0, encumbranceAdj: 100, minorTest: '2 in 6', minorTestEx: 0, majorTest: 4};
             case 13:
-                return {toHit: 0, damage: 0, encumbranceAdj: 100, minorTest: 2, minorTestEx: 0, majorTest: 4};
+                return {toHit: 0, damage: 0, encumbranceAdj: 100, minorTest: '2 in 6', minorTestEx: 0, majorTest: 4};
             case 14:
-                return {toHit:0, damage: 0, encumbranceAdj: 200, minorTest: 2, minorTestEx: 0, majorTest: 7};
+                return {toHit:0, damage: 0, encumbranceAdj: 200, minorTest: '2 in 6', minorTestEx: 0, majorTest: 7};
             case 15:
-                return {toHit:0, damage: 0, encumbranceAdj: 200, minorTest: 2, minorTestEx: 0, majorTest: 7};
+                return {toHit:0, damage: 0, encumbranceAdj: 200, minorTest: '2 in 6', minorTestEx: 0, majorTest: 7};
             case 16:
-                return {toHit: 0, damage: 1, encumbranceAdj: 350, minorTest: 3, minorTestEx: 0, majorTest: 10};
+                return {toHit: 0, damage: 1, encumbranceAdj: 350, minorTest: '3 in 6', minorTestEx: 0, majorTest: 10};
             case 17:
-                return {toHit: 1, damage: 1, encumbranceAdj: 500, minorTest: 3, minorTestEx: 0, majorTest: 13};
+                return {toHit: 1, damage: 1, encumbranceAdj: 500, minorTest: '3 in 6', minorTestEx: 0, majorTest: 13};
             case 18:
-                return {toHit: 1, damage: 2, encumbranceAdj: 750, minorTest: 3, minorTestEx: 0, majorTest: 16};
+                return {toHit: 1, damage: 2, encumbranceAdj: 750, minorTest: '3 in 6', minorTestEx: 0, majorTest: 16};
+            case 19:
+                return {toHit: 3, damage: 7, encumbranceAdj: 4500, minorTest: '7 in 8', minorTestEx: '3 in 6', majorTest: 50};
         }
     },
     int: (int) => {
@@ -78,7 +80,7 @@ module.exports = {
             case 18:
                 return {addLanguages: 7, chanceToUnderstand: 85, minSpells: 9, maxSpells: 18};
             case 19:
-                return {addLanguages: 8, chanceToUnderstand: 90, minSpells: 10, maxSpells: 22, immunity: 1};
+                return {addLanguages: 8, chanceToUnderstand: 95, minSpells: 11, maxSpells: 22, immunity: 1};
         }
     },
     wis: (wis) => {
@@ -116,7 +118,7 @@ module.exports = {
             case 18:
                 return {mental: 4, spells: [2, 2, 1, 1], failure: 0};
             case 19:
-                return {mental: 5, spells: [3, 2, 1, 1], failure: 0};
+                return {mental: 5, spells: [4, 2, 1, 1], failure: 0};
         }},
     dex: (dex) => {
         switch(dex) {
@@ -256,13 +258,13 @@ module.exports = {
             return Math.min(num, newClass.saving_throws[i]) - character.saving_throw_adj;
         });
         for (let i = 0; i < ogClass.hp.length; i++) {
-            newClass.hp.unshift();
+            newClass.hp.unshift(0);
         }
-        ogHP = ogClass.hp.reduce((acc, num) => {
-            return acc + num + character.con.hp;
+        ogHP = ogClass.hp.reduce((acc, num, i) => {
+            if (i < ogClass.level) return acc + num + character.con.hp;
         }, 0) + ogClass.hp_bonus;
-        newHP = newClass.hp.reduce((acc, num) => {
-            if (num) return acc + num + character.con.hp;
+        newHP = newClass.hp.reduce((acc, num, i) => {
+            if (num && i < newClass.level) return acc + num + character.con.hp;
             else return acc;
         }, 0) + newClass.hp_bonus;
         character.hp = ogHP + newHP; 
@@ -297,12 +299,16 @@ module.exports = {
     },
     racialStatParser: (character) => {
         character.stats = character.stats.map((element, i)=> {
-            return element + character.stat_adj[i];
+            if (element > 18 || element < 4) {
+                return element
+            } else {
+                return element + character.stat_adj[i];
+            }
         });
         return character;
     },
     racialSavingThrows: (character, con) => {
-        character.special_abilities += `&+${Math.floor(con / 3.5)} to saves against poison and magic`;
+        character.resistances += `&+${Math.floor(con / 3.5)} to saves against poison and magic`;
         return character 
     },
     checkLevelLimit: (character, cLass) => {

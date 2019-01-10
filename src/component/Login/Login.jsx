@@ -43,13 +43,13 @@ class Login extends Component {
         return (
             <div className='Login'>
                 <input
-                    className='username-input'
+                    className='username-input input'
                     type="text"
                     name='username'
                     placeholder='Username'
                     onChange={this.handleInput}/>
                 <input 
-                    className='password-input'
+                    className='password-input input'
                     type="text"
                     name='password'
                     placeholder='Password'

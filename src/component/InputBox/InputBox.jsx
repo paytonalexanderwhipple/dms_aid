@@ -8,11 +8,15 @@ class InputBox extends Component {
     constructor() {
         super()
         
+        this.textarea = React.createRef();
+        
         this.state = {
             campaignName: '',
             text: '',
             levelLimits: false,
             description: '',
+            textSelectionStart: '',
+            tab: false,
         }
     }
 
@@ -53,6 +57,23 @@ class InputBox extends Component {
             })
     }
 
+    handleTab = (event) => {
+        let { value, name, selectionStart } = event.target;
+        if (event.keyCode === 9) {
+            event.preventDefault();
+            value = value.slice(0, selectionStart) + '\t' + value.slice(selectionStart, );
+            this.setState({[name]: value, textSelectionStart: selectionStart, tab: true, })
+        }
+    }
+
+    componentDidUpdate = (prevProps, prevState) => {
+        if (this.state.description !== prevState.description && this.state.tab) {
+            this.textarea.current.selectionStart = this.state.textSelectionStart + 1;
+            this.textarea.current.selectionEnd = this.state.textSelectionStart + 1;
+            this.setState({tab: false});
+        }
+    }
+
     render() {
 
         let render;
@@ -73,7 +94,7 @@ class InputBox extends Component {
                     <input onChange={this.handleInput} value={this.state.text} name='text'/>
                     <p>Racial Level Restriction</p>
                     <input onChange={() => this.handleCheckBoxes('levelLimits')} type="checkbox"/>
-                    <textarea row='3' column='50' onChange={this.handleInput} value={this.state.description} name='description' maxLength='144'/>
+                    <textarea row='3' column='50' onKeyDown={this.handleTab} ref={this.textarea} onChange={this.handleInput} value={this.state.description} name='description' maxLength='144'/>
                     <button onClick={this.createCampaign}>Create</button>
                     <button onClick={this.clear}>Cancel</button>
                 </div>

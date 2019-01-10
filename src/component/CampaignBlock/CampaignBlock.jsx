@@ -24,7 +24,7 @@ class CampaignBlock extends Component {
             <div className='CampaignBlock'>
                 <img src={img} alt=""/>
                 <p className='CB-name'>{name}</p>
-                <p className='CB-description'>{description}</p>
+                <p className='CB-description MultilineDisplay'>{description}</p>
                 {roster}
                 <p className='CB-class_restrictions'>{class_restrictions}</p>
                 <p className='CB-level_limits'>{level_limits}</p>

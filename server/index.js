@@ -15,6 +15,7 @@ const app = express();
 const io = socket();
 // *** TOPLEVEL MIDDLEWARE *** //
 
+app.use(express.static(`${__dirname}/../build`))
 app.use(express.json());
 app.use(session({
     secret: SESSION_SECRET,
@@ -53,12 +54,13 @@ app.delete('/api/campaign/delete/:campaign_id', camp_ctrl.delete);
 app.post('/api/campaign/invite', camp_ctrl.createInvite);
 app.delete('/api/campaign/leave', camp_ctrl.leave_campaign);
 app.post('/api/campaign/join', camp_ctrl.createJoin);
+app.delete('/api/campaign/remove', camp_ctrl.removePlayer);
 // ---> character data
 app.post('/api/character/import', char_ctrl.import_character);
 app.get('/api/character/creation', char_ctrl.creation_data)
 app.post('/api/character', char_ctrl.create);
-// app.put('/api/character', char_ctrl.update);
-// app.delete('/api/character', char_ctrl.delete);
+app.put('/api/character', char_ctrl.update);
+app.delete('/api/character', char_ctrl.delete);
 //---> invites/join requests
 app.get('/api/invites', async (req, res) => {
     const { user_id } = req.session.user;

@@ -1,17 +1,21 @@
 import React ,{ Component } from 'react';
 import { connect } from 'react-redux';
-import { setCurrentCampaign } from '../../ducks/reducer/campaign_reducer.js';
+    import { setCurrentCampaign } from '../../ducks/reducer/campaign_reducer.js';
 import axios from 'axios';
 
 class EditCampaign extends Component {
     constructor(props) {
         super(props);
         
+        this.textarea = React.createRef();
+
         this.state = {
             name: this.props.currentCampaign.campaignDetails.name,
             img: this.props.currentCampaign.campaignDetails.img,
             level_limits: this.props.currentCampaign.campaignDetails.level_limits,
             description: this.props.currentCampaign.campaignDetails.description,
+            textSelectionStart: '',
+            tab: false,
         }
     }
     
@@ -53,6 +57,23 @@ class EditCampaign extends Component {
             });
     }
 
+    handleTab = (event) => {
+        let { value, name, selectionStart } = event.target;
+        if (event.keyCode === 9) {
+            event.preventDefault();
+            value = value.slice(0, selectionStart) + '\t' + value.slice(selectionStart, );
+            this.setState({[name]: value, textSelectionStart: selectionStart, tab: true, })
+        }
+    }
+
+    componentDidUpdate = (prevProps, prevState) => {
+        if (this.state.description !== prevState.description && this.state.tab) {
+            this.textarea.current.selectionStart = this.state.textSelectionStart + 1;
+            this.textarea.current.selectionEnd = this.state.textSelectionStart + 1;
+            this.setState({tab: false});
+        }
+    }
+
     render() {
 
         const { name, img, description } = this.props.currentCampaign.campaignDetails;
@@ -69,7 +90,7 @@ class EditCampaign extends Component {
                     : <input onClick={this.handleCheckbox} name="level_limits" type="checkbox" checked/>
                 }
                 <p>Description:</p>
-                <textarea name="description" onChange={this.handleInput} value={this.state.description} id="" cols="20" rows="3" placeholder={description}></textarea>
+                <textarea name="description" ref={this.textarea} onKeyDown={this.handleTab} onChange={this.handleInput} value={this.state.description} id="" cols="20" rows="3"></textarea>
                 <button onClick={this.submitEdit}>Submit Changes</button>
                 <button onClick={this.reset}>Cancel</button>
             </div>

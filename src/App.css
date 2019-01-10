@@ -1,0 +1,26 @@
+:root {
+    --color1: #ddd;
+    --color2: #F1ECE1;
+    --color3: #C6B392;
+    --color4: #5A3516;
+    --color5: #412306;
+}
+.sup {
+    vertical-align: super;
+    font-size: 8px;
+    display: inline;
+}
+.MultilineDisplay {
+    white-space: pre-wrap;
+}
+.button {
+
+}
+.input {
+    background-color: var(--color3);
+    border: none;
+    border-bottom: var(--color2) 1px solid;
+}
+.input:focus {
+    outline: none;
+}

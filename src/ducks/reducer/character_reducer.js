@@ -13,14 +13,36 @@ const initialState = {
     },
     characterChanges: {
             personalDetails: {},
-            combat: {},
+            combat: {
+                weapons: [],
+                ammo: [],
+                newAmmo: [],
+                newWeapon: [],
+                newArmor: {},
+                newShield: {},
+                armor: [],
+                shield: [],
+                deleteAmmo: [],
+                deleteWeapon: [],
+            },
             Magic: {},
-            Inventory: {},
-            Notes: {},
+            Inventory: {
+                deleteItem: [],
+                createItem: [],
+            },
             abilities: {},
+            dualClass: {},
+            XP: {
+                xp: {},
+                hp: [],
+            },
     },
     loading: false,
     rerenderCreation: false,
+    characterCreateRevealed: false,
+    characterSheetRevealed: false,
+    importRevealed: false,
+    obscured: false,
 };
 
 // *** ACTION TYPES *** //
@@ -35,6 +57,12 @@ const SUBMIT_CHARACTER_FULFILLED = 'SUBMIT_CHARACTER_FULFILLED';
 const SUBMIT_CHARACTER_REJECTED = 'SUBMIT_CHARACTER_REJECTED';
 const INPUT_CHARACTER_EDITS = 'INPUT_CHARACTER_EDITS';
 const CLEAR_CHARACTER_EDITS = 'CLEAR_CHARACTER_EDITS';
+const SUBMIT_CHARACTER_EDITS = 'SUBMIT_CHARACTER_EDITS';
+const SUBMIT_CHARACTER_EDITS_PENDING = 'SUBMIT_CHARACTER_EDITS_PENDING';
+const SUBMIT_CHARACTER_EDITS_FULFILLED = 'SUBMIT_CHARACTER_EDITS_FULFILLED';
+const SUBMIT_CHARACTER_EDITS_REJECTED = 'SUBMIT_CHARACTER_EDITS_REJECTED';
+const TOGGLE = 'TOGGLE';
+const TOGGLE_LOAD = 'TOGGLE_LOAD';
 
 
 // *** REDUCER *** //
@@ -61,7 +89,18 @@ export default function reducer(state = initialState, action) {
         case INPUT_CHARACTER_EDITS:
             return { ...state, characterChanges: { ...state.characterChanges, [action.payload.group]: {...state.characterChanges[action.payload.group], [action.payload.key]: action.payload.data }}};           
         case CLEAR_CHARACTER_EDITS:
-            return { ...state, characterChanges: { ...initialState.characterChanges }};
+            return { ...state, characterChanges: { ...initialState.characterChanges, combat: { weapons: [], ammo: [], newAmmo: [], newWeapon: [], newArmor: {}, newShield: {}, armor: [], shield: [], deleteAmmo: [], deleteWeapon: []},}};
+        case SUBMIT_CHARACTER_EDITS_PENDING:
+            return { ...state, loading: true };
+        case SUBMIT_CHARACTER_EDITS_FULFILLED:
+            return { ...state, characterChanges: initialState.characterChanges  };
+        case SUBMIT_CHARACTER_EDITS_REJECTED:
+            alert(action.payload.response.request.response);
+            return { ...state, loading: false };
+        case TOGGLE: 
+            return { ...state, [action.payload]: !state[action.payload], obscured: !state.obscured, characterChanges: { ...initialState.characterChanges, combat: { weapons: [], ammo: [], newAmmo: [], newWeapon: [], newArmor: {}, newShield: {}, armor: [], shield: [], deleteAmmo: [], deleteWeapon: []},}};
+        case TOGGLE_LOAD:
+            return { ...state, loading: !state.loading};
         default: 
             return {...state};
     }
@@ -121,6 +160,27 @@ export function inputCharacterEdits(group, key, data) {
 export function clearCharacterEdits() {
     return {
         type: CLEAR_CHARACTER_EDITS,
+        payload: '',
+    }
+}
+
+export function submitCharacterEdits(character, changes) {
+    return {
+        type: SUBMIT_CHARACTER_EDITS,
+        payload: axios.put('/api/character', { character, ...changes }),
+    }
+}
+
+export function toggle(event) {
+    return {
+        type: TOGGLE,
+        payload: event.target.name,
+    }
+}
+
+export function toggleLoad() {
+    return {
+        type: TOGGLE_LOAD,
         payload: '',
     }
 }
