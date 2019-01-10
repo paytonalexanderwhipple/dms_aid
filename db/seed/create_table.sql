@@ -30,10 +30,10 @@ CREATE TABLE "character" (
 	"name" varchar(50) NOT NULL UNIQUE,
 	"title" varchar(50) NOT NULL,
 	"race" text NOT NULL,
-	"temp_hp" integer NOT NULL,
 	"alignment" varchar(20) NOT NULL,
 	"stats" integer[] NOT NULL,
 	"saving_throw_adj" integer NOT NULL,
+	"ac_bonus" integer NOT NULL,
 	"proficiencies" text[] NOT NULL,
 	"languages" text[] NOT NULL,
 	"weight" integer NOT NULL,--in gp (lbs*10)
@@ -43,8 +43,7 @@ CREATE TABLE "character" (
 	"eyes" varchar(25) NOT NULL,
 	"hair" varchar(25) NOT NULL,
 	"description" varchar(144) NOT NULL,
-	"inventory" varchar(500) NOT NULL,
-	"treasure" varchar(500) NOT NULL,
+	"inventory" text NOT NULL,
 	"coinage" integer[] NOT NULL,--array containing cp, sp, ep, gp, pp.
 	"notes" TEXT NOT NULL,
 	"dm_notes" TEXT NOT NULL,
@@ -109,7 +108,7 @@ CREATE TABLE "class_abilities_fixed" (
 	"armor" text[] NOT NULL,
 	"non_proficiency_penalty" integer NOT NULL,
 	"hd_type" integer NOT NULL,
-	"primary_stat" text NOT NULL,
+	"primary_stat" integer NOT NULL,
 	"alignment_restriction" text[] NOT NULL,
 	CONSTRAINT class_abilities_fixed_pk PRIMARY KEY ("class_name")
 ) WITH (
@@ -120,7 +119,7 @@ DROP TABLE IF EXISTS "race" CASCADE;
 CREATE TABLE "race" (
 	"name" TEXT NOT NULL,
 	"vision" TEXT NOT NULL,
-	"special_abilities" TEXT NOT NULL,
+	"special_attack" TEXT NOT NULL,
 	"detections" TEXT NOT NULL,
 	"resistances" TEXT NOT NULL,
 	"base_movement" integer NOT NULL,
@@ -185,7 +184,6 @@ CREATE TABLE "character_weapon" (
 	"character_weapon_id" serial NOT NULL,
 	"attack_adj" integer NOT NULL,
 	"damage_adj" integer NOT NULL,
-	"is_proficient" BOOLEAN NOT NULL,
 	CONSTRAINT character_weapon_pk PRIMARY KEY ("character_weapon_id")
 ) WITH (
   OIDS=FALSE

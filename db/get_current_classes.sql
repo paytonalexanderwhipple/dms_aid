@@ -1,4 +1,4 @@
-SELECT ch.character_id, cach.campaign_id, cav.*, caf.*, cc.hp, cc.xp, cc.og_class FROM campaign as c
+SELECT ch.character_id, cc.character_class_id, cach.campaign_id, cav.*, caf.*, cc.hp, cc.xp, cc.og_class FROM campaign as c
     JOIN campaign_character as cach ON cach.campaign_id = c.campaign_id
     JOIN character as ch ON ch.character_id = cach.character_id
     JOIN character_class as cc ON cc.character_id = ch.character_id
