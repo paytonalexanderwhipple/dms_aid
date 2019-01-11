@@ -1,5 +1,6 @@
 import React ,{ Component } from 'react';
 import axios from 'axios';
+import './Requests.css';
 
 class Requests extends Component {
     constructor() {
@@ -7,6 +8,7 @@ class Requests extends Component {
         
         this.state = {
             joins: [],
+            view: false,
         }
     }
 
@@ -40,22 +42,43 @@ class Requests extends Component {
                 console.log(`Requests.declineRequest ${err}`);
             })
     }
+
+    toggle = () => {
+        this.setState({view: !this.state.view});
+    }
     
     render() {
 
         let requests = this.state.joins.map((join, i) => {
                 return (
-                    <div key={i}>
-                        <h1>{join.username}</h1>
-                        <p>{join.message}</p>
-                        <button onClick={() => this.acceptRequest(join.campaign_id, join.user_id, join.join_request_id)}>Accept</button>
-                        <button onClick={() => this.declineRequest(join.join_request_id)}>Decline</button>
+                    <div key={i} className='Request'>
+                        <div className='RequestUsername'>
+                            <p className='text'>Username:</p>{' '}
+                            <h1 className='text'>{join.username}</h1>
+                        </div>
+                        <p className='text RequestMessage'>{' '}{join.message}</p>
+                        <div className='RequestButtons'>
+                            <button className='button' id='RequestButtons' onClick={() => this.acceptRequest(join.campaign_id, join.user_id, join.join_request_id)}>Accept</button>
+                            <button className='button' id='RequestButtons' onClick={() => this.declineRequest(join.join_request_id)}>Decline</button>
+                        </div>
                     </div>
                 );
         })
+
+        let render;
+        if (this.state.view) {
+            render = (<div className='Requests'>
+                {requests}
+                <button id='RequestsLeave' className='button' onClick={this.toggle}>Leave</button>
+            </div>)
+        } else {
+            render = (<div className='requests'>
+                <button className='button paper ToggleRequests' onClick={this.toggle}>View Requests</button>
+            </div>)
+        }
         return (
             <div>
-                {requests}
+                {render}
             </div>
         )
     }

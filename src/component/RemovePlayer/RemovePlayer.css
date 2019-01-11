@@ -1,0 +1,34 @@
+.RemovePlayer {
+    height: 200px;
+}
+.RemoveButtonBox {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.removeBox {
+    height: 200px;
+    padding: 5px;
+    overflow: auto;
+}
+.RemovePlayerContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    border-bottom: 1px black solid;
+}
+.removeText {
+    font-size: 14px;
+}
+#RemoveButton {
+    height: 12px;
+    width: 12px;
+    padding: 0px;
+    border-radius: 12px;
+    margin-left: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 0px;
+    padding: 0px 0px 2px 1px;
+}

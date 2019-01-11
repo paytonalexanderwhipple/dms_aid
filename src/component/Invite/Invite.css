@@ -1,0 +1,17 @@
+.InviteButtonBox {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 200px;
+    flex-direction: column;
+}
+#InviteInput {
+    background-color: var(--color-1)
+}
+.InviteText {
+    font-size: 12px;
+}
+#InviteButton {
+    height: 15px;
+    width: 50px;
+}

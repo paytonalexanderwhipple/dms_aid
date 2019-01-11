@@ -46,21 +46,23 @@ class InviteBox extends Component {
 
         let invites = this.state.invites.map((invite, i) => {
             return (
-                <div key={i}>
-                    <h1>{invite.name}</h1>
-                    <p className='MultilineDisplay'>{invite.message}</p>
-                    <button onClick={() => this.acceptInvite(invite.name, invite.join_request_id)}>Accept</button>
-                    <button onClick={() => this.declineInvite(invite.join_request_id)}>Decline</button>
+                <div key={i} className='inviteBoxInvite paper'>
+                    <h1 className='text IBname'>Campaign:{invite.name}</h1>
+                    <p className='MultilineDisplay text IBmessage'>{invite.message}</p>
+                    <button id='inviteBoxButton1' className='button' onClick={() => this.acceptInvite(invite.name, invite.join_request_id)}>Accept</button>
+                    <button id='inviteBoxButton2' className='button' onClick={() => this.declineInvite(invite.join_request_id)}>Decline</button>
                 </div>
             );
         })
 
         return (
             <div className={this.props.revealed ? 'InviteBox RevealInviteBox' : 'InviteBox'}>
-                <div>
+                <div className='InviteBoxBox'>
                     {invites}
                 </div>
-                <button onClick={this.props.toggleInvite}>Cancel</button>
+                <div className='IBbuttonBox'>
+                    <button className='button' id='IBcancel' onClick={this.props.toggleInvite}>Cancel</button>
+                </div>
             </div>
         )
     }

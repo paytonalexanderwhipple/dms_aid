@@ -2,6 +2,7 @@ import React ,{ Component } from 'react';
 import { connect } from 'react-redux';
     import { setCurrentCampaign } from '../../ducks/reducer/campaign_reducer.js';
 import axios from 'axios';
+import './RemovePlayer.css';
 
 class RemovePlayer extends Component {
     constructor() {
@@ -35,9 +36,9 @@ class RemovePlayer extends Component {
         let usersDisplay = users.map(user => {
             if (!user.is_dm) {
                 return (
-                    <div>
-                        <p>Player: {user.username}</p>
-                        <button onClick={() => this.removePlayer(user)}>x</button>
+                    <div className='RemovePlayerContainer'>
+                        <p className='text RemoveText'>Player: {user.username}</p>
+                        <button id='RemoveButton' className='button' onClick={() => this.removePlayer(user)}>x</button>
                     </div>
                 )
             }
@@ -45,18 +46,18 @@ class RemovePlayer extends Component {
 
         let render;
         if (this.state.remove) {
-            render = (<div>
+            render = (<div className='removeBox'>
                 {usersDisplay}
-                <button onClick={this.toggle}>Cancel</button>
+                <button id='RemoveCancel' className='button' onClick={this.toggle}>Cancel</button>
             </div>)
         } else {
-            render = (<div>
-                <button onClick={this.toggle}>Remove Players</button>
+            render = (<div className='RemoveButtonBox'>
+                <button className='button paper' onClick={this.toggle}>Remove Players</button>
             </div>)
         }
 
         return (
-            <div>
+            <div className='RemovePlayer'>
                 {render}
             </div>
         )

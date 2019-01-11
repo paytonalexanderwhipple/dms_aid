@@ -1,5 +1,6 @@
 import React ,{ Component } from 'react';
 import axios from 'axios';
+import './Invite.css';
 
 class Invite extends Component {
     constructor() {
@@ -33,7 +34,7 @@ class Invite extends Component {
     }
     
     clear = () => {
-        this.setState({username: '', message: ''});
+        this.setState({username: '', message: '', invite: false});
     }
 
     handleTab = (event) => {
@@ -53,15 +54,36 @@ class Invite extends Component {
         }
     }
 
+    toggle = () => {
+        this.setState({invite: !this.state.input});
+    }
+
     render() {
+
+        let render;
+
+        if (this.state.invite) {
+            render = (<div className='InviteButtonBox'>
+                <input id='InviteInput' className='input' placeholder='Username' type="text" value={this.state.username} name="username" onChange={this.handleInput}/>
+                <div>
+                    <p className='text InviteText'>Message:</p>
+                    <textarea maxLength='50' className='textarea paper' row="3" column="20" type="text" ref={this.textarea} onKeyDown={this.handleTab} value={this.state.message} name="message" onChange={this.handleInput}/>
+                </div>
+                <div>
+                    <button id='InviteButton' className='button' onClick={this.sendInvite}>Send</button>
+                    <button id='InviteButton' className='button' onClick={this.clear}>Cancel</button>
+                </div>
+            </div>
+            )
+        } else {
+            render = (<div className='InviteButtonBox'>
+                <button className='button paper' onClick={this.toggle}>Invite Players</button>
+            </div>)
+        }
+
         return (
             <div>
-                <p>Username:</p>
-                <input type="text" value={this.state.username} name="username" onChange={this.handleInput}/>
-                <p>Message:</p>
-                <textarea row="3" column="20" type="text" ref={this.textarea} onKeyDown={this.handleTab} value={this.state.message} name="message" onChange={this.handleInput}/>
-                <button onClick={this.sendInvite}>Send</button>
-                <button onClick={this.clear}>Clear</button>
+                {render}
             </div>
         )
     }

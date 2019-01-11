@@ -82,7 +82,7 @@ class InputBox extends Component {
             render = (
                 <div className='inviteSend'>
                     <input className="campaignJoin input" placeholder='Campaign Name' onChange={this.handleInput} value={this.state.campaignName} name='campaignName' maxLength='144'/>
-                    <input className="textJoin input" placeholder='Message' onChange={this.handleInput} value={this.state.text} name='text' maxLength='144'/>
+                    <input className="textJoin input" placeholder='Message' onChange={this.handleInput} value={this.state.text} name='text' maxLength='50'/>
                     <button className="sendJoin button" onClick={this.createJoin}>Send</button>
                     <button className="cancelJoin button" onClick={this.clear}>Cancel</button>
                 </div>

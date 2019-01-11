@@ -1,0 +1,63 @@
+.eyeImg {
+    height: 10px;
+    width: 10px;
+}
+.eyeButton {
+    background-color: var(--color0);
+    border: none;
+    border-radius: 10px;
+    position: absolute;
+    right: 3px;
+    top: 3px;
+}
+.eyeButton:hover {
+    background-color: var(--color8)
+}
+.eyeButton:focus {
+    outline: none;
+}
+.ChBframe {
+    border: 1px solid var(--color7);
+    flex-basis: 100px;
+    flex-shrink: 0;
+    width: 125px;
+    align-self: center;
+}
+.CharacterCard {
+    position: relative;
+    height: 200px;
+    width: 160px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+.ChBimage {
+    max-height: 100px;
+    overflow: hidden;
+    width: 125px;
+}
+.nameTextChB {
+    font-size: 14px;
+    font-weight: bold;
+}
+.ChBrace {
+    font-size: 12px;
+    font-weight: bold
+}
+.ChBclass {
+    font-size: 12px;
+    margin-left: 2px;
+}
+.BreakChB {
+    border: .5px solid black;
+}
+.ChBstats {
+    display: flex;
+    justify-content: flex-start;
+    height: 10px;
+}
+.statsChB {
+    font-size: 10px;
+    margin-right: 3px;
+}

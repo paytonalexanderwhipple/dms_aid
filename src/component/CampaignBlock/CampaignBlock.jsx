@@ -4,6 +4,19 @@ import CBPlayerDisplay from '../CBPlayerDisplay/CBPlayerDisplay.jsx';
 import './CampaignBlock.css';
 
 class CampaignBlock extends Component {
+    constructor() {
+        super()
+
+        this.state = {
+            imgExists: true,
+        }
+    }
+
+    imageLoad = (result) => {
+        if (this.state.imgExists !== result) {
+            this.setState({imgExists: result});
+        }
+    }
 
     render() {
 
@@ -19,6 +32,10 @@ class CampaignBlock extends Component {
             <div className='CampaignBlock paper'>
                 <p className='CB-name text'>{name}</p>
                 <div className='campaignImgFrame'>
+                    {this.state.imgExists 
+                        ?<img src={img} onLoad={() => this.imageLoad(true)} onError={() => this.imageLoad(false)} className='campaignImg'/>
+                        :<div className='frame'/>
+                    }
                     <img src={img} alt="" className='campaignImg'/>
                 </div>
                 <p className='CB-description MultilineDisplay'>{description}</p>

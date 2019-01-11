@@ -65,11 +65,16 @@ class CharacterLanding extends Component {
             <div>
                 <div
                     className={this.props.obscured 
-                        ? 'Background'
-                        : 'Foreground'
+                        ? 'Background CharacterContainer'
+                        : 'Foreground CharacterContainer'
                         }>
-                    <button onClick={this.props.handleView} name="landing">Home</button>
-                    <div>
+                    <button className='CharacterButtonsContainer' onClick={this.props.handleView} name="landing">
+                        <button className='homeButton text' onClick={this.props.handleView} name="landing">H</button>
+                        <button className='homeButton text' onClick={this.props.handleView} name="landing">o</button>
+                        <button className='homeButton text' onClick={this.props.handleView} name="landing">m</button>
+                        <button className='homeButton text' onClick={this.props.handleView} name="landing">e</button>
+                    </button>
+                    <div className='CharacterDisplayBox paper'>
                         {characters}
                         <button
                             style={{display: this.props.currentCampaign.campaignDetails.is_dm 

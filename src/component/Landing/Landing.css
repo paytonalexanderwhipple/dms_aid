@@ -80,7 +80,6 @@
     align-items: center;
     justify-content: space-between;
     overflow: auto;
-    width: 100%;
 }
 @media (min-width: 415px) {
     #viewButton {

@@ -1,0 +1,59 @@
+.EditCampaignComponent {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.nameEdit {
+    grid-area: name;
+    display: inline;
+}
+.nameEditInput {
+    grid-area: nameInput;
+    display: inline;
+    width: 80px;
+}
+.imgEdit {
+    grid-area: image;
+    display: inline;
+}
+.imgEditInput  {
+    grid-area: imageInput;
+    display: inline;
+    width: 60px;
+}
+.levelEdit {
+    grid-area: level;
+}
+.descEdit {
+    grid-area: desc;
+}
+.descEditInput {
+    grid-area: descInput;
+}
+.submitEdit {
+    grid-area: submit;
+    margin-right: 15px;
+}
+.resetEdit {
+    grid-area: reset;
+    display: inline;
+}
+.EditLevelRestrictions {
+    display: flex;
+    align-items: center;
+}
+.editText {
+    font-size: 14px;
+}
+#EditButton {
+    height: 15px;
+    width: 50px;
+}
+#textareaEdit {
+    background-color: var(--color0)
+}
+#editInput {
+    background-color: var(--color-1);
+}

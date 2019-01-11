@@ -1,10 +1,64 @@
 .InviteBox {
-    height: 250px;
-    width: 375px;
+    height: auto;
+    width: 150px;
     position: absolute;
     right: -375px;
     top: 250px;
     transition: .65s;
+    border: 5px var(--color3) outset;
+    border-right: none;
+}
+.InviteBoxBox {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+.inviteBoxInvite {
+    background: var(--color0);
+    height: 100px;
+    width: 150px;
+    flex-shrink: 0;
+    border-bottom: 1px black solid;
+    display: grid;
+    grid-template-rows: 25px 1fr 1fr 20px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+    "name ."
+    "message ."
+    ". ."
+    "accept decline"
+}
+.IBname {
+    grid-area: name;
+    font-size: 12px;
+}
+.IBmessage {
+    grid-area: message;
+    font-size: 10px;
+}
+#inviteBoxButton1 {
+    grid-area: accept;
+    height: 15px;
+    width: 50px;
+    font-size: 12px;
+}
+#inviteBoxButton2 {
+    grid-area: decline;
+    height: 15px;
+    width: 50px;
+    font-size: 12px;
+}
+.IBbuttonBox {
+    height: 20px;
+    border-top: 5px outset var(--color3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#IBcancel {
+    height: 13px;
+    width: 50px;
 }
 .RevealInviteBox {
     right: 0px;

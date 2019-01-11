@@ -1,6 +1,7 @@
 import React ,{ Component } from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
+import './DeleteCampaign.css';
 
 class DeleteCampaign extends Component {
     constructor() {
@@ -26,13 +27,18 @@ class DeleteCampaign extends Component {
 
     render() {
         return (
-            <div>
-                <button onClick={this.toggleAreYouSure}>Delete Campaign</button>
+            <div className='DeleteCampaign'>
+                <button 
+                    style={{display: this.state.areYouSure ? 'none' : ''}}
+                    className='button paper' onClick={this.toggleAreYouSure}>Delete Campaign</button>
                 <div
-                style={{display: this.state.areYouSure ? '' : 'none'}}>
-                    <p>Are you sure!</p>
-                    <button onClick={this.deleteCampaign}>Yes</button>
-                    <button onClick={this.toggleAreYouSure}>No</button>
+                    style={{display: this.state.areYouSure ? '' : 'none'}}
+                    className='DeleteCampaign'>
+                    <p className='text'>Are you sure!</p>
+                    <div className='DeleteButtonBox'>
+                        <button id='deleteYes' className='button' onClick={this.deleteCampaign}>Yes</button>
+                        <button id='deleteNo' className='button' onClick={this.toggleAreYouSure}>No</button>
+                    </div>
                 </div>
             </div>
         )

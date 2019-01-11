@@ -1,18 +1,87 @@
-.CampaignLanding {
-    width: 100%;
-    height: 100%;
-}
-.mainLanding {
+.LoadingLanding {
+    background-color: var(--color0);
+    height: 100vh;
     display: flex;
-    justify-content: space-between;
-    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.LoadingTextCampaign {
+    font-size: 40px;
+    font-weight: bold;
+}
+.CampaignLanding {
+    width: 100vw;
+    height: 100vh;
+    background: var(--color0);
+    position: fixed;
 }
 .Box {
-    border: gray 5px solid;
-    display: inline-block;
     height: 200px;
-    width: 200px;
+    width: 20vw;
     overflow: auto;
+    background: var(--color-1)
+}
+.EditCampaignBox {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+}
+.DeleteCampaignBox {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+}
+.RemovePlayerBox {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+}   
+.InvitePlayerBox {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+}
+.RequestsBox {
+    position: absolute;
+    bottom: 8px;
+    left: 40vw;
+}
+.LeaveCampaignBox {
+    position: absolute;
+    top: 37vh;
+    left: 8px;
+}
+.returnButton {
+    position: absolute;
+    left: 47.5vw;
+    width: 5vw;
+    display: flex;
+    justify-content: center;
+    border: 5px inset var(--color3);
+    border-top: none;
+    background: var(--color-1);
+}
+.returnButton:hover {
+    background-color: var(--color0);
+}
+.characterToggle {
+    position: absolute;
+    right: 0px;
+    top: 47.5vh;
+    height: 5vh;
+    width: 75px;
+    display: flex;
+    justify-content: flex-start;
+    border: var(--color3) 5px inset;
+    border-right: none;
+    background: var(--color-1);
+}
+.characterToggle:hover {
+    background-color: var(--color0);
+}
+.characterToggle:focus {
+    outline: none;
 }
 .landing-screen {
     height: 100%;
@@ -39,4 +108,17 @@
 .left-and-center {
     position: absolute;
     left: 0px;
+}
+@media (max-width: 415px) {
+    .Box {
+        width: 40vw;
+    }
+    .RequestsBox {
+        top: 37vh;
+        left: 8px;
+    }
+    .returnButton {
+        width: 13vw;
+        left: 43.5vw;
+    }
 }

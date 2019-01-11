@@ -47,19 +47,12 @@ class CampaignLanding extends Component {
         }
         let render;
         if (!this.props.currentCampaign.user_id) {
-            render = (<div>
-                <p>Loading {this.props.match.params.name}</p>
+            render = (<div className='LoadingLanding'>
+                <p className='text LoadingTextCampaign'>Loading {this.props.match.params.name}...</p>
             </div>
             )
         } else {
             render = (<div className='CampaignLanding'>
-                <div
-                    className={this.state.view === 'messages' 
-                    ? 'left-and-center landing-screen'
-                    : 'hidden-left landing-screen'
-                    }>
-                    <Message handleView={this.handleView}/>
-                </div>
                 <div
                     className={this.state.view === 'landing' 
                     ? 'front-and-center landing-screen mainLanding'
@@ -67,41 +60,42 @@ class CampaignLanding extends Component {
                         ? 'hidden-right landing-screen mainLanding'
                         : 'hidden-left landing-screen mainLanding'
                     }>
-                    <button onClick={this.handleView} name='messages'>Messages</button>
                     <div 
-                        className="Box"
+                        className="Box paper EditCampaignBox"
                         style={{display: is_dm ? "" : "none"}}>
                         <EditCampaign />
                     </div>
                     <div 
-                        className="Box"
+                        className="Box paper DeleteCampaignBox"
                         style={{display: is_dm ? "" : "none"}}>
                         <DeleteCampaign campaign_id={campaign_id}/>
                     </div>
                     <div 
-                        className="Box"
+                        className="Box paper LeaveCampaignBox"
                         style={{display: is_dm ? "none" : ""}}>
                         <LeaveCampaign campaign_id={campaign_id}/>    
                     </div>
                     <div 
-                        className="Box"
+                        className="Box paper RemovePlayerBox"
                         style={{display: is_dm ? "" : "none"}}>
                         <RemovePlayer campaign_id={campaign_id}/>    
                     </div>
-                    <Link to="/landing">
-                        <button>Return To Landing</button>
-                    </Link>
+                    <div className='returnButton'>
+                        <Link to="/landing">
+                            <button className='text'>Home</button>
+                        </Link>
+                    </div>
                     <div 
-                        className="Box"
+                        className="Box paper InvitePlayerBox"
                         style={{display: is_dm ? "" : "none"}}>
                         <Invite campaign_id={campaign_id}/>
                     </div>
                     <div 
-                        className="Box"
+                        className="Box paper RequestsBox"
                         style={{display: is_dm ? "" : "none"}}>
                         <Requests campaign_id={campaign_id}/>
                     </div>
-                    <button onClick={this.handleView} name='characters'>Characters</button>
+                    <button className='characterToggle text' onClick={this.handleView} name='characters'>Characters</button>
                 </div>
                 <div
                     className={this.state.view === 'characters' 

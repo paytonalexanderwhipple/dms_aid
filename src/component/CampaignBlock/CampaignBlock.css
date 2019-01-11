@@ -23,6 +23,12 @@
 .campaignImg {
     max-height: 75px;
     width: auto;
+    
+}
+.frame {
+    height: 75px;
+    width: 100px;
+    border: 1px solid var(--color5)
 }
 .CB-description {
     font-size: 10px;

@@ -54,6 +54,10 @@ module.exports = {
         const { user_id } = req.session.user
         const db = req.app.get('db');
         const campaign = await db.campaign.findOne({name: campaignName});
+        if (!campaign) {
+            res.status(404).send('That campaign does not exist. (yet), or you just mispelled the name.');
+            return ''
+        }
         const isParticipating = await db.check_for_campaign_participation([user_id, campaign.campaign_id]);
         if (!isParticipating[0]) {
             await db.create_join_invite([ campaign.campaign_id, user_id, 'join', text ]);

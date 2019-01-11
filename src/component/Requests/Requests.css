@@ -1,0 +1,46 @@
+.Requests {
+    height: 200px;
+    overflow: auto;
+    padding: 5px;
+}
+.requests {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+}
+#RequestsLeave {
+    flex-basis: 20px;
+    flex-shrink: 0;
+    align-self: center;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.ToggleRequests {
+    align-self: center;
+}
+.Request {
+    border-bottom: 1px black solid;
+}
+.RequestUsername {
+    font-size: 16px;
+    display: flex;
+}
+.RequestMessage {
+    font-size: 12px;
+    width: 100px;
+    height: 24px;
+    overflow-wrap: break-word;
+    overflow: scroll;
+    margin-top:3px;
+}
+.RequestButtons {
+    display: flex;
+    justify-content: space-around;
+    height: 15px;
+}
+#RequestButtons {
+    height: 15px;
+    width: 50px;
+}
