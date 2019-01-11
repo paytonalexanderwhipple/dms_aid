@@ -93,8 +93,8 @@ class InputBox extends Component {
                     <input className='input campaignNew' placeholder='Campaign Name' onChange={this.handleInput} value={this.state.campaignName} name='campaignName' maxLength='144'/>
                     <input className='input imgNew' placeholder='Img Url' onChange={this.handleInput} value={this.state.text} name='text'/>
                     <div className='levelNew'>
-                        <p>Level Limits</p>
-                        <input className='input' onChange={() => this.handleCheckBoxes('levelLimits')} type="checkbox"/>
+                        <p className='levelBox text'>Level Limits</p>
+                        <input className='input levelBox' onChange={() => this.handleCheckBoxes('levelLimits')} type="checkbox"/>
                     </div>
                     <textarea className='paper textNew textarea' row='3' column='50' placeholder='Description' onKeyDown={this.handleTab} ref={this.textarea} onChange={this.handleInput} value={this.state.description} name='description' maxLength='144'/>
                     <button id='newCampaignButton' className='sendNew button' onClick={this.createCampaign}>Create</button>

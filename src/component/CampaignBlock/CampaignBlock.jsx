@@ -1,15 +1,10 @@
 import React ,{ Component } from 'react';
+import { Link } from 'react-router-dom';
 import CBPlayerDisplay from '../CBPlayerDisplay/CBPlayerDisplay.jsx';
+import './CampaignBlock.css';
 
 class CampaignBlock extends Component {
-    constructor() {
-        super()
-        
-        this.state = {
-            
-        }
-    }
-    
+
     render() {
 
         let roster = this.props.campaign.characters.map((character, i) => {
@@ -18,16 +13,19 @@ class CampaignBlock extends Component {
             )
         })
 
-        const { img, name, description, class_restrictions, level_limits } = this.props.campaign; 
+        const { img, name, description, campaign_id } = this.props.campaign; 
 
         return (
-            <div className='CampaignBlock'>
-                <img src={img} alt=""/>
-                <p className='CB-name'>{name}</p>
+            <div className='CampaignBlock paper'>
+                <p className='CB-name text'>{name}</p>
+                <div className='campaignImgFrame'>
+                    <img src={img} alt="" className='campaignImg'/>
+                </div>
                 <p className='CB-description MultilineDisplay'>{description}</p>
                 {roster}
-                <p className='CB-class_restrictions'>{class_restrictions}</p>
-                <p className='CB-level_limits'>{level_limits}</p>
+                <Link to={`/landing/campaign/${campaign_id}/${name}`} id='CBbutton'>
+                    <button className='button' id='CBbutton'>Load</button>
+                </Link>
             </div>
         )
     }

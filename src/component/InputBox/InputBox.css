@@ -11,34 +11,48 @@
     right: 0px;
 }
 .newCampaign {
+    height: 100%;
+    width: 100%;
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-columns: 1fr 1fr 10px 1fr 1fr;
+    grid-template-columns: 1fr 100px 10px 30px 10px 100px 1fr;
     grid-template-areas: 
-    ". . . . ."
-    ". campaign . desc ."
-    ". image . desc ."
-    ". limit . desc ."
-    ". . . . ."
-    ". send . cancel ."
-    ". . . . ."
+    ". . . . . . ."
+    ". campaign . . . desc ."
+    ". image . . . desc ."
+    ". limit . . . desc ."
+    ". . . . . . ."
+    ". send . . . cancel ."
+    ". . . . . . ."
 }
 .campaignNew {
+    height: 20px;
     grid-area: campaign;
 }
 .imgNew {
+    height: 20px;
     grid-area: image;
 }
 .levelNew {
+    display: flex;
+    align-items: center;
     grid-area: limit;
+}
+.levelBox {
+    font-size: 12px;
+    display: inline-block;
 }
 .textNew {
     grid-area: desc;
 }
 .sendNew {
+    position: relative;
+    left: 15px;
     grid-area: send;
 }
 .cancelNew {
+    position: relative;
+    right: 15px;
     grid-area: cancel;
 }
 #newCampaignButton {

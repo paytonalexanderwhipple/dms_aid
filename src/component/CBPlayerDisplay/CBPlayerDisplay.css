@@ -1,0 +1,13 @@
+.CBplayerName {
+    font-size: 12px;
+}
+.CBplayerRace {
+    font-size: 11px;
+    position: relative;
+    left: 1px;
+}
+.CBPD-class_name {
+    position: relative;
+    left: 3px;
+    font-size: 10px;
+}

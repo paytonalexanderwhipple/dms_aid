@@ -14,6 +14,9 @@
     --color9: #bbb;
     --color10: #333;
 }
+html {
+    overflow: hidden;
+}
 body {
     font-family: 'Forum', serif;
     height: 100vh;
@@ -49,6 +52,7 @@ body {
     border-bottom: var(--color9) 1px solid;
     font-family: 'Forum', serif;
     color: var(--color10);
+    font-size: 12px;
 }
 .input:focus {
     outline: none;
@@ -56,9 +60,14 @@ body {
 .textarea {
     background-color: var(--color-1);
     border: none;
+    font-family: 'Forum', serif;
 }
 .textarea:focus {
     outline: none;
+}
+.text {
+    font-family: 'Forum', serif;
+    color: var(--color10);
 }
 .paper {
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);

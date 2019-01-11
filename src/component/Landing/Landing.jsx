@@ -137,8 +137,7 @@ class Landing extends Component {
                     <Link to={`/landing/campaign/${campaign_id}/${name}`}>
                         <button
                             className='stageButton button'
-                            style={{display: this.state.stagedCampaign.name ? '' : 'none'}}
-                            onClick={this.stageCampaign}>
+                            style={{display: this.state.stagedCampaign.name ? '' : 'none'}}>
                                 Load Campaign
                         </button>
                     </Link>
