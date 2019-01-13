@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
     import { handleCreationInput, rerenderCreation, clearClassData, submitCharacter } from '../../ducks/reducer/character_reducer.js';
 import ProficienciesDropdown from './ProficienciesDropdown/ProficienciesDropdown.jsx';
-
+import './CharacterCreation4.css';
 
 class CharacterCreation4 extends Component {
     constructor() {
@@ -157,40 +157,49 @@ class CharacterCreation4 extends Component {
             if (cLass.hd > 1) {
                 return (
                     <div key={i}>
-                        <h1>{cLass.class_name} hp: 1-{cLass.hd_type}</h1>
-                        <button onClick={(event) => this.handleButtonInput(event, cLass.hd_type)} name={`${cLass.class_name}hp1`} value="-">-</button>
-                        <p>{this.props.characterCreation[`${cLass.class_name}hp1`] || 0}</p>
-                        <button onClick={(event) => this.handleButtonInput(event, cLass.hd_type)} name={`${cLass.class_name}hp1`} value="+">+</button>
-
-                        <button onClick={(event) => this.handleButtonInput(event, cLass.hd_type)} name={`${cLass.class_name}hp2`} value="-">-</button>
-                        <p>{this.props.characterCreation[`${cLass.class_name}hp2`] || 0}</p>
-                        <button onClick={(event) => this.handleButtonInput(event, cLass.hd_type)} name={`${cLass.class_name}hp2`} value="+">+</button>
+                        <h1 className='text Header'>{cLass.class_name} hp: 1-{cLass.hd_type}</h1>
+                        <div className='IncrementButtonBox'>
+                            <button className='button' id='IncrementButton' onClick={(event) => this.handleButtonInput(event, cLass.hd_type)} name={`${cLass.class_name}hp1`} value="-">-</button>
+                            <p className='InlineText text'>{this.props.characterCreation[`${cLass.class_name}hp1`] || 0}</p>
+                            <button className='button' id='IncrementButton' onClick={(event) => this.handleButtonInput(event, cLass.hd_type)} name={`${cLass.class_name}hp1`} value="+">+</button>
+                        </div>
+                        <div className='IncrementButtonBox'>
+                            <button className='button' id='IncrementButton' onClick={(event) => this.handleButtonInput(event, cLass.hd_type)} name={`${cLass.class_name}hp2`} value="-">-</button>
+                            <p className='InlineText text'>{this.props.characterCreation[`${cLass.class_name}hp2`] || 0}</p>
+                            <button className='button' id='IncrementButton' onClick={(event) => this.handleButtonInput(event, cLass.hd_type)} name={`${cLass.class_name}hp2`} value="+">+</button>
+                        </div>
                         <div style={{display: this.state.exeptionalStrength
                             ? ''
                             : 'none'
                             }}>
-                            <h1>Exeptional Strength</h1>
-                            <button onClick={this.handleInput} name='exeptionalStrength' value='-'>-</button>
-                            <p>{this.props.characterCreation.exeptionalStrength || 0}</p>
-                            <button onClick={this.handleInput} name='exeptionalStrength' value='+'>+</button>
+                            <h1 className='text Header'>Exeptional Strength</h1>
+                            <div className='IncrementButtonBox'>
+                                <button className='button' id='IncrementButton' onClick={this.handleInput} name='exeptionalStrength' value='+'>+</button>
+                                <p className='InlineText text'>{this.props.characterCreation.exeptionalStrength || 0}</p>
+                                <button className='button' id='IncrementButton' onClick={this.handleInput} name='exeptionalStrength' value='-'>-</button>
+                            </div>
                         </div>
                     </div>
                 )
             } else {
                 return (
                     <div key={i}>
-                        <h1>{cLass.class_name} hp: 1-{cLass.hd_type}</h1>
-                        <button onClick={(event) => this.handleButtonInput(event, cLass.hd_type)} name={`${cLass.class_name}hp`} value="-">-</button>
-                        <p>{this.props.characterCreation[`${cLass.class_name}hp`] || 0}</p>
-                        <button onClick={(event) => this.handleButtonInput(event, cLass.hd_type)} name={`${cLass.class_name}hp`} value="+">+</button>
+                        <h1 className='text Header'>{cLass.class_name} hp: 1-{cLass.hd_type}</h1>
+                        <div className='IncrementButtonBox'>
+                            <button className='button' id='IncrementButton' onClick={(event) => this.handleButtonInput(event, cLass.hd_type)} name={`${cLass.class_name}hp`} value="-">-</button>
+                            <p className='InlineText text'>{this.props.characterCreation[`${cLass.class_name}hp`] || 0}</p>
+                            <button className='button' id='IncrementButton' onClick={(event) => this.handleButtonInput(event, cLass.hd_type)} name={`${cLass.class_name}hp`} value="+">+</button>
+                        </div>
                         <div style={{display: this.state.exeptionalStrength
                             ? ''
                             : 'none'
                             }}>
-                            <h1>Exeptional Strength</h1>
-                            <button onClick={this.handleInput} name='exeptionalStrength' value='-'>-</button>
-                            <p>{this.props.characterCreation.exeptionalStrength || 0}</p>
-                            <button onClick={this.handleInput} name='exeptionalStrength' value='+'>+</button>
+                            <h1 className='text Header'>Exeptional Strength</h1>
+                            <div className='IncrementButtonBox'>
+                                <button className='button' id='IncrementButton' onClick={this.handleInput} name='exeptionalStrength' value='-'>-</button>
+                                <p className='InlineText text'>{this.props.characterCreation.exeptionalStrength || 0}</p>
+                                <button className='button' id='IncrementButton' onClick={this.handleInput} name='exeptionalStrength' value='+'>+</button>
+                            </div>
                         </div>
                     </div>
                 )
@@ -198,22 +207,27 @@ class CharacterCreation4 extends Component {
         })
 
         return (
-            <div>
-                <h1>Proficiencies:</h1>
+            <div className='Ch4'>
                 {proficiencies}
-                <h1>Starting Gold: {startingGoldRange}</h1>
-                <button name={startingGoldRange} onClick={this.handleGoldInput} value='-'>-</button>
-                <p>{this.props.characterCreation.startingGold || startingGoldRange.match(/\d+/)[0]}</p>
-                <button name={startingGoldRange} onClick={this.handleGoldInput} value='+'>+</button>
+                <h1 className='text Header'>Starting Gold: {startingGoldRange}</h1>
+                <div className='IncrementButtonBox'>
+                    <button name={startingGoldRange} className='button' id='IncrementButton' onClick={this.handleGoldInput} value='-'>-</button>
+                    <p className='InlineText text'>{this.props.characterCreation.startingGold || startingGoldRange.match(/\d+/)[0]}</p>
+                    <button name={startingGoldRange} className='button' id='IncrementButton' onClick={this.handleGoldInput} value='+'>+</button>
+                </div>
                 {hd}
                 <Link to={`/landing/campaign/${campaign_id}/${name}/create/3`}>
                     <button
+                        className='button'
+                        id='prevStepCh4'
                         onClick={this.clearClassData}>
                             Prev Step
                     </button>
                 </Link>
                 <Link to={`/landing/campaign/${campaign_id}/${name}`}>
                     <button
+                        className='button'
+                        id='nextStepCh4'
                         style={{display: this.state.advance
                             ? ''
                             : 'none'

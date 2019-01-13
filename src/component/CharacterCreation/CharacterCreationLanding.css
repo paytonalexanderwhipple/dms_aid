@@ -1,0 +1,20 @@
+.alignmentSelect {
+    position: relative;
+    background-color: var(--color0);
+    border: 1px var(--color9) solid;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+.alignmentSelect:after {
+    position: absolute;
+  content: "";
+  top: 7px;
+  right: 7px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: var(--color10) transparent transparent transparent;
+}
+select:focus {
+    outline: none;
+}

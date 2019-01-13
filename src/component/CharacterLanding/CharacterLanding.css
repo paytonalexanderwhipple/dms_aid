@@ -1,20 +1,14 @@
 .Character-Box {
     position: absolute;
-    left: 42%;
-    right: 42%;
+    margin: auto;
+    left: auto;
+    right: auto;
     top: 35%;
     bottom: 35%;
-    width: 10%;
-    height: 10%;
-}
-.bigbox {
-    position: relative;
-    top: -100px;
-    left: -100px;
-    height: 350px;
-    width: 350px;
-    border: 5px solid gray;
-    overflow: auto;
+    background-color: var(--color0);
+    height: 200px;
+    width: 200px;
+    padding: 10px;
 }
 .Background {
     opacity: .5;
@@ -22,12 +16,22 @@
 .Foreground {
     opacity: 1;
 }
+.CharacterLanding {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
 .CharacterDisplayBox {
-    height: 85vh;
-    width: 85%;
+    grid-area: realstuff;
+    height: calc(85vh - 30px);
+    width: calc(80vw - 30px);
     background: var(--color-1);
     margin: auto;
-    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    overflow: auto;
 }
 .CharacterButtonsContainer {
     position: absolute;
@@ -50,4 +54,141 @@
 }
 .homeButton {
     width: 10px;
+    background: none;
+    border: none;
+}
+.homeButton:focus {
+    outline: none;
+}
+#ChCreationButton {
+    background-color: var(--color8);
+    flex-basis: 30px;
+    flex-shrink: 0;
+    height: 30px;
+    width: 30px;
+    border-radius: 30px;
+    color: var(--color10);
+    font-size: 20px;
+    font-weight: bold;
+    padding: 2px 0 0 0;
+}
+#ChCreationButton:hover {
+    background-color: var(--color9);
+}
+.NewButtonBox {
+    flex-basis: 200px;
+    flex-shrink: 0;
+    height: 200px;
+    width: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: dotted 1px black;
+    margin-top: 20px;
+}
+#ChImportButton {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: var(--color8);
+    height: 25px;
+    width: 80px;
+    color: var(--color10);
+    font-size: 20px;
+    opacity: .5;
+}
+#ChImportButton:hover {
+    background-color: var(--color9);
+}
+#IncrementButton {
+    height: 10px;
+    width: 10px;
+    border-radius: 10px;
+    font-size: 10px;
+    padding: 0 0 1px 1px;
+    display: inline;
+}
+#IncrementButtonPlus {
+    height: 10px;
+    width: 10px;
+    border-radius: 10px;
+    font-size: 8px;
+    padding: 1px 0 0px 1px;
+    display: inline;
+}
+#IncrementButtonMinus {
+    height: 10px;
+    width: 10px;
+    border-radius: 10px;
+    font-size: 10px;
+    padding: 0 0 1px 1px;
+    display: inline;
+}
+#IncrementButtonX {
+    height: 10px;
+    width: 10px;
+    border-radius: 10px;
+    font-size: 8px;
+    padding: 0 0 1px 1px;
+    display: inline;
+}
+.GridForCorners {
+    margin-top: 30px;
+    background: var(--color-1);
+    display: grid;
+    grid-template-rows: 30px 1fr 30px;
+    grid-template-columns: 30px 1fr 30px;
+    grid-template-areas: 
+    "TL . TR"
+    ". realstuff ."
+    "BL . BR";
+    justify-content: center;
+}
+.corner {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+    "TL TR"
+    "BL BR"
+}
+.c1 {
+    grid-area: TL;
+}
+.c2 {
+    grid-area: TR;
+}
+.c3 {
+    grid-area: BL;
+}
+.c4 {
+    grid-area: BR;
+}
+.TL {
+    grid-area: TL;
+}
+.TR {
+    grid-area: TR;
+}
+.BL {
+    grid-area: BL;
+}
+.BR {
+    grid-area: BR;
+}
+#ImportInput {
+
+}
+.ImportBox {
+    display: flex;
+    flex-direction: column;
+}
+@media (min-width: 415px) {
+    .CharacterDisplayBox {
+        display: grid;
+        grid-template-rows: repeat(autofill 1fr);
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        justify-items: center;
+    }
 }

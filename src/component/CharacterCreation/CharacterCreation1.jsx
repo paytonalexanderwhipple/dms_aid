@@ -2,7 +2,7 @@ import React ,{ Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
     import { handleCreationInput, rerenderCreation } from '../../ducks/reducer/character_reducer.js';
-
+import './CharacterCreation1.css';
 
 class CharacterCreation1 extends Component {
 
@@ -26,37 +26,61 @@ class CharacterCreation1 extends Component {
         const { str, int, wis, dex, con, cha } = this.props.characterCreation
 
         return (
-            <div>
-                <h1>STR <p>{str}</p></h1>
-                        <button onClick={this.handleInput} name='str' value='-'>-</button>
-                        <button onClick={this.handleInput} name='str' value='+'>+</button>
-                <h1>INT <p>{int}</p></h1>
-                        <button onClick={this.handleInput} name='int' value='-'>-</button>
-                        <button onClick={this.handleInput} name='int' value='+'>+</button>
-                <h1>WIS <p>{wis}</p></h1>
-                        <button onClick={this.handleInput} name='wis' value='-'>-</button>
-                        <button onClick={this.handleInput} name='wis' value='+'>+</button>
-                <h1>DEX <p>{dex}</p></h1>
-                        <button onClick={this.handleInput} name='dex' value='-'>-</button>
-                        <button onClick={this.handleInput} name='dex' value='+'>+</button>
-                <h1>CON <p>{con}</p></h1>
-                        <button onClick={this.handleInput} name='con' value='-'>-</button>
-                        <button onClick={this.handleInput} name='con' value='+'>+</button>
-                <h1>CHA <p>{cha}</p></h1>
-                        <button onClick={this.handleInput} name='cha' value='-'>-</button>        
-                        <button onClick={this.handleInput} name='cha' value='+'>+</button>
-                <Link to={`/landing/campaign/${campaign_id}/${name}`}>
-                    <button
-                        onClick={this.props.rerenderCreation}>
-                            Prev Step
-                    </button>
-                </Link>
-                <Link to={`/landing/campaign/${campaign_id}/${name}/create/2`}>
-                    <button
-                        onClick={this.props.rerenderCreation}>
-                            Next Step
-                    </button>
-                </Link>
+            <div >
+                <div className='statContainerCh1'>
+                    <h1 className='StatNameCH1 text'>STR: </h1>
+                    <button className='button' id='IncrementButton' onClick={this.handleInput} name='str' value='-'>-</button>
+                    <p className='text CreationStatsNums'>{str}</p>
+                    <button className='button' id='IncrementButton' onClick={this.handleInput} name='str' value='+'>+</button>
+                </div>
+                <div className='statContainerCh1'>
+                    <h1 className='StatNameCH1 text'>INT: </h1>
+                    <button className='button' id='IncrementButton' onClick={this.handleInput} name='int' value='-'>-</button>
+                    <p className='text CreationStatsNums'>{int}</p>
+                    <button className='button' id='IncrementButton' onClick={this.handleInput} name='int' value='+'>+</button>
+                </div>
+                <div className='statContainerCh1'>
+                    <h1 className='StatNameCH1 text'>WIS: </h1>
+                    <button className='button' id='IncrementButton' onClick={this.handleInput} name='wis' value='-'>-</button>
+                    <p className='text CreationStatsNums'>{wis}</p>
+                    <button className='button' id='IncrementButton' onClick={this.handleInput} name='wis' value='+'>+</button>
+                </div>
+                <div className='statContainerCh1'>
+                    <h1 className='StatNameCH1 text'>DEX: </h1>
+                    <button className='button' id='IncrementButton' onClick={this.handleInput} name='dex' value='-'>-</button>
+                    <p className='text CreationStatsNums'>{dex}</p>
+                    <button className='button' id='IncrementButton' onClick={this.handleInput} name='dex' value='+'>+</button>
+                </div>
+                <div className='statContainerCh1'>
+                    <h1 className='StatNameCH1 text'>CON: </h1>
+                    <button className='button' id='IncrementButton' onClick={this.handleInput} name='con' value='-'>-</button>
+                    <p className='text CreationStatsNums'>{con}</p>
+                    <button className='button' id='IncrementButton' onClick={this.handleInput} name='con' value='+'>+</button>
+                </div>
+                <div className='statContainerCh1'>
+                    <h1 className='StatNameCH1 text'>CHA: </h1>
+                    <button className='button' id='IncrementButton' onClick={this.handleInput} name='cha' value='-'>-</button>        
+                    <p className='text CreationStatsNums'>{cha}</p>
+                    <button className='button' id='IncrementButton' onClick={this.handleInput} name='cha' value='+'>+</button>
+                </div>
+                <div className='Ch1ButtonBox'>
+                    <Link to={`/landing/campaign/${campaign_id}/${name}`}>
+                        <button
+                            id='prevStep'
+                            className='button'
+                            onClick={this.props.rerenderCreation}>
+                                Prev Step
+                        </button>
+                    </Link>
+                    <Link to={`/landing/campaign/${campaign_id}/${name}/create/2`}>
+                        <button
+                            id='nextStep'
+                            className='button'
+                            onClick={this.props.rerenderCreation}>
+                                Next Step
+                        </button>
+                    </Link>
+                </div>
             </div>
         )
     }

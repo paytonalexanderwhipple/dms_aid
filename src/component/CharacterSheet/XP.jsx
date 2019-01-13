@@ -40,7 +40,6 @@ class XP extends Component {
     handleInputHP = (event, hdData) => {
         const { index, hd_type } = hdData;
         const { value } = event.target;
-        console.log(index);
         let obj = this.props.characterChanges.XP.hp[index] || {...hdData, hp:0};
         if (value.includes('+') && obj.hp < hd_type) {
             obj.hp += 1;
@@ -82,18 +81,19 @@ class XP extends Component {
                     classIds.push(cLass.character_class_id);
                 })
         }
-        let xpDisplay = (<div>
-            <button style={{display: this.props.edit ? '' : 'none'}} onClick={event => this.handleInputXP(event, classIds, xpTotal)} value='-10000'>-10000</button>
-            <button style={{display: this.props.edit ? '' : 'none'}} onClick={event => this.handleInputXP(event, classIds, xpTotal)} value='-1000'>-1000</button>
-            <button style={{display: this.props.edit ? '' : 'none'}} onClick={event => this.handleInputXP(event, classIds, xpTotal)} value='-100'>-100</button>
-            <button style={{display: this.props.edit ? '' : 'none'}} onClick={event => this.handleInputXP(event, classIds, xpTotal)} value='-10'>-10</button>
-            <button style={{display: this.props.edit ? '' : 'none'}} onClick={event => this.handleInputXP(event, classIds, xpTotal)} value='-1'>-1</button>
-            <h1>{this.props.characterChanges.XP.xp.xp === 0 ? 0 : this.props.characterChanges.XP.xp.xp || xpTotal}</h1>
-            <button style={{display: this.props.edit ? '' : 'none'}} onClick={event => this.handleInputXP(event, classIds, xpTotal)} value='+1'>+1</button>
-            <button style={{display: this.props.edit ? '' : 'none'}} onClick={event => this.handleInputXP(event, classIds, xpTotal)} value='+10'>+10</button>
-            <button style={{display: this.props.edit ? '' : 'none'}} onClick={event => this.handleInputXP(event, classIds, xpTotal)} value='+100'>+100</button>
-            <button style={{display: this.props.edit ? '' : 'none'}} onClick={event => this.handleInputXP(event, classIds, xpTotal)} value='+1000'>+1000</button>
-            <button style={{display: this.props.edit ? '' : 'none'}} onClick={event => this.handleInputXP(event, classIds, xpTotal)} value='+10000'>+10000</button>
+        let xpDisplay = (<div
+            className='Container'>
+            <button className='button' id='IncrementButton' style={{display: this.props.edit ? '' : 'none', height: 19, width: 19}} onClick={event => this.handleInputXP(event, classIds, xpTotal)} value='-10000'>-10k</button>
+            <button className='button' id='IncrementButton' style={{display: this.props.edit ? '' : 'none', height: 17, width: 17}} onClick={event => this.handleInputXP(event, classIds, xpTotal)} value='-1000'>-1k</button>
+            <button className='button' id='IncrementButton' style={{display: this.props.edit ? '' : 'none', height: 15, width: 15}} onClick={event => this.handleInputXP(event, classIds, xpTotal)} value='-100'>-1h</button>
+            <button className='button' id='IncrementButton' style={{display: this.props.edit ? '' : 'none', height: 13, width: 13}} onClick={event => this.handleInputXP(event, classIds, xpTotal)} value='-10'>-10</button>
+            <button className='button' id='IncrementButton' style={{display: this.props.edit ? '' : 'none', height: 11, width: 11}} onClick={event => this.handleInputXP(event, classIds, xpTotal)} value='-1'>-1</button>
+            <h1 className='text Text'>{this.props.characterChanges.XP.xp.xp === 0 ? 0 : this.props.characterChanges.XP.xp.xp || xpTotal}</h1>
+            <button className='button' id='IncrementButton' style={{display: this.props.edit ? '' : 'none', height: 11, width: 11}} onClick={event => this.handleInputXP(event, classIds, xpTotal)} value='+1'>+1</button>
+            <button className='button' id='IncrementButton' style={{display: this.props.edit ? '' : 'none', height: 13, width: 13}} onClick={event => this.handleInputXP(event, classIds, xpTotal)} value='+10'>+10</button>
+            <button className='button' id='IncrementButton' style={{display: this.props.edit ? '' : 'none', height: 15, width: 15}} onClick={event => this.handleInputXP(event, classIds, xpTotal)} value='+100'>+1h</button>
+            <button className='button' id='IncrementButton' style={{display: this.props.edit ? '' : 'none', height: 17, width: 17}} onClick={event => this.handleInputXP(event, classIds, xpTotal)} value='+1000'>+1k</button>
+            <button className='button' id='IncrementButton' style={{display: this.props.edit ? '' : 'none', height: 19, width: 19}} onClick={event => this.handleInputXP(event, classIds, xpTotal)} value='+10000'>+10k</button>
         </div>);
 
         let HD = [];
@@ -112,10 +112,13 @@ class XP extends Component {
             return (
                 <div
                     style={{display: this.props.edit ? '' : 'none'}}>
-                    <h1>{class_name}: 1-{hd_type}</h1>
-                    <button value='-' onClick={event => this.handleInputHP(event, hd)}>-</button>
-                    <h1>{(this.props.characterChanges.XP.hp[index] || {}).hp || 0}</h1>
-                    <button value='+' onClick={event => this.handleInputHP(event, hd)}>+</button>
+                    <h1 className='Text text'>{class_name}: 1-{hd_type}</h1>
+                    <div
+                        className='Container'>
+                        <button className='button' id='IncrementButton' value='-' onClick={event => this.handleInputHP(event, hd)}>-</button>
+                        <h1 className='text Text'>{(this.props.characterChanges.XP.hp[index] || {}).hp || 0}</h1>
+                        <button className='button' id='IncrementButton' value='+' onClick={event => this.handleInputHP(event, hd)}>+</button>
+                    </div>
                 </div>
             )
         })
@@ -133,9 +136,9 @@ class XP extends Component {
         let oldHD = Hd.map(hd => {
             const { class_name, hp } = hd
             return (
-                <div>
-                    <h1>{class_name}:</h1>
-                    <p>{hp}</p>
+                <div
+                    className='Container text Text'>
+                    <h1>{class_name}: {hp}</h1>
                 </div>
             )
         })
@@ -192,28 +195,39 @@ class XP extends Component {
         let proficiencySelects = [];
         for (let i = 0; i < deficientProficiencies; i++) {
             proficiencySelects.push((
-                <select name={i + proficiencies.length} value={(this.props.characterChanges.abilities.proficiencies || [])[i + proficiencies.length]} onChange={this.handleInputProficiencies}>
-                    <option value="">--Choose a proficiency--</option>
-                    {weaponOptions}
-                </select>
-            ))
+                <div
+                    className='alignmentSelect' style={{width: 160, marginTop: 5}}>
+                    <select name={i + proficiencies.length} value={(this.props.characterChanges.abilities.proficiencies || [])[i + proficiencies.length]} onChange={this.handleInputProficiencies}>
+                        <option value="">--Choose a proficiency--</option>
+                        {weaponOptions}
+                    </select>
+                </div>
+            ));
         };
 
         let oldProficiencies = proficiencies.map(weapon => {
-            return (
-                <p>-{weapon}</p>
-            )
+            if (weapon) {
+                return (
+                    <p className='Text text'>-{weapon}</p>
+                );
+            };
         })
 
         let render;
         if (this.state.revealed) {
             render = (<div>
-                <h1>XP:</h1>
-                <button onClick={this.toggle}>v</button>
-                <div>
-                    XP: {xpDisplay}
+                <div className='SectionTitleBox'>
+                    <h1 className='SectionTitle text'>XP:</h1>
+                    <button className='button' id='SectionButton' onClick={this.toggle}>v</button>
+                </div>
+                <hr/>
+                <div
+                    className='Container'>
+                    <h1 className='Header text'>XP:</h1> 
+                    {xpDisplay}
                 </div>
                 <h1
+                    className='Header text'
                     style={{display: (this.props.edit && HD.length > 0) || this.props.advanced ? '' : 'none'}}>Hit Dice:</h1>
                 <div
                     style={{display: HD.length > 0 && this.props.edit ? '' : 'none'}}>
@@ -221,11 +235,12 @@ class XP extends Component {
                 </div>
                 <div
                     style={{display: this.props.advanced ? '' : 'none'}}>
-                    <p>{race !== "Human" && classDetails.length > 1 ? `Divided by ${classDetails.length} for multiclass` : ''}</p>
-                    <h1>Constitution: {con.hp > 0 ? '+' : ''}{con.hp}/Hit Die</h1>
+                    <p className='text Text'>{race !== "Human" && classDetails.length > 1 ? `Divided by ${classDetails.length} for multiclass` : ''}</p>
+                    <h1 className='text Text'>Constitution: {con.hp > 0 ? '+' : ''}{con.hp}/Hit Die</h1>
                     {oldHD}
                 </div>
                 <h1
+                    className='Header text'
                     style={{display: (this.props.edit && deficientProficiencies > 0) || this.props.advanced ? '' : 'none'}}>Proficiencies:</h1>
                 <div
                     style={{display: this.props.edit ? '' : 'none'}}>
@@ -239,8 +254,10 @@ class XP extends Component {
             )    
         } else {
             render = (<div>
-                <h1>XP:</h1>
-                <button onClick={this.toggle}>></button>
+                <div className='SectionTitleBox'>
+                    <h1 className='SectionTitle text'>XP:</h1>
+                    <button className='button' id='SectionButton' onClick={this.toggle}>></button>
+                </div>
             </div>
             )
         }

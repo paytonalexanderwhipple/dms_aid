@@ -82,7 +82,7 @@ export default function reducer(state = initialState, action) {
         case SUBMIT_CHARACTER_PENDING:
             return { ...state, loading: true };
         case SUBMIT_CHARACTER_FULFILLED:
-            return { ...initialState };
+            return { ...initialState, characterData: state.characterData };
         case SUBMIT_CHARACTER_REJECTED:
             alert(action.payload.response.request.response);
             return { ...state, loading: false };

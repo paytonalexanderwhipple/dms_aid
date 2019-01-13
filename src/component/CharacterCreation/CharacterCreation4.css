@@ -1,4 +1,20 @@
-
-
-
-
+.InlineText {
+    display: inline;
+    margin: 0 5px;
+}
+.Ch4 {
+    overflow: auto;
+    height: 180px;
+    width: 180px;
+}
+#prevStepCh4 {
+    position: relative;
+    height: 20px;
+    width: 75px;
+    margin-right: 28px
+}
+#nextStepCh4 {
+    position: relative;
+    height: 20px;
+    width: 75px;
+}

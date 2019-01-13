@@ -51,14 +51,17 @@ class Notes extends Component {
         let render;
         if (this.state.revealed) {
             render = (<div>
-                <h1>Notes:</h1>
-                <button onClick={this.toggle} name='revealed'>v</button>
+                <div className='SectionTitleBox'>
+                    <h1 className='SectionTitle text'>Notes:</h1>
+                    <button className='button' id='SectionButton' onClick={this.toggle} name='revealed'>v</button>
+                </div>
+                <hr/>
                 <div
                     style={{display: is_dm ? 'none' : ''}}>
                     <p
-                        className='MultilinDisplay'
-                        style={{display: this.props.edit ? 'none' : ''}}>{notes}</p>
-                    <textarea name="notes" ref={this.textarea} onKeyDown={this.handleTab} onChange={this.handleInput} cols="30" rows="10" value={this.props.characterChanges.personalDetails.notes
+                        className='text Text MultilinDisplay paper'
+                        style={{display: this.props.edit ? 'none' : '', width: 200, marginLeft: 5}}>{notes}</p>
+                    <textarea className='textarea paper' name="notes" ref={this.textarea} onKeyDown={this.handleTab} onChange={this.handleInput} cols="30" rows="10" value={this.props.characterChanges.personalDetails.notes
                         ? this.props.characterChanges.personalDetails.notes
                         : this.props.characterChanges.personalDetails.notes === ''
                             ? this.props.characterChanges.personalDetails.notes
@@ -68,9 +71,9 @@ class Notes extends Component {
                 <div    
                     style={{display: is_dm ? '' : 'none'}}>
                     <p
-                        className='MultilineDisplay'
-                        style={{display: this.props.edit ? 'none' : ''}}>{dm_notes}</p>
-                    <textarea name="dm_notes" ref={this.textarea} onKeyDown={this.handleTab} onChange={this.handleInput} cols="30" rows="10" value={this.props.characterChanges.personalDetails.dm_notes
+                        className='text Text MultilineDisplay paper TextBackground'
+                        style={{display: this.props.edit ? 'none' : '', width: 200, marginLeft: 5}}>{dm_notes}</p>
+                    <textarea className='textarea paper' name="dm_notes" ref={this.textarea} onKeyDown={this.handleTab} onChange={this.handleInput} cols="30" rows="10" value={this.props.characterChanges.personalDetails.dm_notes
                         ? this.props.characterChanges.personalDetails.dm_notes
                         : this.props.characterChanges.personalDetails.dm_notes === ''
                             ? this.props.characterChanges.personalDetails.dm_notes
@@ -80,8 +83,10 @@ class Notes extends Component {
             </div>)
         } else {
             render = (<div>
-                <h1>Notes:</h1>
-                <button onClick={this.toggle} name='revealed'>></button>
+                <div className='SectionTitleBox'>
+                    <h1 className='SectionTitle text'>Notes:</h1>
+                    <button className='button' id='SectionButton' onClick={this.toggle} name='revealed'>></button>
+                </div>
             </div>)
         }
         return (

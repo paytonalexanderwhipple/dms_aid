@@ -72,6 +72,15 @@ body {
 .paper {
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
+select {
+    padding: 0 0 3px 5px; ;
+    background-color: transparent;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}
 @media (min-width: 415px) {
     .button {
         border-radius: 5px;

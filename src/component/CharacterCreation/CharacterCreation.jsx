@@ -7,6 +7,7 @@ import CharacterCreation1 from './CharacterCreation1.jsx';
 import CharacterCreation2 from './CharacterCreation2.jsx';
 import CharacterCreation3 from './CharacterCreation3.jsx';
 import CharacterCreation4 from './CharacterCreation4.jsx';
+import './CharacterCreation.css';
 
 class CharacterCreation extends Component {
 
@@ -25,8 +26,8 @@ class CharacterCreation extends Component {
         let render;
 
         if (this.props.loading) {
-            render = (<div>
-                Createing Character ...
+            render = (<div >
+                Creating Character ...
             </div>
             )
         } else {
@@ -42,7 +43,7 @@ class CharacterCreation extends Component {
         return (
             <div>
                 {render}
-                <button onClick={this.cancel} name='characterCreateRevealed'>Cancel</button>
+                <button id='ChCreationCancel' className='button' onClick={this.cancel} name='characterCreateRevealed'>X</button>
             </div>
         )
     }

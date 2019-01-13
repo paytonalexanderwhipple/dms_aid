@@ -11,7 +11,6 @@ import Inventory from './Inventory.jsx';
 import Notes from './Notes.jsx';
 import XP from './XP.jsx';
 import './CharacterSheet.css';
-import { runInThisContext } from 'vm';
 
 class CharacterSheet extends Component {
     constructor() {
@@ -83,18 +82,19 @@ class CharacterSheet extends Component {
         let render;
 
         if (this.props.loading) {
-            render = (<div>
+            render = (<div className='text Loading'>
                 Submiting Changes...
             </div>)
         } else {
-            render = (<div>
-                <button name='edit' onClick={this.toggle}>
+            render = (<div
+                        className='CharacterSheet'>
+                <button id='CharacterSheetEdit' className='button' name='edit' onClick={this.toggle}>
                     {this.state.edit
                         ? 'Cancel'
                         : 'Edit'
                     }
                 </button>
-                <button name='advancedDetails'
+                <button id='CharacterSheetAdvanced' className='button' name='advancedDetails'
                     onClick={this.toggle}
                     style={{display: this.state.edit
                         ? 'none'
@@ -103,27 +103,41 @@ class CharacterSheet extends Component {
                     Advanced Stats
                 </button>
                 <Abilites character={this.state.character} advanced={this.state.advancedDetails} edit={this.state.edit}/>
+                <hr/>
                 <Combat character={this.state.character} advanced={this.state.advancedDetails} edit={this.state.edit}/>
+                <hr/>
                 <Magic character={this.state.character} advanced={this.state.advancedDetails} edit={this.state.edit}/>
+                <hr/>
                 <Inventory character={this.state.character} advanced={this.state.advancedDetails} edit={this.state.edit}/>
+                <hr/>
                 <PersonalDetails character={this.state.character} advanced={this.state.advancedDetails} edit={this.state.edit}/>
+                <hr/>
                 <Notes character={this.state.character} advanced={this.state.advancedDetails} edit={this.state.edit}/>
+                <hr/>
                 <div
                     style={{display: this.props.currentCampaign.campaignDetails.is_dm ? '' : 'none'}}>
                     <XP character={this.state.character} edit={this.state.edit} advanced={this.state.advancedDetails}/>
+                    <hr/>
                 </div>
-                <button
-                    style={{display: this.state.edit
-                        ? ''
-                        : 'none'
-                    }}
-                    onClick={this.submitChanges}>
-                    Submit
-                </button>
-                <button
-                    onClick={this.removeCharacter}>
-                    Remove
-                </button>
+                <div
+                    className='RemoveSubmitButtons'>
+                    <button
+                        style={{display: this.state.edit
+                            ? ''
+                            : 'none'
+                        }}
+                        className='button'
+                        id='SubmitButtonCH'
+                        onClick={this.submitChanges}>
+                        Submit
+                    </button>
+                    <button
+                        className='button'
+                        id='RemoveButtonCH'
+                        onClick={this.removeCharacter}>
+                        Remove
+                    </button>
+                </div>
             </div>)
         }
 

@@ -1,1 +1,18 @@
-
+#bigbox {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    flex-basis: 350px;
+    flex-shrink: 0;
+    height: 50%;
+    width: 50%;
+    overflow: auto;
+    background: var(--color0);
+    padding: 10px;
+}
+@media (max-width: 415px) {
+    #bigbox {
+        width: 100%;
+        left: 0;
+    }
+}

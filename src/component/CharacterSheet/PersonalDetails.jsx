@@ -1,6 +1,7 @@
 import React ,{ Component } from 'react';
 import { connect } from 'react-redux';
     import { inputCharacterEdits } from '../../ducks/reducer/character_reducer.js';
+import './PersonalDetails.css';
 
 class PersonalDetails extends Component {
     constructor(props) {
@@ -94,101 +95,126 @@ class PersonalDetails extends Component {
         let render;
         if (this.state.revealed) {
             render = (<div>
-                <h1>Personal Details:</h1>
-                <button onClick={this.toggle} name='revealed'>v</button>
+                <div className='SectionTitleBox'>
+                    <h1 className='SectionTitle text'>Personal Details:</h1>
+                    <button className='button' id='SectionButton' onClick={this.toggle} name='revealed'>v</button>
+                </div>
+                <hr/>
                 <div>
                     <h1
+                        className='Header text'
                         style={{display: description || this.props.edit ? '' : 'none'}}>Description:</h1>
                     <div
                         style={{display: description || this.props.edit ? '' : 'none'}}>
                          <p
-                        className='MultilineDisplay'
-                        style={{display: this.props.edit ? 'none' : ''}}>{description}</p>
-                        <textarea name="description" ref={this.textarea} onKeyDown={this.handleTab} onChange={this.handleInputPersonal} cols="30" rows="5" value={this.props.characterChanges.personalDetails.description
+                            className='MultilineDisplay text Text paper TextBackground'
+                            style={{display: this.props.edit ? 'none' : '', width: 200, marginLeft: 5}}>{description}</p>
+                        <textarea className='textarea paper' name="description" ref={this.textarea} onKeyDown={this.handleTab} onChange={this.handleInputPersonal} cols="30" rows="5" value={this.props.characterChanges.personalDetails.description
                             ? this.props.characterChanges.personalDetails.description
                             : this.props.characterChanges.personalDetails.description === ''
                                 ? this.props.characterChanges.personalDetails.description
                                 : description}
-                            style={{display: this.props.edit ? '' : 'none'}}
+                            style={{display: this.props.edit ? '' : 'none' ,marginBottom: 10}}
                             maxLength='144'/>
                     </div>
-                    <div>
+                    <div
+                        className='Container'>
                         <h1
+                            className='Header text'
                             style={{display: eyes || this.props.edit ? '' : 'none'}}>Eyes:</h1>
                         <p
+                            className='Text text'
                             style={{display: this.props.edit ? 'none' : ''}}>{eyes}</p>
-                        <input name='eyes' onChange={this.handleInputPersonal} maxLength='25'
+                        <input className='input' name='eyes' onChange={this.handleInputPersonal} maxLength='25'
                             style={{display: this.props.edit ? '' : 'none'}}/>
                     </div>
-                    <div>
+                    <div
+                        className='Container'>
                         <h1
+                            className='Header text'
                             style={{display: hair || this.props.edit ? '' : 'none'}}>Hair:</h1>
                         <p
+                            className='Text text'
                             style={{display: this.props.edit ? 'none' : ''}}>{hair}</p>
-                        <input name='hair' onChange={this.handleInputPersonal} maxLength='25'
+                        <input className='input' name='hair' onChange={this.handleInputPersonal} maxLength='25'
                             style={{display: this.props.edit ? '' : 'none'}}/>
                     </div>
                     <div>
                         <h1
-                            style={{display: sex || (this.props.edit && is_dm) ? '' : 'none'}}>Gender: {this.props.edit ? this.props.characterChanges.personalDetails.sex || sex : sex}</h1>
-                        <select name="sex" onChange={this.handleInputPersonal} style={{display: this.props.edit && is_dm ? '' : 'none'}}>
-                            <option value="">--Select a gender--</option>
-                            <option value="Male">Male ♂</option>
-                            <option value="Female">Female ♀</option>
-                        </select>
+                            className='Header text'
+                            style={{display: sex && !this.props.edit ? '' : 'none'}}>{this.props.edit ? this.props.characterChanges.personalDetails.sex || sex : sex}</h1>
+                        <div
+                            className='alignmentSelect'
+                            style={{marginTop: 2, width: 135, display: this.props.edit && is_dm ? '' : 'none'}}>
+                            <select name="sex" onChange={this.handleInputPersonal}>
+                                <option value="">--Select a gender--</option>
+                                <option value="Male">Male ♂</option>
+                                <option value="Female">Female ♀</option>
+                            </select>
+                        </div>
                     </div>
                     <div>
                         <h1
+                            className='Header text'
                             style={{display: height || (this.props.edit && is_dm) ? '' : 'none'}}>Height{this.props.edit ? '(In Inches)' : ''}:</h1>
-                            <button style={{display: this.props.edit && is_dm ? '' : 'none'}} name='height' value='-12' onClick={this.handleInputIncrement}>-12"</button>
-                            <button style={{display: this.props.edit && is_dm ? '' : 'none'}} name='height' value='-' onClick={this.handleInputIncrement}>-1"</button>
-                            <p>{heightDisplay}</p>
-                            <button style={{display: this.props.edit && is_dm ? '' : 'none'}} name='height' value='+' onClick={this.handleInputIncrement}>+1"</button>
-                            <button style={{display: this.props.edit && is_dm ? '' : 'none'}} name='height' value='+12' onClick={this.handleInputIncrement}>+12"</button>
-                    </div>
-                    <div>
-                        <h1
-                            style={{display: weight || (this.props.edit && is_dm)? '' : 'none'}}>Weight{this.props.edit ? '(In Gp.)' : ''}:</h1>
-                            <div>
-                                <button style={{display: this.props.edit && is_dm ? '' : 'none'}} name='weight' value='-100' onClick={this.handleInputIncrement}>-100Gp.</button>
-                                <button style={{display: this.props.edit && is_dm ? '' : 'none'}} name='weight' value='-10' onClick={this.handleInputIncrement}>-10Gp.</button>
-                                <button style={{display: this.props.edit && is_dm ? '' : 'none'}} name='weight' value='-' onClick={this.handleInputIncrement}>-1Gp.</button>
-                                <p>{this.props.characterChanges.personalDetails.weight === 0 ? 0 : this.props.characterChanges.personalDetails.weight || weight || 0} Gp.</p>
-                                <button style={{display: this.props.edit && is_dm ? '' : 'none'}} name='weight' value='+' onClick={this.handleInputIncrement}>+1Gp.</button>
-                                <button style={{display: this.props.edit && is_dm ? '' : 'none'}} name='weight' value='+10' onClick={this.handleInputIncrement}>+10Gp.</button>
-                                <button style={{display: this.props.edit && is_dm ? '' : 'none'}} name='weight' value='+100' onClick={this.handleInputIncrement}>+100Gp.</button>
+                            <div
+                                className='Container'>
+                                <button className='button' id='IncrementButton' style={{display: this.props.edit && is_dm ? '' : 'none', height: 13, width: 13}} name='height' value='-12' onClick={this.handleInputIncrement}>-1'</button>
+                                <button className='button' id='IncrementButton' style={{display: this.props.edit && is_dm ? '' : 'none', height: 13, width: 13}} name='height' value='-' onClick={this.handleInputIncrement}>-1"</button>
+                                <p className='Text text'>{heightDisplay}</p>
+                                <button className='button' id='IncrementButton' style={{display: this.props.edit && is_dm ? '' : 'none', height: 13, width: 13}} name='height' value='+' onClick={this.handleInputIncrement}>+1"</button>
+                                <button className='button' id='IncrementButton' style={{display: this.props.edit && is_dm ? '' : 'none', height: 13, width: 13}} name='height' value='+12' onClick={this.handleInputIncrement}>+1'</button>
                             </div>
                     </div>
                     <div>
                         <h1
+                            className='Header text'
+                            style={{display: weight || (this.props.edit && is_dm)? '' : 'none'}}>Weight{this.props.edit ? '(In Gp.)' : ''}:</h1>
+                            <div
+                                className='Container'>
+                                <button className='button' id='IncrementButton' style={{display: this.props.edit && is_dm ? '' : 'none', height: 17, width: 32, borderRadius: 5}} name='weight' value='-100' onClick={this.handleInputIncrement}>-100Gp.</button>
+                                <button className='button' id='IncrementButton' style={{display: this.props.edit && is_dm ? '' : 'none', height: 15, width: 27, borderRadius: 5}} name='weight' value='-10' onClick={this.handleInputIncrement}>-10Gp.</button>
+                                <button className='button' id='IncrementButton' style={{display: this.props.edit && is_dm ? '' : 'none', height: 13, width: 23, borderRadius: 5}} name='weight' value='-' onClick={this.handleInputIncrement}>-1Gp.</button>
+                                <p className='text Text'>{this.props.characterChanges.personalDetails.weight === 0 ? 0 : this.props.characterChanges.personalDetails.weight || weight || 0} Gp.</p>
+                                <button className='button' id='IncrementButton' style={{display: this.props.edit && is_dm ? '' : 'none', height: 13, width: 23, borderRadius: 5}} name='weight' value='+' onClick={this.handleInputIncrement}>+1Gp.</button>
+                                <button className='button' id='IncrementButton' style={{display: this.props.edit && is_dm ? '' : 'none', height: 15, width: 27, borderRadius: 5}} name='weight' value='+10' onClick={this.handleInputIncrement}>+10Gp.</button>
+                                <button className='button' id='IncrementButton' style={{display: this.props.edit && is_dm ? '' : 'none', height: 17, width: 34, borderRadius: 5}} name='weight' value='+100' onClick={this.handleInputIncrement}>+100Gp.</button>
+                            </div>
+                    </div>
+                    <div>
+                        <h1
+                            className='Header text'
                             style={{display: age || (this.props.edit && is_dm) ? '' : 'none'}}>Age:</h1>
                             <div>
-                                <button style={{display: this.props.edit && is_dm ? '' : 'none'}} name='age' value='-36500' onClick={this.handleInputIncrement}>-100 Years</button>
-                                <button style={{display: this.props.edit && is_dm ? '' : 'none'}} name='age' value='-365' onClick={this.handleInputIncrement}>-1 Year</button>
-                                <button style={{display: this.props.edit && is_dm ? '' : 'none'}} name='age' value='-30' onClick={this.handleInputIncrement}>-1 Month</button>
-                                <button style={{display: this.props.edit && is_dm ? '' : 'none'}} name='age' value='-7' onClick={this.handleInputIncrement}>-1 Week</button>
-                                <button style={{display: this.props.edit && is_dm ? '' : 'none'}} name='age' value='-1' onClick={this.handleInputIncrement}>-1 Day</button>
-                                <p>{ageDisplay}</p>
-                                <button style={{display: this.props.edit && is_dm ? '' : 'none'}} name='age' value='+1' onClick={this.handleInputIncrement}>+1 Day</button>
-                                <button style={{display: this.props.edit && is_dm ? '' : 'none'}} name='age' value='+7' onClick={this.handleInputIncrement}>+1 Week</button>
-                                <button style={{display: this.props.edit && is_dm ? '' : 'none'}} name='age' value='+30' onClick={this.handleInputIncrement}>+1 Month</button>
-                                <button style={{display: this.props.edit && is_dm ? '' : 'none'}} name='age' value='+365' onClick={this.handleInputIncrement}>+1 Year</button>
-                                <button style={{display: this.props.edit && is_dm ? '' : 'none'}} name='age' value='+36500' onClick={this.handleInputIncrement}>+100 Years</button>
+                                <button className='button' id='IncrementButton' style={{display: this.props.edit && is_dm ? '' : 'none', height: 17, width: 50, borderRadius: 7}} name='age' value='-36500' onClick={this.handleInputIncrement}>-100 Years</button>
+                                <button className='button' id='IncrementButton' style={{display: this.props.edit && is_dm ? '' : 'none', height: 16, width: 50, borderRadius: 7}} name='age' value='-365' onClick={this.handleInputIncrement}>-1 Year</button>
+                                <button className='button' id='IncrementButton' style={{display: this.props.edit && is_dm ? '' : 'none', height: 15, width: 42, borderRadius: 7}} name='age' value='-30' onClick={this.handleInputIncrement}>-1 Month</button>
+                                <button className='button' id='IncrementButton' style={{display: this.props.edit && is_dm ? '' : 'none', height: 14, width: 38, borderRadius: 7}} name='age' value='-7' onClick={this.handleInputIncrement}>-1 Week</button>
+                                <button className='button' id='IncrementButton' style={{display: this.props.edit && is_dm ? '' : 'none', height: 13, width: 32, borderRadius: 7}} name='age' value='-1' onClick={this.handleInputIncrement}>-1 Day</button>
+                                <p className='Text text'>{ageDisplay}</p>
+                                <button className='button' id='IncrementButton' style={{display: this.props.edit && is_dm ? '' : 'none', height: 13, width: 32, borderRadius: 7}} name='age' value='+1' onClick={this.handleInputIncrement}>+1 Day</button>
+                                <button className='button' id='IncrementButton' style={{display: this.props.edit && is_dm ? '' : 'none', height: 14, width: 38, borderRadius: 7}} name='age' value='+7' onClick={this.handleInputIncrement}>+1 Week</button>
+                                <button className='button' id='IncrementButton' style={{display: this.props.edit && is_dm ? '' : 'none', height: 15, width: 42, borderRadius: 7}} name='age' value='+30' onClick={this.handleInputIncrement}>+1 Month</button>
+                                <button className='button' id='IncrementButton' style={{display: this.props.edit && is_dm ? '' : 'none', height: 16, width: 50, borderRadius: 7}} name='age' value='+365' onClick={this.handleInputIncrement}>+1 Year</button>
+                                <button className='button' id='IncrementButton' style={{display: this.props.edit && is_dm ? '' : 'none', height: 17, width: 50, borderRadius: 7}} name='age' value='+36500' onClick={this.handleInputIncrement}>+100 Years</button>
                             </div>
                     </div>
-                    <div>
-                        <img src={img} alt={description} style={{display: this.props.edit ? 'none' : ''}}/>
+                    <div
+                        className='Container'>
                         <h1
+                            className='Header text'
                             style={{display: this.props.edit ? '' : 'none'}}>Image URL:</h1>
-                        <input name='img' onChange={this.handleInputPersonal} value={this.props.characterChanges.personalDetails.img || img} placeholder={img}
+                        <input className='input' name='img' onChange={this.handleInputPersonal} value={this.props.characterChanges.personalDetails.img} placeholder={img}
                             style={{display: this.props.edit ? '' : 'none'}}/>
                     </div>
                 </div>
             </div>)
         } else {
             render = (<div>
-                <h1>Personal Details:</h1>
-                <button onClick={this.toggle} name='revealed'>></button>
+                <div className='SectionTitleBox'>
+                    <h1 className='SectionTitle text'>Personal Details:</h1>
+                    <button className='button' id='SectionButton' onClick={this.toggle} name='revealed'>></button>
+                </div>
             </div>)
         }
 

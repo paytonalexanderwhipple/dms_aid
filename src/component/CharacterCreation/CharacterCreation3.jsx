@@ -73,6 +73,7 @@ class CharacterCreation3 extends Component {
                 return cLass
             }
         });
+        console.log('c3', this.props);
         const classOptions = eligableClasses.map(cLass => {
             return (
                 <option value={cLass}>
@@ -83,18 +84,24 @@ class CharacterCreation3 extends Component {
 
         return (
             <div>
-                <select name="cLass" value={this.props.characterCreation.cLass} onChange={this.handleInput}>
-                    <option value="">--Choose your class--</option>
-                    {classOptions}
-                </select>
+                <div className='alignmentSelect'>
+                    <select name="cLass" value={this.props.characterCreation.cLass} onChange={this.handleInput}>
+                        <option value="">--Choose your class--</option>
+                        {classOptions}
+                    </select>
+                </div>
                 <Link to={`/landing/campaign/${campaign_id}/${name}/create/2`}>
                     <button
+                        className='button'
+                        id='prevStep'
                         onClick={this.props.rerenderCreation}>
                             Prev Step
                     </button>
                 </Link>
                 <Link to={`/landing/campaign/${campaign_id}/${name}/create/4`}>
                     <button
+                        className='button'
+                        id='nextStep'
                         style={{display: this.state.advance
                             ? ''
                             : 'none'

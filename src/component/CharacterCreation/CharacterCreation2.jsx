@@ -37,6 +37,8 @@ class CharacterCreation2 extends Component {
         const { campaign_id, name } = this.props.currentCampaign.campaignDetails;
 
         const { str, int, wis, dex, con, cha } = this.props.characterCreation;
+
+        console.log(this.props);
  
         const eligableRaces = this.props.characterData.races.filter(race => {
             const { min_stats, max_stats} = race;
@@ -62,18 +64,24 @@ class CharacterCreation2 extends Component {
 
         return (
             <div>
-                <select name="race" onChange={this.handleInput} value={this.props.characterCreation.race}>
-                    <option value="">--Choose your race--</option>
-                    {raceOptions}
-                </select>
+                <div className='alignmentSelect'>
+                    <select name="race" onChange={this.handleInput} value={this.props.characterCreation.race}>
+                        <option value="">--Choose your race--</option>
+                        {raceOptions}
+                    </select>
+                </div>
                 <Link to={`/landing/campaign/${campaign_id}/${name}/create/1`}>
                     <button
+                        className='button'
+                        id='prevStep'
                         onClick={this.props.rerenderCreation}>
                             Prev Step
                     </button>
                 </Link>
                 <Link to={`/landing/campaign/${campaign_id}/${name}/create/3`}>
                     <button
+                        className='button'
+                        id='nextStep'
                         style={{display: this.state.advance
                             ? ''
                             : 'none'

@@ -1,7 +1,7 @@
 import React ,{ Component } from 'react';
 import { connect } from 'react-redux';
     import { inputCharacterEdits } from '../../ducks/reducer/character_reducer.js';
-
+import './Inventory.css';
 
 class Inventory extends Component {
     constructor(props) {
@@ -42,6 +42,9 @@ class Inventory extends Component {
             if (value.includes('100')) adj -= 90;
             if (value.includes('1000')) adj -= 900;
         }
+        if (adj < 0) {
+            adj = 0
+        };
         this.setState({[name]: adj});
     }
 
@@ -112,11 +115,15 @@ class Inventory extends Component {
             })
             return (
                 <div
+                    className='Container text'
                     style={{display: isDeleted ? 'none' : ''}}>
-                    <p>{item.name}</p>
+                    <p className='Text'>{item.name}</p>
                     <p
-                        style={{display: item.encumbrance ? '' : 'none'}}>{item.encumbrance} Gp.</p>
-                    <button name='deleteItem' onClick={event => this.handleItem(event, item)}
+                        className='Text'
+                        style={{marginLeft: 10}}>{item.encumbrance || 0} Gp.</p>
+                    <button 
+                        className='button' id='IncrementButtonX'
+                        name='deleteItem' onClick={event => this.handleItem(event, item)}
                         style={{display: this.props.edit && is_dm ? '' : 'none'}}>x</button>
                 </div>
             )
@@ -124,16 +131,17 @@ class Inventory extends Component {
 
         let coins = coinage.map((coin, i) => {
             return (
-                <div>
-                    <button style={{display: this.props.edit ? '' : 'none'}} value='-1000' onClick={event => this.handleCoins(event, i)} >-1000</button>
-                    <button style={{display: this.props.edit ? '' : 'none'}} value='-100' onClick={event => this.handleCoins(event, i)} >-100</button>
-                    <button style={{display: this.props.edit ? '' : 'none'}} value='-10' onClick={event => this.handleCoins(event, i)} >-10</button>
-                    <button style={{display: this.props.edit ? '' : 'none'}} value='-1' onClick={event => this.handleCoins(event, i)} >-1</button>
+                <div
+                    className='Container'>
+                    <button className='button' id='IncrementButton' style={{display: this.props.edit ? '' : 'none', height: 15, width: 15}} value='-1000' onClick={event => this.handleCoins(event, i)} >-1k</button>
+                    <button className='button' id='IncrementButton' style={{display: this.props.edit ? '' : 'none', height: 14, width: 14}} value='-100' onClick={event => this.handleCoins(event, i)} >-1h</button>
+                    <button className='button' id='IncrementButton' style={{display: this.props.edit ? '' : 'none', height: 13, width: 13}} value='-10' onClick={event => this.handleCoins(event, i)} >-10</button>
+                    <button className='button' id='IncrementButton' style={{display: this.props.edit ? '' : 'none'}} value='-1' onClick={event => this.handleCoins(event, i)} >-1</button>
                     <p>{(this.props.characterChanges.personalDetails.coinage || [])[i] === 0 ? 0 : ((this.props.characterChanges.personalDetails.coinage || [])[i] || coinage[i])}</p>
-                    <button style={{display: this.props.edit ? '' : 'none'}} value='+1' onClick={event => this.handleCoins(event, i)} >+1</button>
-                    <button style={{display: this.props.edit ? '' : 'none'}} value='+10' onClick={event => this.handleCoins(event, i)} >+10</button>
-                    <button style={{display: this.props.edit ? '' : 'none'}} value='+100' onClick={event => this.handleCoins(event, i)} >+100</button>
-                    <button style={{display: this.props.edit ? '' : 'none'}} value='+1000' onClick={event => this.handleCoins(event, i)} >+1000</button>
+                    <button className='button' id='IncrementButton' style={{display: this.props.edit ? '' : 'none'}} value='+1' onClick={event => this.handleCoins(event, i)} >+1</button>
+                    <button className='button' id='IncrementButton' style={{display: this.props.edit ? '' : 'none', height: 13, width: 13}} value='+10' onClick={event => this.handleCoins(event, i)} >+10</button>
+                    <button className='button' id='IncrementButton' style={{display: this.props.edit ? '' : 'none', height: 14, width: 14}} value='+100' onClick={event => this.handleCoins(event, i)} >+1h</button>
+                    <button className='button' id='IncrementButton' style={{display: this.props.edit ? '' : 'none', height: 15, width: 15}} value='+1000' onClick={event => this.handleCoins(event, i)} >+1k</button>
                 </div>
             )
         })
@@ -148,7 +156,7 @@ class Inventory extends Component {
         let armorEncumbrance = armorDetails.reduce((acc, armor) => {return acc + (armor.ac_adj > 0 && !armor.name.includes('Shield') ? 0 : armor.encumbrance)}, 0);
         let weaponEncumbrance = weaponDetails.reduce((acc, weapon) => {
             return acc + weapon.encumbrance + weapon.ammoDetails.reduce((acc, ammo) => {
-                return acc + (ammo.encumbrance * ammo.quanity)
+                return acc + (ammo.encumbrance * ammo.quantity)
             }, 0);
         }, 0);
         let itemEncumbrance = itemList.reduce((acc, item) => {
@@ -186,49 +194,57 @@ class Inventory extends Component {
         let render;
         if (this.state.revealed) {
             render = (<div>
-                <h1>Inventory:</h1>
-                <button onClick={this.toggle} name='revealed'>v</button>
-                <h1>Carrying:</h1>
-                <div>
+                <div className='SectionTitleBox'>
+                    <h1 className='SectionTitle text'>Inventory:</h1>
+                    <button className='button' id='SectionButton' onClick={this.toggle} name='revealed'>v</button>
+                </div>
+                <hr/>
+                <h1 className='Header text'>Carrying:</h1>
+                <div style={{marginLeft: 5}}>
                     {items}
                     <div
+                        className='Container'
                         style={{display: this.props.edit && is_dm ? '' : 'none'}}>
-                        <input placeholder='Name' name='name' value={this.state.name} onChange={this.handleInput} maxLength='30'/>
-                        <div>
-                            <button name='encumbrance' value='-1000' onClick={this.increment}>-1000</button>
-                            <button name='encumbrance' value='-100' onClick={this.increment}>-100</button>
-                            <button name='encumbrance' value='-10' onClick={this.increment}>-10</button>
-                            <button name='encumbrance' value='-1' onClick={this.increment}>-1</button>
-                            <p>{this.state.encumbrance}</p>
-                            <button name='encumbrance' value='+1' onClick={this.increment}>+1</button>
-                            <button name='encumbrance' value='+10' onClick={this.increment}>+10</button>
-                            <button name='encumbrance' value='+100' onClick={this.increment}>+100</button>
-                            <button name='encumbrance' value='+1000' onClick={this.increment}>+1000</button>
+                        <input className='input' placeholder='Item name' name='name' value={this.state.name} onChange={this.handleInput} maxLength='30'/>
+                        <div className='Container'>
+                            <button className='button' id='IncrementButton' style={{height: 15,width: 15}} name='encumbrance' value='-1000' onClick={this.increment}>-1k</button>
+                            <button className='button' id='IncrementButton' style={{height: 14,width: 14}} name='encumbrance' value='-100' onClick={this.increment}>-1h</button>
+                            <button className='button' id='IncrementButton' style={{height: 13,width: 13}} name='encumbrance' value='-10' onClick={this.increment}>-10</button>
+                            <button className='button' id='IncrementButton' name='encumbrance' value='-1' onClick={this.increment}>-1</button>
+                            <p>{this.state.encumbrance} Gp.</p>
+                            <button className='button' id='IncrementButton' name='encumbrance' value='+1' onClick={this.increment}>+1</button>
+                            <button className='button' id='IncrementButton' style={{height: 13,width: 13}} name='encumbrance' value='+10' onClick={this.increment}>+10</button>
+                            <button className='button' id='IncrementButton' style={{height: 14,width: 14}} name='encumbrance' value='+100' onClick={this.increment}>+1h</button>
+                            <button className='button' id='IncrementButton' style={{height: 15,width: 15}} name='encumbrance' value='+1000' onClick={this.increment}>+1k</button>
                         </div>
                         <button
+                            className='button'
+                            id='IncrementButton'
+                            style={{borderRadius: 3, marginLeft: 5, height: 13, width: 13}}
                             name='createItem' onClick={event => this.handleItem(event, {name: this.state.name, encumbrance: this.state.encumbrance, character_id, campaign_id})}>+</button>
                     </div>
                 </div>
                 <div>
-                    <h1 style={{display: this.props.edit || inventory ? '' : 'none'}}></h1>
+                    <h1 className='Header text' style={{display: this.props.edit || inventory ? '' : 'none'}}>Treasure:</h1>
                     <p
-                        className='MultilineDisplay'
-                        style={{display: this.props.edit ? 'none' : ''}}>{inventory}</p>
-                    <textarea name="inventory" ref={this.textarea} onKeyDown={this.handleTab} onChange={this.handleInputPersonal} cols="30" rows="10" value={this.props.characterChanges.personalDetails.inventory
+                        className='MultilineDisplay text Smalltext paper TextBackground'
+                        style={{display: this.props.edit ? 'none' : '', marginLeft: 5, width: 200}}>{inventory}</p>
+                    <textarea className='textarea paper' name="inventory" ref={this.textarea} onKeyDown={this.handleTab} onChange={this.handleInputPersonal} cols="30" rows="10" value={this.props.characterChanges.personalDetails.inventory
                         ? this.props.characterChanges.personalDetails.inventory
                         : this.props.characterChanges.personalDetails.inventory === ''
                             ? this.props.characterChanges.personalDetails.inventory
                             : inventory}
                         style={{display: this.props.edit ? '' : 'none'}}/>
                 </div>
-                <div>
-                    <p>Cp: {coins[0]}</p>
-                    <p>Sp: {coins[1]}</p>
-                    <p>Ep: {coins[2]}</p>
-                    <p>Gp: {coins[3]}</p>
-                    <p>Pp: {coins[4]}</p>
+                <div
+                    className='text Text'>
+                    <p className='Container'>Pp: {coins[4]}</p>
+                    <p className='Container'>Gp: {coins[3]}</p>
+                    <p className='Container'>Ep: {coins[2]}</p>
+                    <p className='Container'>Sp: {coins[1]}</p>
+                    <p className='Container'>Cp: {coins[0]}</p>
                 </div>
-                <div>
+                <div className='text Header'>
                     <h1>Encumbrance: {encumbranceText}-{encumbrance}Gp.</h1>
                     <p>Movement: {movement}'</p>
                     <p
@@ -237,8 +253,10 @@ class Inventory extends Component {
             </div>)
         } else {
             render = (<div>
-                <h1>Inventory:</h1>
-                <button onClick={this.toggle} name='revealed'>></button>
+                <div className='SectionTitleBox'>
+                    <h1 className='SectionTitle text'>Inventory:</h1>
+                    <button className='button' id='SectionButton' onClick={this.toggle} name='revealed'>></button>
+                </div>
             </div>)
         }
 

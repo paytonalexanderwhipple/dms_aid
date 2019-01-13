@@ -1,0 +1,76 @@
+.CharacterSheet {
+    overflow: auto;
+}
+#CharacterSheetEdit {
+    height: 20px;
+    width: 75px;
+    margin-right: 25px;
+}
+#CharacterSheetAdvanced {
+    height: 20px;
+    width: 100px;
+}
+.SectionTitle {
+    font-size: 20px;
+    display: inline;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+.Loading {
+    font-size: 40px;
+}
+#SectionButton {
+    margin-top: 5px;
+    height: 20px;
+    width: 20px;
+    border-radius: 20px;
+    display: inline;
+}
+.SectionTitleBox {
+    display: flex;
+    align-items: center;
+}
+#RemoveButtonCH {
+    height: 20px;
+    width: 75px;
+    order: 1
+}
+#SubmitButtonCH {
+    order: 2;
+    height: 20px;
+    width: 75px;
+}
+.RemoveSubmitButtons {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+.Container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.ContainerColumn {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.Header {
+    font-size: 14px;
+    line-height: 14px;
+    margin-right: 3px;
+}
+.Smalltext {
+    font-size: 10px;
+    line-height: 10px;
+}
+.MinuteText {
+    font-size: 8px;
+}
+.Text {
+    font-size: 12px;
+    line-height: 14px;
+}
+.TextBackground {
+    background-color: var(--color-1);
+}

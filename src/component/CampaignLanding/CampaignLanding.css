@@ -65,6 +65,13 @@
 .returnButton:hover {
     background-color: var(--color0);
 }
+.HomeButton {
+    background: none;
+    border: none;
+}
+.HomeButton:focus {
+    outline: none;
+}
 .characterToggle {
     position: absolute;
     right: 0px;

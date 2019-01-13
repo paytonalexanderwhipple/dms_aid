@@ -120,7 +120,7 @@ class Abilites extends Component {
                 superScript = '4th';
                 break;
             }
-            return (<p>{num}<sup className="sup">{superScript}</sup></p>);//styled in App.css
+            return (<p>{num}<sup className="sup">{superScript}</sup></p>);
         })
         const { suprise, missile, ac } = dex;
         const { raise, shock } = con;
@@ -144,21 +144,21 @@ class Abilites extends Component {
         let thiefSkills = concatThiefSkills.map((skill, i) => {
             switch(i) {
                 case 0:
-                    return <p>Climb Walls: {skill}%</p>
+                    return <p className='text Text' style={{marginLeft: 5}}>Climb Walls: {skill}%</p>
                 case 1:
-                    return <p>Find Traps: {skill}%</p>
+                    return <p className='text Text' style={{marginLeft: 5}}>Find Traps: {skill}%</p>
                 case 2:
-                    return <p>Hear Noise: {skill}%</p>
+                    return <p className='text Text' style={{marginLeft: 5}}>Hear Noise: {skill}%</p>
                 case 3:
-                    return <p>Hide In Shadows: {skill}%</p>
+                    return <p className='text Text' style={{marginLeft: 5}}>Hide In Shadows: {skill}%</p>
                 case 4:
-                    return <p>Move Quietly: {skill}%</p>
+                    return <p className='text Text' style={{marginLeft: 5}}>Move Quietly: {skill}%</p>
                 case 5:
-                    return <p>Open Locks: {skill}%</p>
+                    return <p className='text Text' style={{marginLeft: 5}}>Open Locks: {skill}%</p>
                 case 6:
-                    return <p>Pick Pockets: {skill}%</p>
+                    return <p className='text Text' style={{marginLeft: 5}}>Pick Pockets: {skill}%</p>
                 case 7:
-                    return <p>Read Languages: {skill}%</p>
+                    return <p className='text Text' style={{marginLeft: 5}}>Read Languages: {skill}%</p>
             }
         })
 
@@ -168,14 +168,14 @@ class Abilites extends Component {
         let detectionsList = detections.split('&').map((text, i) => {
             if (text) {
                 return (
-                    <p key={i}>-{text}</p>
+                    <p className='Text text' key={i}>-{text}</p>
                 )
             }
         })
 
         const racialLanguagesList = racial_languages.map(language => {
             return (
-                <p>-{language}</p>
+                <p className='Text text'>-{language}</p>
             )
         })
 
@@ -183,13 +183,16 @@ class Abilites extends Component {
 
         const languagesList = languages.map((language, i) => {
             return (
-                <div>
-                    <p>-{language}</p>
+                <div className='Container'>
+                    <p className='Text text'>-{language}</p>
                     <button
                         style={{display: this.props.edit && is_dm
                             ? ''
-                            : 'none'
+                            : 'none',
+                            paddingBottom: 1
                         }}
+                        className='button'
+                        id='IncrementButtonX'
                         onClick={(event) => this.removeLanguage(i)}>
                         x
                     </button>
@@ -333,137 +336,158 @@ class Abilites extends Component {
         if (armor.name === 'None' || armor.name === 'Leather' || armor.name === 'Studded' || armor.name === 'Elfin-Chain') {
             restricted = '';
         }
+
+        let BonusSpells = (<div className='Container' style={{marginTop: -2}}>
+            <p>{bonusSpells[0]}</p>
+            <p>{bonusSpells[1]}</p>
+            <p>{bonusSpells[2]}</p>
+            <p>{bonusSpells[3]}</p>
+        </div>)
         let render;
 
         if (this.state.revealed) {
-            render = (<div>
-                <h1>Abilities:</h1>
-                <button onClick={this.toggle} name='revealed'>v</button>
-                <h1>Name:</h1>
-                {this.props.edit 
-                    ? <input onChange={this.handleInputPersonal} value={this.props.characterChanges.personalDetails.name} name="name" placeholder={name}/>
-                    : <p>{name}</p>
-                }
-                <h1
-                    style={{display: this.props.edit || title
-                        ? ''
-                        : 'none'
-                }}>
-                    Title:
-                </h1>
-                <div
-                    style={{display: title || this.props.edit
-                        ? ''
-                        : 'none'
-                    }}>
-                    {this.props.edit
-                        ? <input onChange={this.handleInputPersonal} value={this.props.characterChanges.personalDetails.title} name="title" placeholder={title}/>
-                        : <p>{title}</p>
+            render = (<div className='Abilities'>
+                <div className='SectionTitleBox'>
+                    <h1 className='SectionTitle text'>Abilities:</h1>
+                    <button className='button' id='SectionButton' onClick={this.toggle} name='revealed'>v</button>
+                </div>
+                <hr/>
+                <div className='Container'>
+                    <h1 className='text Header'>Name:</h1>
+                    {this.props.edit 
+                        ? <input className='input' onChange={this.handleInputPersonal} value={this.props.characterChanges.personalDetails.name} name="name"/>
+                        : <p className='text Header'>{name}</p>
                     }
                 </div>
-                <h1>Alignment:</h1>
-                {this.props.edit && is_dm
-                    ? (
-                        <select name="alignment" onChange={this.handleInputPersonal} value={this.props.characterChanges.personalDetails.alignment || alignment}>
-                            <option value="">--Choose your alignment--</option>
-                            <option value="Lawful-Good">Lawful Good</option>
-                            <option value="Neutral-Good">Neutral Good</option>
-                            <option value="Chaotic-Good">Chaotic Good</option>
-                            <option value="Lawful-Neutral">Lawful Neutral</option>
-                            <option value="True-Neutral">True Neutral</option>
-                            <option value="Chaotic-Neutral">Chaotic Neutral</option>
-                            <option value="Lawful-Evil">Lawful Evil</option>
-                            <option value="Neutral-Evil">Neutral Evil</option>
-                            <option value="Chaotic-Evil">Chaotic Evil</option>
-                        </select>
-                    )
-                    : <p>{alignment}</p>
-                }
-                <h1>Classes:</h1>
-                <p>{classes.join('/')}</p>
-                <div
-                    style={{display: this.props.edit && dualClass && race === "Human" && classDetails.length < 2 && is_dm && classSelectionList[0]
-                        ? ''
-                        : 'none'
-                    }}>
-                    <select onChange={this.handleClassInput} name="class_name" value={this.props.characterChanges.dualClass.class_name}>
-                        <option value="">--Choose a dual class--</option>
-                        {classSelection}
-                    </select>
+                <div className='Container'>
+                    <h1
+                        style={{display: this.props.edit || title
+                            ? ''
+                            : 'none',
+                            marginLeft: 3
+                    }}
+                    className='text Header'>
+                        Title:
+                    </h1>
+                    <div
+                        style={{display: title || this.props.edit
+                            ? ''
+                            : 'none'
+                        }}>
+                        {this.props.edit
+                            ? <input className='input' onChange={this.handleInputPersonal} value={this.props.characterChanges.personalDetails.title} name="title" placeholder={title}/>
+                            : <p className='text Header'>{title}</p>
+                        }
+                    </div>
                 </div>
-                <div>
-                    <h1>STR 
+                <div className='Container'>
+                    <h1 className='text Header'>Alignment:</h1>
+                    {this.props.edit && is_dm
+                        ? (
+                            <div className='alignmentSelect' style={{margin: 0}}>
+                                <select name="alignment" onChange={this.handleInputPersonal} value={this.props.characterChanges.personalDetails.alignment || alignment}>
+                                    <option value="">--Choose your alignment--</option>
+                                    <option value="Lawful-Good">Lawful Good</option>
+                                    <option value="Neutral-Good">Neutral Good</option>
+                                    <option value="Chaotic-Good">Chaotic Good</option>
+                                    <option value="Lawful-Neutral">Lawful Neutral</option>
+                                    <option value="True-Neutral">True Neutral</option>
+                                    <option value="Chaotic-Neutral">Chaotic Neutral</option>
+                                    <option value="Lawful-Evil">Lawful Evil</option>
+                                    <option value="Neutral-Evil">Neutral Evil</option>
+                                    <option value="Chaotic-Evil">Chaotic Evil</option>
+                                </select>
+                            </div>
+                        )
+                        : <p className='text Header'>{alignment}</p>
+                    }
+                </div>
+                <div className='Container'>
+                    <h1 className='text Header'>Classes:</h1>
+                    <p className='text Header'>{classes.join('/')}</p>
+                    <div
+                        style={{display: this.props.edit && dualClass && race === "Human" && classDetails.length < 2 && is_dm && classSelectionList[0]
+                            ? ''
+                            : 'none'
+                        }}>
+                        <div className='alignmentSelect' style={{margin: 0, width: 160}}>
+                            <select onChange={this.handleClassInput} name="class_name" value={this.props.characterChanges.dualClass.class_name}>
+                                <option value="">--Choose a dual class--</option>
+                                {classSelection}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div className='statsContainer'>
+                    <h1 className='text Header'>STR 
                         {this.props.edit && is_dm
                             ? (
                                 <div>
-                                    <button onClick={this.handleInputStats} name='str' value='-0'>-</button>
+                                    <button className='button' id='IncrementButton' onClick={this.handleInputStats} name='str' value='-0'>-</button>
                                     {this.props.characterChanges.abilities.str || stats[0]}
-                                    <button onClick={this.handleInputStats} name='str' value='+0'>+</button>
+                                    <button className='button' id='IncrementButton' onClick={this.handleInputStats} name='str' value='+0'>+</button>
                                 </div>
                             )
-                            : stats[0]
+                            : ` ${stats[0]}`
                         } 
                         {stats[0] === 18 && !this.props.edit && (classes.includes('Fighter') || classes.includes('Paladin') || classes.includes('Ranger'))
-                            ? <p>{stats[6]}%</p>
+                            ? ` ${stats[6]}%`
                             : (this.props.edit && is_dm && (this.props.characterChanges.abilities.str || stats[0]) === 18 && (classes.includes('Fighter') || classes.includes('Paladin') || classes.includes('Ranger'))
                                 ? (
-                                    <div>
-                                        <button onClick={this.handleInputStats} name='exeptionalStrength' value='-6*5'>-5</button>
-                                        <button onClick={this.handleInputStats} name='exeptionalStrength' value='-6'>-</button>
+                                    <div className='ContainerInline'>
+                                        <button className='button' id='IncrementButton' onClick={this.handleInputStats} name='exeptionalStrength' value='-6*5' style={{height: 13, width: 13}}>-5</button>
+                                        <button className='button' id='IncrementButton' onClick={this.handleInputStats} name='exeptionalStrength' value='-6'>-</button>
                                         {this.props.characterChanges.abilities.exeptionalStrength || stats[6]}%
-                                        <button onClick={this.handleInputStats} name='exeptionalStrength' value='+6'>+</button>
-                                        <button onClick={this.handleInputStats} name='exeptionalStrength' value='+6*5'>+5</button>                                        
+                                        <button className='button' id='IncrementButton' onClick={this.handleInputStats} name='exeptionalStrength' value='+6'>+</button>
+                                        <button className='button' id='IncrementButton' onClick={this.handleInputStats} name='exeptionalStrength' value='+6*5' style={{height: 13, width: 13}}>+5</button>                                        
                                     </div>
                                 )
                                 : '')
                         }
+                        <div
+                            className='Container'
+                            style={{display: !this.props.edit && this.props.advanced
+                                ? ''
+                                : 'none'
+                            }}>
+                            <p className='Smalltext' style={{marginRight: 2, marginTop: -3}}>To Hit: {toHit > 0 ? '+' : ''}{toHit}{' '}</p>
+                            <p className='Smalltext' style={{marginRight: 2, marginTop: -3}}>Damage: {damage > 0 ? '+' : ''}{damage}{' '}</p>
+                            <p className='Smalltext' style={{marginRight: 2, marginTop: -3}}>Encumbrance: {encumbranceAdj > 0 ? '+' : ''}{encumbranceAdj}{' '}</p>
+                            <p className='Smalltext' style={{marginRight: 2, marginTop: -3}}>Minor Test: {minorTest}{minorTestEx ? `(${minorTestEx})` : ''}{' '}</p>    
+                            <p className='Smalltext' style={{marginRight: 2, marginTop: -3}}>Major Test: {majorTest}%</p>
+                        </div>
                     </h1>
-                    <div
-                        style={{display: this.props.edit
-                            ? 'none'
-                            : ''
-                        }}>
-                        <p>Minor Test: {minorTest}{minorTestEx ? `(${minorTestEx})` : ''}</p>    
-                        <p>Major Test: {majorTest}%</p>
-                    </div>
-                    <div
-                        style={{display: !this.props.edit && this.props.advanced
-                            ? ''
-                            : 'none'
-                        }}>
-                        <p>To Hit Adj: {toHit > 0 ? '+' : ''}{toHit}</p>
-                        <p>Damage Adj: {damage > 0 ? '+' : ''}{damage}</p>
-                        <p>Encumbrance Adj: {encumbranceAdj > 0 ? '+' : ''}{encumbranceAdj}</p>
-                    </div>
-                    <h1>INT {this.props.edit && is_dm
+                    <h1 className='text Header'>INT {this.props.edit && is_dm
                             ? (
                                 <div>
-                                    <button onClick={this.handleInputStats} name='int' value='-1'>-</button>
+                                    <button className='button' id='IncrementButton' onClick={this.handleInputStats} name='int' value='-1'>-</button>
                                     {this.props.characterChanges.abilities.int || stats[1]}
-                                    <button onClick={this.handleInputStats} name='int' value='+1'>+</button>
+                                    <button className='button' id='IncrementButton' onClick={this.handleInputStats} name='int' value='+1'>+</button>
                                 </div>
                             )
                             : stats[1]
                         }
+                        <div
+                            style={{display: !this.props.edit && this.props.advanced
+                                ? ''
+                                : 'none'
+                            }}
+                            className='Container'>
+                            <p className='Smalltext' style={{marginRight: 2, marginTop: -3}}>Add Languages: {additionalLanguages}</p>
+                            <p 
+                                style={{display: classes.includes('Magic-User'), marginRight: 2, marginTop: -3}}
+                                className='Smalltext'>% To Understand Spell: {chanceToUnderstand}</p>
+                            <p 
+                                style={{display: classes.includes('Magic-User'), marginRight: 2, marginTop: -3}}
+                                className='Smalltext'>Min Spells: {minSpells} Max Spells: {maxSpells}</p>
+                        </div>
                     </h1>
-                    <div
-                        style={{display: !this.props.edit && this.props.advanced
-                            ? ''
-                            : 'none'
-                        }}>
-                        <p>Add Languages: {additionalLanguages}</p>
-                        <p></p>
-                        <p 
-                            style={{display: classes.includes('Magic-User')}}>% To Understand Spell: {chanceToUnderstand}</p>
-                        <p 
-                            style={{display: classes.includes('Magic-User')}}>Min Spells: {minSpells} Max Spells: {maxSpells}</p>
-                    </div>
-                    <h1>WIS {this.props.edit && is_dm
+                    <h1 className='text Header'>WIS {this.props.edit && is_dm
                             ? (
                                 <div>
-                                    <button onClick={this.handleInputStats} name='wis' value='-2'>-</button>
+                                    <button className='button' id='IncrementButton' onClick={this.handleInputStats} name='wis' value='-2'>-</button>
                                     {this.props.characterChanges.abilities.wis || stats[2]}
-                                    <button onClick={this.handleInputStats} name='wis' value='+2'>+</button>
+                                    <button className='button' id='IncrementButton' onClick={this.handleInputStats} name='wis' value='+2'>+</button>
                                 </div>
                             )
                             : stats[2]
@@ -473,25 +497,26 @@ class Abilites extends Component {
                         style={{display: !this.props.edit && this.props.advanced
                             ? ''
                             : 'none'
-                        }}>
-                        <p>Mental Saves Bonus: {mental}</p>
+                        }}
+                        className='Container'>
+                        <p className='Smalltext' style={{marginRight: 2, marginTop: -3}}>Mental Saves Bonus: {mental > 0 ? '+' : ''}{mental}</p>
                         <p
                             style={{display: classes.includes('Cleric')
                                 ? ''
-                                : 'none'
-                            }}>Bonus Spells: {bonusSpells[0] ? bonusSpells : 'none'}</p>
+                                : 'none', marginRight: 2, marginTop: -3}}
+                                className='Smalltext Container'>Bonus Spells: {bonusSpells[0] ? BonusSpells : 'none'}</p>
                         <p
                             style={{display: classes.includes('Cleric')
                                 ? ''
-                                : 'none'
-                            }}>Spell Failure: {failure}%</p>
+                                : 'none', marginRight: 2, marginTop: -3}}
+                                className='Smalltext'>Spell Failure: {failure}%</p>
                     </div>
-                    <h1>DEX {this.props.edit && is_dm
+                    <h1 className='text Header'>DEX {this.props.edit && is_dm
                             ? (
                                 <div>
-                                    <button onClick={this.handleInputStats} name='dex' value='-3'>-</button>
+                                    <button className='button' id='IncrementButton' onClick={this.handleInputStats} name='dex' value='-3'>-</button>
                                     {this.props.characterChanges.abilities.dex || stats[3]}
-                                    <button onClick={this.handleInputStats} name='dex' value='+3'>+</button>
+                                    <button className='button' id='IncrementButton' onClick={this.handleInputStats} name='dex' value='+3'>+</button>
                                 </div>
                             )
                             : stats[3]
@@ -500,76 +525,75 @@ class Abilites extends Component {
                     <div
                         style={{display: !this.props.edit && this.props.advanced
                             ? ''
-                            : 'none'
-                        }}>
-                        <p>Surprise Bonus/Missile To Hit Adj: {suprise > 0 ? '+' : ''}{suprise}</p>
-                        <p>AC Adj: {ac > 0 ? '+' : ''}{ac}</p>
+                            : 'none',
+                        }}
+                        className='Container'>
+                        <p className='Smalltext' style={{marginRight: 2, marginTop: -3}}>Surprise Bonus/Missile To Hit Adj: {suprise > 0 ? '+' : ''}{suprise}</p>
+                        <p className='Smalltext' style={{marginRight: 2, marginTop: -3}}>AC Adj: {ac > 0 ? '+' : ''}{ac}</p>
                     </div>
-                    <h1>CON {this.props.edit && is_dm
+                    <h1 className='text Header'>CON {this.props.edit && is_dm
                             ? (
                                 <div>
-                                    <button onClick={this.handleInputStats} name='con' value='-4'>-</button>
+                                    <button className='button' id='IncrementButton' onClick={this.handleInputStats} name='con' value='-4'>-</button>
                                     {this.props.characterChanges.abilities.con || stats[4]}
-                                    <button onClick={this.handleInputStats} name='con' value='+4'>+</button>
+                                    <button className='button' id='IncrementButton' onClick={this.handleInputStats} name='con' value='+4'>+</button>
                                 </div>
                             )
                             : stats[4]
                         }
                     </h1>
                     <div
-                        style={{display: this.props.edit
-                            ? 'none'
-                            : ''
-                        }}>
-                        <p>Resurection Survival: {raise}%</p>
-                        <p>System Shock Survival: {shock}%</p>
-                    </div>
-                    <div
-                        style={{display: !this.props.edit && this.props.advanced
+                        style={{display: !this.props.edit & this.props.advanced
                             ? ''
                             : 'none'
-                        }}>
-                        <p>HP Bonus: {con.hp > 0 ? '+' : ''}{con.hp}</p>
+                        }}
+                        className='Container'>
+                        <p className='Smalltext' style={{marginRight: 2, marginTop: -3}}>Resurection Survival: {raise}%</p>
+                        <p className='Smalltext' style={{marginRight: 2, marginTop: -3}}>System Shock Survival: {shock}%</p>
+                        <p className='Smalltext' style={{marginRight: 2, marginTop: -3}}>HP Bonus: {con.hp > 0 ? '+' : ''}{con.hp}</p>
                     </div>
-                    <h1>CHA {this.props.edit && is_dm
+                
+                    <h1 className='text Header'>CHA {this.props.edit && is_dm
                             ? (
                                 <div>
-                                    <button onClick={this.handleInputStats} name='cha' value='-5'>-</button>
+                                    <button className='button' id='IncrementButton' onClick={this.handleInputStats} name='cha' value='-5'>-</button>
                                     {this.props.characterChanges.abilities.cha || stats[5]}
-                                    <button onClick={this.handleInputStats} name='cha' value='+5'>+</button>
+                                    <button className='button' id='IncrementButton' onClick={this.handleInputStats} name='cha' value='+5'>+</button>
                                 </div>
                             )
                             : stats[5]
                         }
                     </h1>
                     <div
-                        style={{display: this.props.edit
-                            ? 'none'
-                            : ''
-                        }}>
-                        <p>Max Henchmen: {henchmen}</p>
-                        <p>Loyalty Bonus: {loyalty > 0 ? '+' : ''}{loyalty}%</p>
-                        <p>Reaction Bonus: {reaction > 0 ? '+' : ''}{reaction}%</p>
+                        style={{display: !this.props.edit && this.props.advanced
+                            ? ''
+                            : 'none'
+                        }}
+                        className='Container'>
+                        <p className='Smalltext' style={{marginRight: 2, marginTop: -3}}>Max Henchmen: {henchmen}</p>
+                        <p className='Smalltext' style={{marginRight: 2, marginTop: -3}}>Loyalty Bonus: {loyalty > 0 ? '+' : ''}{loyalty}%</p>
+                        <p className='Smalltext' style={{marginRight: 2, marginTop: -3}}>Reaction Bonus: {reaction > 0 ? '+' : ''}{reaction}%</p>
                     </div>
                 </div>
                 <div
                     style={{display: vision
                         ? ''
                         : 'none'
-                    }}>
-                    <h1>Vision:</h1>
-                    <p>{vision}</p>
+                    }}
+                    className='Container'>
+                    <h1 className='Header text'>Vision:</h1>
+                    <p className='Header text'>{vision}</p>
                 </div>
                 <div
                     style={{display: detections
                         ? ''
                         : 'none'
                     }}>
-                    <h1>Detections:</h1>
+                    <h1 className='Header text'>Detections:</h1>
                     {detectionsList}
                 </div>
                 <div>
-                    <h1>Languages:</h1>
+                    <h1 className='Header text '>Languages:</h1>
                     {racialLanguagesList}
                     {languagesList}
                     <div
@@ -577,38 +601,40 @@ class Abilites extends Component {
                             ? ''
                             : 'none'
                         }}>
-                        <input onChange={this.handleInput} name="languageInput" value={this.state.languageInput}/>
-                        <button onClick={this.addLanguage}>Add</button>
-                        <h1>Possible Additional Languages: {additionalLanguages}</h1>
+                        <input className='input' onChange={this.handleInput} name="languageInput" value={this.state.languageInput}/>
+                        <button className='button' id='IncrementButton' onClick={this.addLanguage}>+</button>
+                        <h1 className='Smalltext text'>Possible Additional Languages: {additionalLanguages}</h1>
                     </div>
                 </div>
                 <div>
-                    <h1>Class Abilities:</h1>
-                    <p className='MultilineDisplay'>{specialAbilities}</p>
+                    <h1 className='Header text'>Class Abilities:</h1>
+                    <p className='Text text MultilineDisplay'>{specialAbilities}</p>
                 </div>
                 <div
                     style={{display: classes.includes('Thief') || classes.includes('Assassin')
                         ? ''
                         : 'none'
                     }}>
-                    <h1>Thief Skills</h1>
+                    <h1 className='Header text'>Thief Skills</h1>
                     {thiefSkills}
-                    <p>{restricted}</p>
+                    <p className='text Smalltext'>{restricted}</p>
                 </div>
                 <div
                     style={{display: this.props.edit
                         ? 'none'
                         : ''
-                    }}>
-                    <h1>Base Movement:</h1>
-                    {base_movement}
+                    }}
+                    className='Container'>
+                    <h1 className='Header text'>Base Movement: {base_movement}'</h1>
                 </div>
             </div>)
         } else {
             render = (
                 <div>
-                    <h1>Abilities:</h1>
-                    <button onClick={this.toggle} name='revealed'>></button>
+                    <div className='SectionTitleBox'>
+                        <h1 className='SectionTitle text'>Abilities:</h1>
+                        <button className='button' id='SectionButton' onClick={this.toggle} name='revealed'>></button>
+                    </div>
                 </div>
             )
         }

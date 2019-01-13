@@ -22,6 +22,8 @@
     flex-shrink: 0;
     width: 125px;
     align-self: center;
+    display: flex;
+    justify-content: center;
 }
 .CharacterCard {
     position: relative;
@@ -31,15 +33,23 @@
     display: flex;
     flex-direction: column;
     padding: 5px;
+    margin-top: 20px;
 }
 .ChBimage {
-    max-height: 100px;
-    overflow: hidden;
-    width: 125px;
+    height: 98px;
+    align-self: center;
+    max-width: 123px;
 }
 .nameTextChB {
     font-size: 14px;
     font-weight: bold;
+}
+.nameTextChBBox {
+    flex-basis: 15px;
+    flex-shrink: 0;
+    width: 100px;
+    height: 14px;
+    overflow: hidden;
 }
 .ChBrace {
     font-size: 12px;
@@ -54,10 +64,27 @@
 }
 .ChBstats {
     display: flex;
-    justify-content: flex-start;
-    height: 10px;
+    flex-basis: 20px;
+    flex-shrink: 0;
 }
 .statsChB {
     font-size: 10px;
     margin-right: 3px;
+}
+.ChBsavesBox {
+    margin-top: 3px;
+}
+.ChBsaves {
+    margin-bottom: 4px;
+    font-size: 12px;
+}
+.ChBsavesNums {
+    font-size: 12px;
+    font-weight: 700;
+    display: inline;
+    margin-right: 5px;
+    border: .5px black solid;
+    border-radius: 150px;
+    padding: 1px;
+    float: right;
 }

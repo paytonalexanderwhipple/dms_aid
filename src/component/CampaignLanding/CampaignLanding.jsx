@@ -82,7 +82,7 @@ class CampaignLanding extends Component {
                     </div>
                     <div className='returnButton'>
                         <Link to="/landing">
-                            <button className='text'>Home</button>
+                            <button className='text HomeButton'>Home</button>
                         </Link>
                     </div>
                     <div 

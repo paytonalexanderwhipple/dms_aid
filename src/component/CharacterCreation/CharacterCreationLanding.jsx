@@ -2,7 +2,7 @@ import React ,{ Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
     import { handleCreationInput, rerenderCreation } from '../../ducks/reducer/character_reducer.js';
-
+import './CharacterCreationLanding.css';
 
 class CharacterCreationLanding extends Component {
     constructor() {
@@ -38,29 +38,34 @@ class CharacterCreationLanding extends Component {
 
         return (
             <div>
-                <h1>Name:</h1>
                 <input type="text"
                     onChange={this.handleInput}
                     name='name'
                     value={this.props.characterCreation.name}
-                    maxLength="50"/>
-                <h1>Alignment:</h1>
-                <select name="alignment"
-                    onChange={this.handleInput}
-                    value={this.props.characterCreation.alignment}>
-                    <option value="">--Choose your alignment--</option>
-                    <option value="Lawful-Good">Lawful Good</option>
-                    <option value="Neutral-Good">Neutral Good</option>
-                    <option value="Chaotic-Good">Chaotic Good</option>
-                    <option value="Lawful-Neutral">Lawful Neutral</option>
-                    <option value="True-Neutral">True Neutral</option>
-                    <option value="Chaotic-Neutral">Chaotic Neutral</option>
-                    <option value="Lawful-Evil">Lawful Evil</option>
-                    <option value="Neutral-Evil">Neutral Evil</option>
-                    <option value="Chaotic-Evil">Chaotic Evil</option>
-                </select>
+                    maxLength="50"
+                    placeholder='Name'
+                    className='input'/>
+                <div className='alignmentSelect'>
+                    <select name="alignment"
+                        onChange={this.handleInput}
+                        value={this.props.characterCreation.alignment}
+                        className='select'>
+                        <option value="">--Choose your alignment--</option>
+                        <option value="Lawful-Good">Lawful Good</option>
+                        <option value="Neutral-Good">Neutral Good</option>
+                        <option value="Chaotic-Good">Chaotic Good</option>
+                        <option value="Lawful-Neutral">Lawful Neutral</option>
+                        <option value="True-Neutral">True Neutral</option>
+                        <option value="Chaotic-Neutral">Chaotic Neutral</option>
+                        <option value="Lawful-Evil">Lawful Evil</option>
+                        <option value="Neutral-Evil">Neutral Evil</option>
+                        <option value="Chaotic-Evil">Chaotic Evil</option>
+                    </select>
+                </div>
                 <Link to={`/landing/campaign/${campaign_id}/${name}/create/1`}>
                     <button
+                        className='button'
+                        id='nextStep'
                         style={{display: this.state.advance
                             ? ''
                             : 'none'

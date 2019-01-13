@@ -201,84 +201,101 @@ class Combat extends Component {
                 }
                 return (
                     <div
-                        style={{display: this.props.characterChanges.combat.deleteAmmo.includes((ammoUpdate || ammo).character_weapon_ammo_id) ? 'none' : ''}}>
-                        <h1>{name} <button name='deleteAmmo' onClick={event => this.handleInputDelete(event, ammo.character_weapon_ammo_id)} style={{display: this.props.edit && is_dm ? '' : 'none'}}>x</button>
+                        className='Smalltext'
+                        style={{display: this.props.characterChanges.combat.deleteAmmo.includes((ammoUpdate || ammo).character_weapon_ammo_id) ? 'none' : '', marginLeft: 5, marginTop: -2}}>
+                        <h1>{name} <button name='deleteAmmo' className='button' id='IncrementButtonX' onClick={event => this.handleInputDelete(event, ammo.character_weapon_ammo_id)} style={{display: this.props.edit && is_dm ? '' : 'none'}}>x</button>
+                        <div className='Container'>
                             (<button
                                 style={{display: this.props.edit && is_dm ? '' : 'none'}}
                                 onClick={event => this.handleInputAdj(event, ammo, 'ammo')}
+                                className='button'
+                                id='IncrementButton'
                                 name='attack_adj'
                                 value='-'>-</button>
-                                <p>To Hit: {toHit > 0 ? '+' : ''}{toHit}</p>
+                                <p style={{marginRight: 3, marginLeft: 3}}>To Hit: {toHit > 0 ? '+' : ''}{toHit}</p>
                                 <div
+                                    className='Container MinuteText'
                                     style={{display: this.props.advanced ? '' : 'none'}}>
-                                        <h1>Dexterity:</h1>
-                                            <p>{dex.missile > 0 ? '+' : ''}{dex.missile}</p>
+                                        <h1 style={{marginRight: 2}}>Dexterity:</h1>
+                                            <p style={{marginRight: 2}}>{dex.missile > 0 ? '+' : ''}{dex.missile}</p>
                                         <h1
-                                            style={{display: !proficiencies.includes(weapon.name) ? '' : 'none'}}>Non-Proficiency:</h1>
+                                            style={{display: !proficiencies.includes(weapon.name) ? '' : 'none', marginRight: 2}}>Non-Proficiency:</h1>
                                         <p
-                                            style={{display: !proficiencies.includes(weapon.name) ? '' : 'none'}}>-{nonProficiencyPenalty}</p>
+                                            style={{display: !proficiencies.includes(weapon.name) ? '' : 'none', marginRight: 2}}>-{nonProficiencyPenalty}</p>
                                         <h1
-                                            style={{display: is_dm && ammoMagicAttackAdj ? '' : 'none'}}>Magic Adj(Ammo):</h1>
+                                            style={{display: is_dm && ammoMagicAttackAdj ? '' : 'none', marginRight: 2}}>Magic Adj(Ammo):</h1>
                                             <p
-                                                style={{display: is_dm && ammoMagicAttackAdj ? '' : 'none'}}>{ammoMagicAttackAdj > 0 ? '+' : ''}{ammoMagicAttackAdj}</p>
+                                                style={{display: is_dm && ammoMagicAttackAdj ? '' : 'none', marginRight: 2}}>{ammoMagicAttackAdj > 0 ? '+' : ''}{ammoMagicAttackAdj}</p>
                                         <h1
-                                            style={{display: is_dm && ammoMagicAttackAdj ? '' : 'none'}}>Magic Adj(Weapon):</h1>
+                                            style={{display: is_dm && weaponMagicAttackAdj ? '' : 'none', marginRight: 2}}>Magic Adj(Weapon):</h1>
                                             <p
-                                                style={{display: is_dm && ammoMagicAttackAdj ? '' : 'none'}}>{weaponMagicAttackAdj > 0 ? '+' : ''}{weaponMagicAttackAdj}</p>
+                                                style={{display: is_dm && weaponMagicAttackAdj ? '' : 'none', marginRight: 2}}>{weaponMagicAttackAdj > 0 ? '+' : ''}{weaponMagicAttackAdj}</p>
                                         <h1
-                                            style={{display: race === 'Elf' && (weapon.name === 'Short-Bow' || weapon.name === 'Long-Bow' || weapon.name === 'Composite-Short-Bow' || weapon.name === 'Composite-Long-Bow') ? '' : 'none'}}>Racial Adj(Elf):</h1>
+                                            style={{display: race === 'Elf' && (weapon.name === 'Short-Bow' || weapon.name === 'Long-Bow' || weapon.name === 'Composite-Short-Bow' || weapon.name === 'Composite-Long-Bow') ? '' : 'none', marginRight: 2}}>Racial Adj(Elf):</h1>
                                             <p
-                                                style={{display: race === 'Elf' && (weapon.name === 'Short-Bow' || weapon.name === 'Long-Bow' || weapon.name === 'Composite-Short-Bow' || weapon.name === 'Composite-Long-Bow') ? '' : 'none'}}>+1</p>
+                                                style={{display: race === 'Elf' && (weapon.name === 'Short-Bow' || weapon.name === 'Long-Bow' || weapon.name === 'Composite-Short-Bow' || weapon.name === 'Composite-Long-Bow') ? '' : 'none', marginRight: 2}}>+1</p>
                                         <h1
-                                            style={{display: race === 'Halfling' && (weapon.name === 'Short-Bow' || weapon.name === 'Long-Bow' || weapon.name === 'Composite-Short-Bow' || weapon.name === 'Composite-Long-Bow' || weapon.name === 'Sling') ? '' : 'none'}}>Racial Adj(Halfling):</h1>
+                                            style={{display: race === 'Halfling' && (weapon.name === 'Short-Bow' || weapon.name === 'Long-Bow' || weapon.name === 'Composite-Short-Bow' || weapon.name === 'Composite-Long-Bow' || weapon.name === 'Sling') ? '' : 'none', marginRight: 2}}>Racial Adj(Halfling):</h1>
                                             <p
-                                                style={{display: race === 'Halfling' && (weapon.name === 'Short-Bow' || weapon.name === 'Long-Bow' || weapon.name === 'Composite-Short-Bow' || weapon.name === 'Composite-Long-Bow' || weapon.name === 'Sling') ? '' : 'none'}}>+3</p>
+                                                style={{display: race === 'Halfling' && (weapon.name === 'Short-Bow' || weapon.name === 'Long-Bow' || weapon.name === 'Composite-Short-Bow' || weapon.name === 'Composite-Long-Bow' || weapon.name === 'Sling') ? '' : 'none', marginRight: 2}}>+3</p>
                                 </div>
                                 {' '}
                             <button
                                 style={{display: this.props.edit && is_dm ? '' : 'none'}}
                                 onClick={event => this.handleInputAdj(event, ammo, 'ammo')}
+                                className='button'
+                                id='IncrementButton'
                                 name='attack_adj'
                                 value='+'>+</button>
                             <button
                                 style={{display: this.props.edit && is_dm ? '' : 'none'}}
                                 onClick={event => this.handleInputAdj(event, ammo, 'ammo')}
+                                className='button'
+                                id='IncrementButton'
                                 name='damage_adj'
                                 value='-'>-</button>
-                            <p>Damage: {damage > 0 ? '+' : ''}{damage}</p>
+                            <p style={{marginRight: 3}}>Damage: {damage > 0 ? '+' : ''}{damage}</p>
                             <div
+                                className='Container MinuteText'
                                 style={{display: this.props.advanced ? '' : 'none'}}>
                                 <h1
-                                    style={{display: name === 'Hand-Axe' || name === 'Club' || name === 'Dagger' || name === 'Dart' || name === 'Hammer' || name === 'Javelin' || name === 'Spear' ? '' : 'none'}}>Strength:</h1>
+                                    style={{display: name === 'Hand-Axe' || name === 'Club' || name === 'Dagger' || name === 'Dart' || name === 'Hammer' || name === 'Javelin' || name === 'Spear' ? '' : 'none', marginRight: 2}}>Strength:</h1>
                                     <p
-                                        style={{display: name === 'Hand-Axe' || name === 'Club' || name === 'Dagger' || name === 'Dart' || name === 'Hammer' || name === 'Javelin' || name === 'Spear' ? '' : 'none'}}>{ammoStrAdj > 0 ? '+' : ''}{ammoStrAdj}</p>
+                                        style={{display: name === 'Hand-Axe' || name === 'Club' || name === 'Dagger' || name === 'Dart' || name === 'Hammer' || name === 'Javelin' || name === 'Spear' ? '' : 'none', marginRight: 2}}>{ammoStrAdj > 0 ? '+' : ''}{ammoStrAdj}</p>
                                 <h1
-                                    style={{display: is_dm && ammoMagicDamageAdj ? '' : 'none'}}>Magic Adj(Ammo):</h1>
+                                    style={{display: is_dm && ammoMagicDamageAdj ? '' : 'none', marginRight: 2}}>Magic Adj(Ammo):</h1>
                                     <p
-                                        style={{display: is_dm && ammoMagicDamageAdj ? '' : 'none'}}>{ammoMagicDamageAdj > 0 ? '+' : ''}{ammoMagicDamageAdj}</p>
+                                        style={{display: is_dm && ammoMagicDamageAdj ? '' : 'none', marginRight: 2}}>{ammoMagicDamageAdj > 0 ? '+' : ''}{ammoMagicDamageAdj}</p>
                                 <h1
-                                    style={{display: is_dm && weaponMagicDamageAdj ? '' : 'none'}}>Magic Adj(Weapon):</h1>
+                                    style={{display: is_dm && weaponMagicDamageAdj ? '' : 'none', marginRight: 2}}>Magic Adj(Weapon):</h1>
                                     <p
-                                        style={{display: is_dm && weaponMagicDamageAdj? '' : 'none'}}>{weaponMagicDamageAdj > 0 ? '+' : ''}{weaponMagicDamageAdj}</p>
+                                        style={{display: is_dm && weaponMagicDamageAdj? '' : 'none', marginRight: 2}}>{weaponMagicDamageAdj > 0 ? '+' : ''}{weaponMagicDamageAdj}</p>
                             </div>
                             <button
                                 style={{display: this.props.edit && is_dm ? '' : 'none'}}
                                 onClick={event => this.handleInputAdj(event, ammo, 'ammo')}
+                                className='button'
+                                id='IncrementButton'
                                 name='damage_adj'
                                 value='+'>+</button>)
+                        </div>
                         </h1>
-                        <p>Damage S/M: {damage_small_medium} Damage L: {damage_large}</p>
-                        <p>Range: {range}' Fire-Rate: {rate_of_fire}</p>
-                        <div>Quantity: 
+                        <p>Damage S/M: {damage_small_medium} Damage L: {damage_large} Range: {range}' Fire-Rate: {rate_of_fire}</p>
+                        <div
+                            className='Container'>Quantity: 
                             <button
-                                style={{display: this.props.edit && is_dm ? '' : 'none'}}
+                                style={{display: this.props.edit && is_dm ? '' : 'none', height: 13, width: 13}}
                                 onClick={event => this.handleInputAdj(event, ammo, 'ammo')}
+                                className='button'
+                                id='IncrementButton'
                                 name='quantity'
                                 value='-*5'
                                 >-5</button>
                             <button
                                 style={{display: this.props.edit && is_dm ? '' : 'none'}}
                                 onClick={event => this.handleInputAdj(event, ammo, 'ammo')}
+                                className='button'
+                                id='IncrementButton'
                                 name='quantity'
                                 value="-">
                                 -</button>
@@ -288,12 +305,16 @@ class Combat extends Component {
                             <button
                                 style={{display: this.props.edit && is_dm ? '' : 'none'}}
                                 onClick={event => this.handleInputAdj(event, ammo, 'ammo')}
+                                className='button'
+                                id='IncrementButton'
                                 name='quantity'
                                 value="+">
                                 +</button>
                             <button
-                                style={{display: this.props.edit && is_dm ? '' : 'none'}}
+                                style={{display: this.props.edit && is_dm ? '' : 'none', height: 13, width: 13}}
                                 onClick={event => this.handleInputAdj(event, ammo, 'ammo')}
+                                className='button'
+                                id='IncrementButton'
                                 name='quantity'
                                 value='+*5'
                                 >+5</button>
@@ -304,66 +325,77 @@ class Combat extends Component {
             return (
                 <div
                     style={{display: this.props.characterChanges.combat.deleteWeapon.includes((weaponUpdate || weapon).character_weapon_id) ? 'none' : ''}}>
-                    <h1>{name} <button name='deleteWeapon' onClick={event => this.handleInputDelete(event, weapon.character_weapon_id)} style={{display: this.props.edit && is_dm ? '' : 'none'}}>x</button>
+                    <h1 className='Text text'>{name} <button className='button' id='IncrementButtonX' name='deleteWeapon' onClick={event => this.handleInputDelete(event, weapon.character_weapon_id)} style={{display: this.props.edit && is_dm ? '' : 'none'}}>x</button>
                         <div
                             style={{display: damage_large !== 'N/A' || is_dm
                                 ? ''
                                 : 'none'
-                            }}>
+                            }}
+                            className='Container'>
                             (<button
                                 style={{display: this.props.edit && is_dm ? '' : 'none'}}
                                 onClick={event => this.handleInputAdj(event, weapon, 'weapons')}
                                 name='attack_adj'
+                                className='button'
+                                id='IncrementButton'
                                 value='-'>-</button>
-                                <p>To Hit: { (damage_large === 'N/A' ? toHit + dex.missile - str.toHit : toHit) > 0 ? '+' : '' }{ (damage_large === 'N/A' ? toHit + dex.missile - str.toHit : toHit) }</p>
+                                <p style={{marginRight: 5, marginLeft: 5}}>To Hit: { (damage_large === 'N/A' ? toHit + dex.missile - str.toHit : toHit) > 0 ? '+' : '' }{ (damage_large === 'N/A' ? toHit + dex.missile - str.toHit : toHit) }</p>
                                 <div
-                                    style={{display: this.props.advanced ? '' : 'none'}}>
+                                    className='Container Smalltext text'
+                                    style={{display: this.props.advanced ? '' : 'none', marginRight: 3}}>
                                     <h1
-                                        style={{display: damage_large !== 'N/A' ? '' : 'none'}}>Strength:</h1>
+                                        style={{display: damage_large !== 'N/A' ? '' : 'none', marginRight: 2}}>Strength:</h1>
                                         <p
-                                            style={{display: damage_large !== 'N/A' ? '' : 'none'}}>{str.toHit > 0 ? '+' : ''}{str.toHit}</p>
+                                            style={{display: damage_large !== 'N/A' ? '' : 'none', marginRight: 2}}>{str.toHit > 0 ? '+' : ''}{str.toHit}</p>
                                     <h1
-                                        style={{display: damage_large !== 'N/A' ? 'none' : ''}}>Dexterity:</h1>
+                                        style={{display: damage_large !== 'N/A' ? 'none' : '', marginRight: 2}}>Dexterity:</h1>
                                         <p
-                                            style={{display: damage_large !== 'N/A' ? 'none' : ''}}>{dex.missile > 0 ? '+' : ''}{dex.missile}</p>
+                                            style={{display: damage_large !== 'N/A' ? 'none' : '', marginRight: 2}}>{dex.missile > 0 ? '+' : ''}{dex.missile}</p>
                                     <h1
-                                        style={{display: !proficiencies.includes(weapon.name) ? '' : 'none'}}>Non-Proficiency:</h1>
+                                        style={{display: !proficiencies.includes(weapon.name) ? '' : 'none', marginRight: 2}}>Non-Proficiency:</h1>
                                         <p
-                                            style={{display: !proficiencies.includes(weapon.name) ? '' : 'none'}}>-{nonProficiencyPenalty}</p>
+                                            style={{display: !proficiencies.includes(weapon.name) ? '' : 'none', marginRight: 2}}>-{nonProficiencyPenalty}</p>
                                     <h1
-                                        style={{display: is_dm && weaponMagicAttackAdj ? '' : 'none'}}>Magic Adj:</h1>
+                                        style={{display: is_dm && weaponMagicAttackAdj ? '' : 'none', marginRight: 2}}>Magic Adj:</h1>
                                         <p
-                                             style={{display: is_dm && weaponMagicAttackAdj ? '' : 'none'}}>{weaponMagicAttackAdj > 0 ? '+' : ''}{weaponMagicAttackAdj}</p>
+                                             style={{display: is_dm && weaponMagicAttackAdj ? '' : 'none', marginRight: 2}}>{weaponMagicAttackAdj > 0 ? '+' : ''}{weaponMagicAttackAdj}</p>
                                     <h1
-                                        style={{display: race === 'Elf' && (weapon.name === 'Short-Sword' || weapon.name === 'Long-Bow' || weapon.name === 'Short-Bow' || weapon.name === 'Composite-Long-Bow' || weapon.name === 'Composite-Short-Bow' || weapon.name === 'Long-Sword') ? '' : 'none'}}>Racial Adj(Elf):</h1>
+                                        style={{display: race === 'Elf' && (weapon.name === 'Short-Sword' || weapon.name === 'Long-Bow' || weapon.name === 'Short-Bow' || weapon.name === 'Composite-Long-Bow' || weapon.name === 'Composite-Short-Bow' || weapon.name === 'Long-Sword') ? '' : 'none', marginRight: 2}}>Racial Adj(Elf):</h1>
                                         <p
-                                            style={{display: race === 'Elf' && (weapon.name === 'Short-Sword' || weapon.name === 'Long-Bow' || weapon.name === 'Short-Bow' || weapon.name === 'Composite-Long-Bow' || weapon.name === 'Composite-Short-Bow' || weapon.name === 'Long-Sword') ? '' : 'none'}}>+1</p>
+                                            style={{display: race === 'Elf' && (weapon.name === 'Short-Sword' || weapon.name === 'Long-Bow' || weapon.name === 'Short-Bow' || weapon.name === 'Composite-Long-Bow' || weapon.name === 'Composite-Short-Bow' || weapon.name === 'Long-Sword') ? '' : 'none', marginRight: 2}}>+1</p>
                                 </div>{' '}
                             <button
                                 style={{display: this.props.edit && is_dm ? '' : 'none'}}
                                 onClick={event => this.handleInputAdj(event, weapon, 'weapons')}
+                                className='button'
+                                id='IncrementButton'
                                 name='attack_adj'
                                 value='+'>+</button>
                             <button
                                 style={{display: this.props.edit && is_dm ? '' : 'none'}}
                                 onClick={event => this.handleInputAdj(event, weapon, 'weapons')}
+                                className='button'
+                                id='IncrementButton'
                                 name='damage_adj'
                                 value='-'>-</button>
-                                <p>Damage: { (damage_large !== 'N/A' && (name === 'Hand-Axe' || name === 'Club' || name === 'Dagger' || name === 'Dart' || name === 'Hammer' || name === 'Javelin' || name === 'Spear') ? damage : damage - str.damage) > 0 ? '+' : '' }{ (damage_large !== 'N/A' && (name === 'Hand-Axe' || name === 'Club' || name === 'Dagger' || name === 'Dart' || name === 'Hammer' || name === 'Javelin' || name === 'Spear') ? damage : damage - str.damage) }</p>
+                                <p style={{marginRight: 5}}>Damage: { (damage_large !== 'N/A' && !(name === 'Hand-Axe' || name === 'Club' || name === 'Dagger' || name === 'Dart' || name === 'Hammer' || name === 'Javelin' || name === 'Spear') ? damage : damage - str.damage) > 0 ? '+' : '' }{ (damage_large !== 'N/A' && !(name === 'Hand-Axe' || name === 'Club' || name === 'Dagger' || name === 'Dart' || name === 'Hammer' || name === 'Javelin' || name === 'Spear') ? damage : damage - str.damage) }</p>
                                 <div
-                                    style={{display: this.props.advanced ? '' : 'none'}}>
+                                    className='Container Smalltext text'
+                                    style={{display: this.props.advanced ? '' : 'none', marginRight: 3}}>
                                     <h1
-                                        style={{display: damage_large !== 'N/A' && (name === 'Hand-Axe' || name === 'Club' || name === 'Dagger' || name === 'Dart' || name === 'Hammer' || name === 'Javelin' || name === 'Spear') ? '' : 'none'}}>Strength:</h1>
+                                        style={{display: damage_large !== 'N/A' && !(name === 'Hand-Axe' || name === 'Club' || name === 'Dagger' || name === 'Dart' || name === 'Hammer' || name === 'Javelin' || name === 'Spear') ? '' : 'none', marginRight: 2}}>Strength:</h1>
                                         <p
-                                            style={{display: damage_large !== 'N/A' && (name === 'Hand-Axe' || name === 'Club' || name === 'Dagger' || name === 'Dart' || name === 'Hammer' || name === 'Javelin' || name === 'Spear') ? '' : 'none'}}>{str.damage > 0 ? '+' : ''}{str.damage}</p>
+                                            style={{display: damage_large !== 'N/A' && !(name === 'Hand-Axe' || name === 'Club' || name === 'Dagger' || name === 'Dart' || name === 'Hammer' || name === 'Javelin' || name === 'Spear') ? '' : 'none', marginRight: 2}}>{str.damage > 0 ? '+' : ''}{str.damage}</p>
                                     <h1
-                                        style={{display: is_dm && weaponMagicDamageAdj ? '' : 'none'}}>Magic Adj:</h1>
+                                        style={{display: is_dm && weaponMagicDamageAdj ? '' : 'none', marginRight: 2}}>Magic Adj:</h1>
                                         <p
-                                            style={{display: is_dm && weaponMagicDamageAdj ? '' : 'none'}}>{weaponMagicDamageAdj > 0 ? '+' : ''}{weaponMagicDamageAdj}</p>
+                                            style={{display: is_dm && weaponMagicDamageAdj ? '' : 'none', marginRight: 2}}>{weaponMagicDamageAdj > 0 ? '+' : ''}{weaponMagicDamageAdj}</p>
                                 </div>
                             <button
                                 style={{display: this.props.edit && is_dm ? '' : 'none'}}
                                 onClick={event => this.handleInputAdj(event, weapon, 'weapons')}
+                                className='button'
+                                id='IncrementButtonPlus'
                                 name='damage_adj'
                                 value='+'>+</button>)
                         </div>
@@ -372,18 +404,21 @@ class Combat extends Component {
                         style={{display: damage_large === 'N/A'
                             ? 'none'
                             : ''
-                        }}>
+                        }}
+                        className='Smalltext text'>
                         Damage S/M: {damage_small_medium} Damage L: {damage_large}
                     </p>
                     <p
                         style={{display: ammoDetails.length >= 1
                             ? ''
                             : 'none'
-                        }}>
+                        }}
+                        className='Text text'>
                         Ammo:{ammo}
                     </p>
                     <div
-                        style={{display: this.props.edit && ammoOptions.length > 0 && is_dm ? '' : 'none'}}>
+                        className='alignmentSelect'
+                        style={{display: this.props.edit && ammoOptions.length > 0 && is_dm ? '' : 'none', width: 130, marginTop: 5}}>
                             <select name="newAmmo" value="" onChange={event => this.handleInputNew(event, weapon.character_weapon_id)}>
                                 <option value="">--Add new ammo--</option>
                                 {ammoOptions}
@@ -431,126 +466,153 @@ class Combat extends Component {
         }, [15])
 
         let specialAttacks = special_attack.split('&').map(entry => {
-            return (
-                <p>{entry}</p>
-            )
+            if (entry) {
+                return (
+                    <p>-{entry}</p>
+                )
+            }
         })
 
         let rEsistances = resistances.split('&').map(entry => {
-            return (
-                <p>{entry}</p>
-            )
+            if (entry) {
+                return (
+                    <p>-{entry}</p>
+                )
+            }
         })
 
     return (
         <div>
-            <h1>Combat:</h1>
-            <button onClick={this.toggle} name='revealed'>{this.state.revealed ? 'v' : '>'}</button>
+            <div className='SectionTitleBox'>
+                <h1 className='SectionTitle text'>Combat:</h1>
+                <button className='button' id='SectionButton' onClick={this.toggle} name='revealed'>{this.state.revealed ? 'v' : '>'}</button>
+            </div>
             <div
                 style={{display: this.state.revealed ? '' : 'none'}}>
-                <h1>HP:</h1>
-                <p>{this.state.currentHP}</p>
-                <button onClick={this.increment} value='-' name="currentHP">-</button>
-                <button onClick={this.increment} value='+' name="currentHP">+</button>
+                <hr/>
+                <div
+                    className='Container'>
+                    <h1 className='Header text'>HP:</h1>
+                    <div 
+                        className='Container'>
+                        <button className='button' id='IncrementButton' onClick={this.increment} value='-' name="currentHP">-</button>
+                        <p className='Header text'>{this.state.currentHP}</p>
+                        <button className='button' id='IncrementButton' onClick={this.increment} value='+' name="currentHP">+</button>
+                    </div>
+                </div>
                 <div>
-                    <h1>Weapons:</h1>
+                    <h1 className='Header text'>Weapons:</h1>
                     {weapons}
                     <div
-                        style={{display: this.props.edit && is_dm ? '' : 'none'}}>
+                        className='alignmentSelect'
+                        style={{display: this.props.edit && is_dm ? '' : 'none', marginTop: 5}}>
                         <select name="newWeapon" value="" onChange={event => this.handleInputNew(event, character_id)}>
                             <option value="">--Choose new Weapon--</option>
                             {weaponOptions}
                         </select>
                     </div>
                 </div>
-                <div>
-                    <h1>THAC:</h1>
-                    <div>
-                        <p>ac</p>
-                        <p>10</p>
-                        <p>9</p>
-                        <p>8</p>
-                        <p>7</p>
-                        <p>6</p>
-                        <p>5</p>
-                        <p>4</p>
-                        <p>3</p>
-                        <p>2</p>
-                        <p>1</p>
-                        <p>0</p>
-                        <p>-1</p>
-                        <p>-2</p>
-                        <p>-3</p>
-                        <p>-4</p>
-                        <p>-5</p>
-                        <p>-6</p>
-                        <p>-7</p>
-                        <p>-8</p>
-                        <p>-9</p>
-                        <p>-10</p>
-                        <p>To Hit</p>
-                        <p>{thac[0]}</p>
-                        <p>{thac[1]}</p>
-                        <p>{thac[2]}</p>
-                        <p>{thac[3]}</p>
-                        <p>{thac[4]}</p>
-                        <p>{thac[5]}</p>
-                        <p>{thac[6]}</p>
-                        <p>{thac[7]}</p>
-                        <p>{thac[8]}</p>
-                        <p>{thac[9]}</p>
-                        <p>{thac[10]}</p>
-                        <p>{thac[11]}</p>
-                        <p>{thac[12]}</p>
-                        <p>{thac[13]}</p>
-                        <p>{thac[14]}</p>
-                        <p>{thac[15]}</p>
-                        <p>{thac[16]}</p>
-                        <p>{thac[17]}</p>
-                        <p>{thac[18]}</p>
-                        <p>{thac[19]}</p>
-                        <p>{thac[20]}</p>
-                        <p>{thac[21]}</p>
+                <div style={{marginTop: 5}}>
+                    <h1 className='Header text'>THAC:</h1>
+                    <div className='ContainerColumn' style={{marginLeft: 0}}>
+                        <div className='Container'>
+                            <p className='text Text Thac'>AC</p>
+                            <p className='text Text Thac THAC2'>10</p>
+                            <p className='text Text Thac THAC2'>9</p>
+                            <p className='text Text Thac'>8</p>
+                            <p className='text Text Thac'>7</p>
+                            <p className='text Text Thac'>6</p>
+                            <p className='text Text Thac'>5</p>
+                            <p className='text Text Thac'>4</p>
+                            <p className='text Text Thac'>3</p>
+                            <p className='text Text Thac'>2</p>
+                            <p className='text Text Thac'>1</p>
+                            <p className='text Text Thac'>0</p>
+                            <p className='text Text Thac'>-1</p>
+                            <p className='text Text Thac'>-2</p>
+                            <p className='text Text Thac'>-3</p>
+                            <p className='text Text Thac'>-4</p>
+                            <p className='text Text Thac'>-5</p>
+                            <p className='text Text Thac'>-6</p>
+                            <p className='text Text Thac'>-7</p>
+                            <p className='text Text Thac THAC2'>-8</p>
+                            <p className='text Text Thac THAC2'>-9</p>
+                            <p className='text Text Thac THAC2'>-10</p>
+                        </div>
+                        <div className='Container' style={{marginLeft: 0}}>
+                            <p className='text Text Thac'>Hit</p>
+                            <p className='text Text Thac THAC2'>{thac[0]}</p>
+                            <p className='text Text Thac THAC2'>{thac[1]}</p>
+                            <p className='text Text Thac'>{thac[2]}</p>
+                            <p className='text Text Thac'>{thac[3]}</p>
+                            <p className='text Text Thac'>{thac[4]}</p>
+                            <p className='text Text Thac'>{thac[5]}</p>
+                            <p className='text Text Thac'>{thac[6]}</p>
+                            <p className='text Text Thac'>{thac[7]}</p>
+                            <p className='text Text Thac'>{thac[8]}</p>
+                            <p className='text Text Thac'>{thac[9]}</p>
+                            <p className='text Text Thac'>{thac[10]}</p>
+                            <p className='text Text Thac'>{thac[11]}</p>
+                            <p className='text Text Thac'>{thac[12]}</p>
+                            <p className='text Text Thac'>{thac[13]}</p>
+                            <p className='text Text Thac'>{thac[14]}</p>
+                            <p className='text Text Thac'>{thac[15]}</p>
+                            <p className='text Text Thac'>{thac[16]}</p>
+                            <p className='text Text Thac'>{thac[17]}</p>
+                            <p className='text Text Thac THAC2'>{thac[18]}</p>
+                            <p className='text Text Thac THAC2'>{thac[19]}</p>
+                            <p className='text Text Thac THAC2'>{thac[20]}</p>
+                        </div>
                     </div>
                 </div>
                 <div
                     style={{display: !this.props.edit}}>
-                    <h1>AC: {10 + armor.ac_mod + shield.ac_mod  + dex.ac - (is_dm ? (ac_bonus + shield.ac_adj + armor.ac_adj) : 0)}</h1>
-                    <h1>Shieldless: {10 + armor.ac_mod + dex.ac - (is_dm ? (ac_bonus + armor.ac_adj) : 0)}</h1>
-                    <h1>Rear: {10 + armor.ac_mod - (is_dm ? (ac_bonus + armor.ac_adj) : 0)}</h1>
+                    <h1 className='Header text'>AC: {10 + armor.ac_mod + shield.ac_mod  + dex.ac - (is_dm ? (ac_bonus + shield.ac_adj + armor.ac_adj) : 0)}</h1>
+                    <h1 className='Text text' style={{marginLeft: 5}}>Shieldless: {10 + armor.ac_mod + dex.ac - (is_dm ? (ac_bonus + armor.ac_adj) : 0)}</h1>
+                    <h1 className='Text text' style={{marginLeft: 5}}>Rear: {10 + armor.ac_mod - (is_dm ? (ac_bonus + armor.ac_adj) : 0)}</h1>
                     <div
+                        className='Container'
                         style={{display: this.props.edit && is_dm ? '' : 'none'}}>
                         <button
+                            className='button'
+                            id='IncrementButton'
                             onClick={event => this.handleInputIncrement(event, 'personalDetails')} name='ac_bonus' value='-'>-</button>
                         <h1>{(this.props.characterChanges.personalDetails.ac_bonus === 0 ? 0 :(this.props.characterChanges.personalDetails.ac_bonus || ac_bonus)) > 0 ? '+' : ''}{this.props.characterChanges.personalDetails.ac_bonus === 0 ? 0 :(this.props.characterChanges.personalDetails.ac_bonus || ac_bonus)}</h1>
                         <button
+                            className='button'
+                            id='IncrementButton'
                             onClick={event => this.handleInputIncrement(event, 'personalDetails')} name='ac_bonus' value='+'>+</button>
                      </div>
                         <div
+                            className='Container Smalltext'
                             style={{display: this.props.advanced ? '' : 'none'}}>
-                                <h1>Dexterity:</h1>
-                                    <p>{dex.ac > 0 ? '+' : ''}{dex.ac}</p>
+                                <h1 style={{marginLeft: 5}}>Dexterity:</h1>
+                                    <p style={{marginLeft: 2}}>{dex.ac > 0 ? '+' : ''}{dex.ac}</p>
                                 <h1
-                                        style={{display: armor ? '' : 'none'}}>Armor: {armor.name}{is_dm && armor.ac_adj ? ` ${armor.ac_adj > 0 ? "+" : ''}${armor.ac_adj}` : ''}</h1>
-                                    <p>{armor.ac_mod - (is_dm ? armor.ac_adj : 0) > 0 ? '+' : ''}{armor.ac_mod - (is_dm ? armor.ac_adj : 0)}</p>
+                                        style={{display: armor ? '' : 'none', marginLeft: 3}}>Armor: {armor.name} {is_dm && armor.ac_adj ? ` ${armor.ac_adj > 0 ? "+" : ''}${armor.ac_adj}` : ''}</h1>
+                                    <p style={{marginLeft: 2}}>{armor.ac_mod - (is_dm ? armor.ac_adj : 0) > 0 ? '+' : ''}{armor.ac_mod - (is_dm ? armor.ac_adj : 0)}</p>
                                 <h1
-                                    style={{display: shield ? '' : 'none'}}>Shield: {shield.name}{is_dm && shield.ac_adj ? ` ${shield.ac_adj > 0 ? "+" : ''}${shield.ac_adj}` : ''}</h1>
-                                    <p>{shield.ac_mod - (is_dm ? shield.ac_adj : 0) > 0 ? '+' : ''}{shield.ac_mod - (is_dm ? shield.ac_adj : 0)}</p>
+                                    style={{display: shield ? '' : 'none', marginLeft: 3}}>Shield: {shield.name} {is_dm && shield.ac_adj ? ` ${shield.ac_adj > 0 ? "+" : ''}${shield.ac_adj}` : ''}</h1>
+                                    <p style={{marginLeft: 2}}>{shield.ac_mod - (is_dm ? shield.ac_adj : 0) > 0 ? '+' : ''}{shield.ac_mod - (is_dm ? shield.ac_adj : 0)}</p>
                                 <h1
-                                    style={{display: is_dm && ac_bonus ? '' : 'none'}}>Magic Adj:</h1>
+                                    style={{display: is_dm && ac_bonus ? '' : 'none', marginLeft: 3}}>Magic Adj:</h1>
                                     <p
-                                        style={{display: is_dm && ac_bonus ? '' : 'none'}}>{ac_bonus < 0 ? '+' : (ac_bonus > 0 ? '-' : '')}{Math.abs(ac_bonus)} </p>
+                                        style={{display: is_dm && ac_bonus ? '' : 'none', marginLeft: 2}}>{ac_bonus < 0 ? '+' : (ac_bonus > 0 ? '-' : '')}{Math.abs(ac_bonus)} </p>
                         </div>
                     </div>
                     <div
-                        style={{display: armor.name === 'None' ? 'none' : ''}}>
-                        <h1>Armor:</h1>
-                        <p>
+                        className="Container text"
+                        style={{display: armor.name === 'None' && !this.props.edit ? 'none' : ''}}>
+                        <h1 className='Header' style={{marginRight: 3}}>Armor:</h1>
+                        <p className='Text Container'>
                             {this.props.characterChanges.combat.newArmor.name || `${armor.name} ${is_dm ? (armor.ac_adj > 0 ? "+" : '') : ''}${is_dm && armor.ac_adj ? armor.ac_adj : ''}`}
                             <div
+                                className='Container Text'
                                 style={{display: this.props.edit && !this.armorSelect.current.value && is_dm ? '' : 'none'}}>
                                 <button
                                     onClick={event => this.handleInputAdj(event, armor, 'armor')}
+                                    className='button'
+                                    id='IncrementButton'
                                     name='ac_adj'
                                     value='-'>-</button>
                                 {this.props.characterChanges.combat.newArmor.name 
@@ -559,70 +621,86 @@ class Combat extends Component {
                                 }
                                 <button
                                     onClick={event => this.handleInputAdj(event, armor, 'armor')}
+                                    className='button'
+                                    id='IncrementButton'
                                     name='ac_adj'
                                     value='+'>+</button>
                             </div>
                         </p>
-                        <div
-                            style={{display: this.props.edit && is_dm ? '' : 'none'}}>
-                            <select name="newArmor" ref={this.armorSelect} value={ this.props.characterChanges.combat.newArmor.name || '' } onChange={event => this.handleInputNew(event, character_id)}>
-                                <option value="">--Choose Armor--</option>
-                                <option value=''>-Reset-</option>
-                                {armorOptions}
-                            </select>
-                        </div>
                     </div>
                     <div
-                        style={{display: shield ? '' : 'none'}}>
-                        <h1>Shield:</h1>
-                        <p>
+                        className='alignmentSelect'
+                        style={{display: this.props.edit && is_dm ? '' : 'none', marginTop: 0, width: 135}}>
+                        <select name="newArmor" ref={this.armorSelect} value={ this.props.characterChanges.combat.newArmor.name || '' } onChange={event => this.handleInputNew(event, character_id)}>
+                            <option value="">--Choose Armor--</option>
+                            <option value=''>-Reset-</option>
+                            {armorOptions}
+                        </select>
+                    </div>
+                    <div
+                        className='Container text'
+                        style={{display: shield || this.props.edit ? '' : 'none'}}>
+                        <h1 className='Header'>Shield:</h1>
+                        <p className='Text Container'>
                             {this.props.characterChanges.combat.newShield.name || `${shield.name} ${is_dm ? (shield.ac_adj > 0 ? "+" : '') : ''}${is_dm && shield.ac_adj ? shield.ac_adj : ''}`}
                             <div
                                 style={{display: this.props.edit && !this.shieldSelect.current.value && is_dm ? '' : 'none'}}>
                                 <button
                                     onClick={event => this.handleInputAdj(event, shield, 'shield')}
+                                    className='button'
+                                    id='IncrementButton'
                                     name='ac_adj'
                                     value='-'>-</button>
                                 {( this.props.characterChanges.combat.shield[0] || shield ).ac_adj > 0 ? '+' : ''}{( this.props.characterChanges.combat.shield[0] || shield ).ac_adj || 0}
                                 <button
                                     onClick={event => this.handleInputAdj(event, shield, 'shield')}
+                                    className='button'
+                                    id='IncrementButton'
                                     name='ac_adj'
                                     value='+'>+</button>
                             </div>
                         </p>
-                        <div
-                            style={{display: this.props.edit && is_dm ? '' : 'none'}}>
-                            <select name="newShield" ref={this.shieldSelect} value={ this.props.characterChanges.combat.newShield.name || ''} onChange={event => this.handleInputNew(event, character_id)}>
-                                <option value="">--Choose Shield--</option>
-                                <option value="">-Reset-</option>
-                                {shieldOptions}
-                            </select>
-                        </div>
                     </div>
-                    <h1>Saving Throws:</h1>
-                    <div>
-                        <p>Rod, Staff, or Wand</p><p>{savingThrows[0] + (is_dm ? 0 : saving_throw_adj)}</p>
-                        <p>Breath Weapons</p><p>{savingThrows[1] + (is_dm ? 0 : saving_throw_adj)}</p>
-                        <p>Death, Paralysis, Poison</p><p>{savingThrows[2] + (is_dm ? 0 : saving_throw_adj)}</p>
-                        <p>Petrification, Polymorph</p><p>{savingThrows[3] + (is_dm ? 0 : saving_throw_adj)}</p>
-                        <p>Spells</p><p>{savingThrows[4] + (is_dm ? 0 : saving_throw_adj)}</p>
+                    <div
+                        className='alignmentSelect'
+                        style={{display: this.props.edit && is_dm ? '' : 'none', marginTop: 0, width: 135}}>
+                        <select name="newShield" ref={this.shieldSelect} value={ this.props.characterChanges.combat.newShield.name || ''} onChange={event => this.handleInputNew(event, character_id)}>
+                            <option value="">--Choose Shield--</option>
+                            <option value="">-Reset-</option>
+                            {shieldOptions}
+                        </select>
+                    </div>
+                    <h1 className='text Header'>Saving Throws:</h1>
+                    <div className='text Text' style={{width: 200}}>
+                        <p className='Container Justify-End'>Rod, Staff, or Wand:<p className='Saves'>{savingThrows[0] + (is_dm ? 0 : saving_throw_adj)}</p></p>
+                        <p className='Container Justify-End'>Breath Weapons:<p className='Saves'>{savingThrows[1] + (is_dm ? 0 : saving_throw_adj)}</p></p>
+                        <p className='Container Justify-End'>Death, Paralysis, Poison:<p className='Saves'>{savingThrows[2] + (is_dm ? 0 : saving_throw_adj)}</p></p>
+                        <p className='Container Justify-End'>Petrification, Polymorph:<p className='Saves'>{savingThrows[3] + (is_dm ? 0 : saving_throw_adj)}</p></p>
+                        <p className='Container Justify-End'>Spells:<p className='Saves'>{savingThrows[4] + (is_dm ? 0 : saving_throw_adj)}</p></p>
                         <div
-                            style={{display: this.props.advanced && is_dm ? '' : 'none'}}>
-                            <h1>Magic Adj: </h1>
+                            className='Container Minutetext'
+                            style={{display: this.props.advanced && is_dm ? '' : 'none', marginLeft: 5}}>
+                            <h1 style={{marginRight: 2}}>Magic Adj: </h1>
+                                <p>{saving_throw_adj > 0 ? '+' : ''}{saving_throw_adj}</p>
                         </div>
                         <div
+                            className='Container'
                             style={{display: this.props.edit && is_dm ? '' : 'none'}}>
                             <button
+                                className='button'
+                                id='IncrementButton'
                                 onClick={event => this.handleInputIncrement(event, 'personalDetails')} name='saving_throw_adj' value='-'>-</button>
                             <h1>{(this.props.characterChanges.personalDetails.saving_throw_adj === 0 ? 0 :(this.props.characterChanges.personalDetails.saving_throw_adj || saving_throw_adj)) > 0 ? '+' : ''}{this.props.characterChanges.personalDetails.saving_throw_adj === 0 ? 0 :(this.props.characterChanges.personalDetails.saving_throw_adj || saving_throw_adj)}</h1>
                             <button
+                                className='button'
+                                id='IncrementButton'
                                 onClick={event => this.handleInputIncrement(event, 'personalDetails')} name='saving_throw_adj' value='+'>+</button>
                         </div>
                     </div>
                     <div
                         style={{display: resistances.length > 0 || special_attack.length > 0 ? '' : 'none'}}>
-                        <h1>Special Abilities:</h1>
-                        <div>
+                        <h1 className='Header text'>Special Abilities:</h1>
+                        <div className='Text text'>
                             {rEsistances}
                             {specialAttacks}
                         </div>

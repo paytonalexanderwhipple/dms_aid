@@ -23,3 +23,24 @@
     flex-wrap: wrap-reverse;
     align-content: flex-start;
 }
+.Saves {
+    border: 1px black solid;
+    border-radius: 20px;
+    padding: 1px;
+}
+.Justify-End {
+    margin-left: 5px;
+    justify-content: space-between;
+}
+.Thac {
+    border: 1px black solid;
+    border-left: .5px;
+    border-right: .5px;
+    height: 15px;
+    width: 20px;
+}
+@media (max-width: 415px) {
+    .THAC2 {
+        display: none;
+    }
+}

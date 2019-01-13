@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
     import { clearCharacterEdits } from '../../ducks/reducer/character_reducer.js';
 import { Switch, Route, Link, withRouter, Redirect } from 'react-router-dom';
 import CharacterSheet from '../CharacterSheet/CharacterSheet.jsx';
+import './CharacterSheetWrapper.css';
 
 class CharacterSheetWrapper extends Component {
     constructor() {
@@ -28,13 +29,14 @@ class CharacterSheetWrapper extends Component {
         const { campaign_id, name } = this.props.currentCampaign.campaignDetails;
 
         if (!this.props.characterData.classes) {
-           return <Redirect to={`/landing/campaign/${campaign_id}/${name}`}/>;
+            return <Redirect to={`/landing/campaign/${campaign_id}/${name}`}/>;
         }
 
+
         return (
-            <div className='bigbox'>
+            <div id='bigbox' className='paper'>
                 <Link to={`/landing/campaign/${campaign_id}/${name}`}>
-                    <button name="characterSheetRevealed" onClick={this.props.toggle}>X</button>
+                    <button className='button' id='ChCreationCancel' name="characterSheetRevealed" onClick={this.props.toggle}>X</button>
                 </Link>
                 <Switch>
                     <Route exact path={`/landing/campaign/${campaign_id}/${name}/sheet/:character_id`} component={CharacterSheet}/>

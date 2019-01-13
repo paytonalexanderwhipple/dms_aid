@@ -23,7 +23,7 @@ class ProficienciesDropdown extends Component {
         });
 
         return (
-            <div>
+            <div className='alignmentSelect' style={{margin:0}}>
                 <select name="proficiencies" onChange={this.handleInput} value={this.props.characterCreation.proficiencies[this.props.index]}>
                     <option value="">--Select a proficiency--</option>
                     {weaponOptions}

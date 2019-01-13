@@ -1,0 +1,30 @@
+#ChCreationCancel {
+    background: var(--color9);
+    border: none;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 10px;
+    height: 15px;
+    width: 15px;
+    border-radius: 15px;
+    color: var(--color10);
+    padding: 0 0 0 .5px;
+}
+#ChCreationCancel:hover {
+    background-color: var(--color8);
+}
+#nextStep {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    height: 20px;
+    width: 75px;
+}
+#prevStep {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    height: 20px;
+    width: 75px;
+}

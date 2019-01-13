@@ -62,7 +62,7 @@ class CharacterLanding extends Component {
         })
 
         return (
-            <div>
+            <div className='CharacterLanding'>
                 <div
                     className={this.props.obscured 
                         ? 'Background CharacterContainer'
@@ -74,39 +74,66 @@ class CharacterLanding extends Component {
                         <button className='homeButton text' onClick={this.props.handleView} name="landing">m</button>
                         <button className='homeButton text' onClick={this.props.handleView} name="landing">e</button>
                     </button>
-                    <div className='CharacterDisplayBox paper'>
-                        {characters}
-                        <button
-                            style={{display: this.props.currentCampaign.campaignDetails.is_dm 
-                            ? 'none'
-                            : ''
-                            }}
-                            onClick={this.props.toggle}
-                            name='characterCreateRevealed'>
-                            +</button>
-                        <button
-                            style={{display: this.props.currentCampaign.campaignDetails.is_dm 
-                            ? 'none'
-                            : ''
-                            }}
-                            onClick={this.props.toggle}
-                            name='importRevealed'>
-                            Import</button>
+                    <div className='GridForCorners paper'>
+                        <div className='corner TL'>
+                            <div className='c1 brown'/>
+                            <div className='c2 brown'/>
+                            <div className='c3 brown'/>
+                        </div>
+                        <div className='corner TR'>
+                            <div className='c1 brown'/>
+                            <div className='c2 brown'/>
+                            <div className='c4 brown'/>
+                        </div>
+                        <div className='CharacterDisplayBox'>
+                            {characters}
+                            <div className='NewButtonBox paper'
+                                style={{display: this.props.currentCampaign.campaignDetails.is_dm 
+                                    ? 'none'
+                                    : ''
+                                }}>
+                                <button
+                                    onClick={this.props.toggle}
+                                    name='characterCreateRevealed'
+                                    id='ChCreationButton'
+                                    className='button paper'>
+                                    +</button>
+                            </div>
+                        </div>
+                        <div className='corner BL'>
+                            <div className='c1 brown'/>
+                            <div className='c3 brown'/>
+                            <div className='c4 brown'/>
+                        </div>
+                        <div className='corner BR'>
+                            <div className='c2 brown'/>
+                            <div className='c3 brown'/>
+                            <div className='c4 brown'/>
+                        </div>
                     </div>
+                    <button
+                        style={{display: this.props.currentCampaign.campaignDetails.is_dm 
+                        ? 'none'
+                        : ''
+                        }}
+                        onClick={this.props.toggle}
+                        name='importRevealed'
+                        id='ChImportButton'
+                        className='button paper'>
+                        Import</button>
                 </div>
                     <div
-                        className="Character-Box Box"
+                        className="Character-Box paper ImportBox"
                         style={{display: this.props.importRevealed 
                             ? ''
                             : 'none'
                         }}>
-                        Import Character
-                        <input type="text" placeholder="Name" name='importName' onChange={this.handleInput}/>
-                        <button onClick={this.importCharacter}>Submit</button>
-                        <button onClick={this.props.toggle} name="importRevealed">Cancel</button>
+                        <input className='input' id='ImportInput' placeholder='Name' type="text" placeholder="Name" name='importName' onChange={this.handleInput}/>
+                        <button className='button' id='prevStep' onClick={this.importCharacter}>Import</button>
+                        <button className='button' id='ChCreationCancel' onClick={this.props.toggle} name="importRevealed">X</button>
                     </div>
                     <div
-                        className='Character-Box Box'
+                        className='Character-Box paper'
                         style={{display: this.props.characterCreateRevealed
                             ? ''
                             : 'none'
@@ -114,7 +141,6 @@ class CharacterLanding extends Component {
                         <CharacterCreation toggle={this.props.toggle}/>
                     </div>
                     <div
-                        className='Character-Box'
                         style={{display: this.props.characterSheetRevealed
                             ? ''
                             : 'none'

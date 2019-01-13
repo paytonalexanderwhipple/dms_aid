@@ -1,0 +1,24 @@
+.CharacterCreation1 {
+    position: relative;
+    height: 200px;
+    width: 200px;
+    overflow: auto;
+}
+.CreationStatsNums {
+    display: inline;
+}
+.CH1ButtonBox {
+    width: 180px;
+    display: flex;
+    justify-content: space-around;
+}
+#ButtonCh1 {
+    height: 20px;
+    width: 75px;
+}
+.StatNameCH1 {
+    display: inline;
+}
+.statContainerCh1 {
+    margin-bottom: 10px;
+}
