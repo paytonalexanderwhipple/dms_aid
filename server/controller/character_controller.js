@@ -63,7 +63,7 @@ module.exports = {
     update: async (req, res) => {
         let { abilities, combat, Inventory, personalDetails, character, dualClass, XP } = req.body;
         const db = req.app.get('db');
-        const { stats, character_id, classDetails } = character;
+        const { stats, character_id, classDetails, race } = character;
         const abilitiesUpdate = [];
         const personalUpdate = [];
         for ( let catagory in req.body ) {
@@ -194,7 +194,17 @@ module.exports = {
                             case "xp":
                                 const { xp, idArr } = XP.xp
                                 if (idArr) {
-                                    db.character_class.update({character_class_id: idArr}, {xp: (xp/idArr.length)})
+                                    if (classDetails.length > 1 && race === 'Human') {
+                                        let ogXp = 0
+                                        classDetails.forEach(cLass => {
+                                            if (cLass.og_class) {
+                                                ogXp = cLass.xp;
+                                            }
+                                        });
+                                        db.character_class.update({character_class_id: idArr}, {xp: (xp - ogXp)});
+                                    } else {
+                                        db.character_class.update({character_class_id: idArr}, {xp: (xp/idArr.length)});
+                                    }
                                 }
                                 break;
                             case "hp":

@@ -2,6 +2,7 @@ import React ,{ Component } from 'react';
 import { connect } from 'react-redux';
     import { inputCharacterEdits } from '../../ducks/reducer/character_reducer.js';
 import './PersonalDetails.css';
+import { userInfo } from 'os';
 
 class PersonalDetails extends Component {
     constructor(props) {
@@ -78,7 +79,7 @@ class PersonalDetails extends Component {
     
     render() {
 
-        const { description, eyes, hair, sex, img, height, weight, age } = this.props.character;
+        const { description, eyes, hair, sex, img, height, weight, age, user_id } = this.props.character;
         const { is_dm } = this.props.currentCampaign.campaignDetails
 
         let heightDisplay = (<p>
@@ -91,6 +92,8 @@ class PersonalDetails extends Component {
             {(this.props.characterChanges.personalDetails.age === 0 ? 0 : this.props.characterChanges.personalDetails.age || age || 0)%365} Days
         </p>
         )
+
+        let user = this.props.currentCampaign.users.filter(user => user.user_id === user_id);
 
         let render;
         if (this.state.revealed) {
@@ -204,8 +207,16 @@ class PersonalDetails extends Component {
                         <h1
                             className='Header text'
                             style={{display: this.props.edit ? '' : 'none'}}>Image URL:</h1>
-                        <input className='input' name='img' onChange={this.handleInputPersonal} value={this.props.characterChanges.personalDetails.img} placeholder={img}
+                        <input className='input' name='img' onChange={this.handleInputPersonal} value={this.props.characterChanges.personalDetails.img}
                             style={{display: this.props.edit ? '' : 'none'}}/>
+                    </div>
+                    <div
+                        style={{display: this.props.edit ? 'none' : ''}}
+                        className='Container'>
+                        <h1
+                            className='Header text'>User:</h1>
+                        <p
+                            className='Text text'>{user.username}</p>
                     </div>
                 </div>
             </div>)

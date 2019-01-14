@@ -38,7 +38,8 @@ class CampaignBlock extends Component {
                     }
                     <img src={img} alt="" className='campaignImg'/>
                 </div>
-                <p className='CB-description MultilineDisplay'>{description}</p>
+                <p className='text Smalltext MultilineDisplay'>{description}</p>
+                <p className='Header text'>Roster:</p>
                 {roster}
                 <Link to={`/landing/campaign/${campaign_id}/${name}`} id='CBbutton'>
                     <button className='button' id='CBbutton'>Load</button>

@@ -28,10 +28,16 @@ class CharacterCreation4 extends Component {
     handleInput = (event) => {
         const { name, value } = event.target;
         let exeptionalStrength = this.props.characterCreation[name] || 0;
-        if (value === '+') {
+        if (value.includes('+')) {
             exeptionalStrength += 1
+            if(value.includes('*5')) {
+                exeptionalStrength += 4;
+            }
         } else {
             exeptionalStrength -= 1
+            if (value.includes('*5')) {
+                exeptionalStrength -= 4;
+            }
         }
         if ( 1 <= exeptionalStrength && exeptionalStrength <= 100 ) {
             this.props.handleCreationInput(name, exeptionalStrength);
@@ -55,10 +61,10 @@ class CharacterCreation4 extends Component {
     handleButtonInput = (event, hd_type) => {
         const { name, value } = event.target;
         let hp = this.props.characterCreation[name] || 0;
-        if (value === '+') {
-            hp += 1
+        if (value.includes('+')) {
+            hp += 1;
         } else {
-            hp -= 1
+            hp -= 1;
         }
         if ( 1 <= hp && hp <= hd_type ) {
             this.props.handleCreationInput(name, hp);
@@ -173,10 +179,12 @@ class CharacterCreation4 extends Component {
                             : 'none'
                             }}>
                             <h1 className='text Header'>Exeptional Strength</h1>
-                            <div className='IncrementButtonBox'>
-                                <button className='button' id='IncrementButton' onClick={this.handleInput} name='exeptionalStrength' value='+'>+</button>
-                                <p className='InlineText text'>{this.props.characterCreation.exeptionalStrength || 0}</p>
+                            <div className='IncrementButtonBox Container'>
+                                <button className='button' id='IncrementButton' onClick={this.handleInput} name='exeptionalStrength' style={{height: 13, width: 13}} value='-*5'>-5</button>
                                 <button className='button' id='IncrementButton' onClick={this.handleInput} name='exeptionalStrength' value='-'>-</button>
+                                <p className='InlineText text'>{this.props.characterCreation.exeptionalStrength || 0}</p>
+                                <button className='button' id='IncrementButton' onClick={this.handleInput} name='exeptionalStrength' value='+'>+</button>
+                                <button className='button' id='IncrementButton' onClick={this.handleInput} name='exeptionalStrength' style={{height: 13, width: 13}} value='+*5'>+5</button>
                             </div>
                         </div>
                     </div>
@@ -195,10 +203,12 @@ class CharacterCreation4 extends Component {
                             : 'none'
                             }}>
                             <h1 className='text Header'>Exeptional Strength</h1>
-                            <div className='IncrementButtonBox'>
+                            <div className='IncrementButtonBox Container'>
+                                <button className='button' id='IncrementButton' onClick={this.handleInput} name='exeptionalStrength' style={{height: 13, width: 13}} value='-*5'>-5</button>
                                 <button className='button' id='IncrementButton' onClick={this.handleInput} name='exeptionalStrength' value='-'>-</button>
                                 <p className='InlineText text'>{this.props.characterCreation.exeptionalStrength || 0}</p>
                                 <button className='button' id='IncrementButton' onClick={this.handleInput} name='exeptionalStrength' value='+'>+</button>
+                                <button className='button' id='IncrementButton' onClick={this.handleInput} name='exeptionalStrength' style={{height: 13, width: 13}} value='+*5'>+5</button>
                             </div>
                         </div>
                     </div>

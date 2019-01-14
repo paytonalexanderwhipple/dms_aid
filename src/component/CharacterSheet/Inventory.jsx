@@ -250,6 +250,14 @@ class Inventory extends Component {
                     <p
                         style={{display: surprise ? '' : 'none'}}>Surprise: {surprise}</p>
                 </div>
+                <div
+                    className='Container'
+                    style={{display: this.props.advanced ? '' : 'none'}}>
+                    <p className='text Smalltext' style={{marginRight: 3}}>Armor: {armorEncumbrance}Gp.</p>
+                    <p className='text Smalltext' style={{marginRight: 3}}>Weapons: {weaponEncumbrance}Gp.</p>
+                    <p className='text Smalltext' style={{marginRight: 3}}>Items: {itemEncumbrance}Gp.</p>
+                    <p className='text Smalltext' style={{marginRight: 3}}>Coinage: {coinEncumbrance}Gp.</p>
+                </div>
             </div>)
         } else {
             render = (<div>

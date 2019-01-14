@@ -375,7 +375,7 @@ class Abilites extends Component {
                             : 'none'
                         }}>
                         {this.props.edit
-                            ? <input className='input' onChange={this.handleInputPersonal} value={this.props.characterChanges.personalDetails.title} name="title" placeholder={title}/>
+                            ? <input className='input' onChange={this.handleInputPersonal} value={this.props.characterChanges.personalDetails.title} name="title"/>
                             : <p className='text Header'>{title}</p>
                         }
                     </div>
@@ -431,7 +431,7 @@ class Abilites extends Component {
                             : ` ${stats[0]}`
                         } 
                         {stats[0] === 18 && !this.props.edit && (classes.includes('Fighter') || classes.includes('Paladin') || classes.includes('Ranger'))
-                            ? ` ${stats[6]}%`
+                            ? ` (${stats[6]}%)`
                             : (this.props.edit && is_dm && (this.props.characterChanges.abilities.str || stats[0]) === 18 && (classes.includes('Fighter') || classes.includes('Paladin') || classes.includes('Ranger'))
                                 ? (
                                     <div className='ContainerInline'>
@@ -450,11 +450,11 @@ class Abilites extends Component {
                                 ? ''
                                 : 'none'
                             }}>
-                            <p className='Smalltext' style={{marginRight: 2, marginTop: -3}}>To Hit: {toHit > 0 ? '+' : ''}{toHit}{' '}</p>
-                            <p className='Smalltext' style={{marginRight: 2, marginTop: -3}}>Damage: {damage > 0 ? '+' : ''}{damage}{' '}</p>
-                            <p className='Smalltext' style={{marginRight: 2, marginTop: -3}}>Encumbrance: {encumbranceAdj > 0 ? '+' : ''}{encumbranceAdj}{' '}</p>
-                            <p className='Smalltext' style={{marginRight: 2, marginTop: -3}}>Minor Test: {minorTest}{minorTestEx ? `(${minorTestEx})` : ''}{' '}</p>    
-                            <p className='Smalltext' style={{marginRight: 2, marginTop: -3}}>Major Test: {majorTest}%</p>
+                            <p className='text Smalltext' style={{marginRight: 2, marginTop: -3}}>To Hit: {toHit > 0 ? '+' : ''}{toHit}{' '}</p>
+                            <p className='text Smalltext' style={{marginRight: 2, marginTop: -3}}>Damage: {damage > 0 ? '+' : ''}{damage}{' '}</p>
+                            <p className='text Smalltext' style={{marginRight: 2, marginTop: -3}}>Encumbrance: {encumbranceAdj > 0 ? '+' : ''}{encumbranceAdj}{' '}</p>
+                            <p className='text Smalltext' style={{marginRight: 2, marginTop: -3}}>Minor Test: {minorTest}{minorTestEx ? `(${minorTestEx})` : ''}{' '}</p>    
+                            <p className='text Smalltext' style={{marginRight: 2, marginTop: -3}}>Major Test: {majorTest}%</p>
                         </div>
                     </h1>
                     <h1 className='text Header'>INT {this.props.edit && is_dm
@@ -473,13 +473,13 @@ class Abilites extends Component {
                                 : 'none'
                             }}
                             className='Container'>
-                            <p className='Smalltext' style={{marginRight: 2, marginTop: -3}}>Add Languages: {additionalLanguages}</p>
+                            <p className='Smalltext text' style={{marginRight: 2, marginTop: -3}}>Add Languages: {additionalLanguages}</p>
                             <p 
                                 style={{display: classes.includes('Magic-User'), marginRight: 2, marginTop: -3}}
-                                className='Smalltext'>% To Understand Spell: {chanceToUnderstand}</p>
+                                className='Smalltext text'>% To Understand Spell: {chanceToUnderstand}</p>
                             <p 
                                 style={{display: classes.includes('Magic-User'), marginRight: 2, marginTop: -3}}
-                                className='Smalltext'>Min Spells: {minSpells} Max Spells: {maxSpells}</p>
+                                className='Smalltext text'>Min Spells: {minSpells} Max Spells: {maxSpells}</p>
                         </div>
                     </h1>
                     <h1 className='text Header'>WIS {this.props.edit && is_dm
@@ -499,17 +499,17 @@ class Abilites extends Component {
                             : 'none'
                         }}
                         className='Container'>
-                        <p className='Smalltext' style={{marginRight: 2, marginTop: -3}}>Mental Saves Bonus: {mental > 0 ? '+' : ''}{mental}</p>
+                        <p className='Smalltext text' style={{marginRight: 2, marginTop: -3}}>Mental Saves Bonus: {mental > 0 ? '+' : ''}{mental}</p>
                         <p
-                            style={{display: classes.includes('Cleric')
+                            style={{display: classes.includes('Cleric') || classes.includes('Druid')
                                 ? ''
                                 : 'none', marginRight: 2, marginTop: -3}}
-                                className='Smalltext Container'>Bonus Spells: {bonusSpells[0] ? BonusSpells : 'none'}</p>
+                                className='Smalltext text Container'>Bonus Spells: {bonusSpells[0] ? BonusSpells : 'none'}</p>
                         <p
-                            style={{display: classes.includes('Cleric')
+                            style={{display: classes.includes('Cleric') || classes.includes('Druid')
                                 ? ''
                                 : 'none', marginRight: 2, marginTop: -3}}
-                                className='Smalltext'>Spell Failure: {failure}%</p>
+                                className='Smalltext text'>Spell Failure: {failure}%</p>
                     </div>
                     <h1 className='text Header'>DEX {this.props.edit && is_dm
                             ? (
@@ -528,8 +528,8 @@ class Abilites extends Component {
                             : 'none',
                         }}
                         className='Container'>
-                        <p className='Smalltext' style={{marginRight: 2, marginTop: -3}}>Surprise Bonus/Missile To Hit Adj: {suprise > 0 ? '+' : ''}{suprise}</p>
-                        <p className='Smalltext' style={{marginRight: 2, marginTop: -3}}>AC Adj: {ac > 0 ? '+' : ''}{ac}</p>
+                        <p className='Smalltext text' style={{marginRight: 2, marginTop: -3}}>Surprise Bonus/Missile To Hit Adj: {suprise > 0 ? '+' : ''}{suprise}</p>
+                        <p className='Smalltext text' style={{marginRight: 2, marginTop: -3}}>AC Adj: {ac > 0 ? '+' : ''}{ac}</p>
                     </div>
                     <h1 className='text Header'>CON {this.props.edit && is_dm
                             ? (
@@ -548,9 +548,9 @@ class Abilites extends Component {
                             : 'none'
                         }}
                         className='Container'>
-                        <p className='Smalltext' style={{marginRight: 2, marginTop: -3}}>Resurection Survival: {raise}%</p>
-                        <p className='Smalltext' style={{marginRight: 2, marginTop: -3}}>System Shock Survival: {shock}%</p>
-                        <p className='Smalltext' style={{marginRight: 2, marginTop: -3}}>HP Bonus: {con.hp > 0 ? '+' : ''}{con.hp}</p>
+                        <p className='Smalltext text' style={{marginRight: 2, marginTop: -3}}>Resurection Survival: {raise}%</p>
+                        <p className='Smalltext text' style={{marginRight: 2, marginTop: -3}}>System Shock Survival: {shock}%</p>
+                        <p className='Smalltext text' style={{marginRight: 2, marginTop: -3}}>HP Bonus: {con.hp > 0 ? '+' : ''}{con.hp}</p>
                     </div>
                 
                     <h1 className='text Header'>CHA {this.props.edit && is_dm
@@ -570,9 +570,9 @@ class Abilites extends Component {
                             : 'none'
                         }}
                         className='Container'>
-                        <p className='Smalltext' style={{marginRight: 2, marginTop: -3}}>Max Henchmen: {henchmen}</p>
-                        <p className='Smalltext' style={{marginRight: 2, marginTop: -3}}>Loyalty Bonus: {loyalty > 0 ? '+' : ''}{loyalty}%</p>
-                        <p className='Smalltext' style={{marginRight: 2, marginTop: -3}}>Reaction Bonus: {reaction > 0 ? '+' : ''}{reaction}%</p>
+                        <p className='Smalltext text' style={{marginRight: 2, marginTop: -3}}>Max Henchmen: {henchmen}</p>
+                        <p className='Smalltext text' style={{marginRight: 2, marginTop: -3}}>Loyalty Bonus: {loyalty > 0 ? '+' : ''}{loyalty}%</p>
+                        <p className='Smalltext text' style={{marginRight: 2, marginTop: -3}}>Reaction Bonus: {reaction > 0 ? '+' : ''}{reaction}%</p>
                     </div>
                 </div>
                 <div

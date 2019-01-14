@@ -29,7 +29,7 @@ function CharacterBlock(props) {
         </div>
         <p className='text Smalltext' style={{marginLeft: 5, marginTop: -3}}>{title}</p>
         <div
-            className='ChBframe'>
+            className='ChBframe paper'>
             <img className='ChBimage' src={img} onLoad={imageLoad = true} onError={imageLoad = false}/>
 
         </div>
@@ -39,12 +39,12 @@ function CharacterBlock(props) {
         <p className='text ChBhp'>HP: {hp}</p>
         <div className='BreakChB'/>
         <div className='ChBstats'>
-            <h1 className='statsChB' >STR <p onClass='text'>{stats[0]} {stats[6] && stats[0] === 18 ? `${stats[6]}%` : ''}</p></h1>
-            <h1 className='statsChB' >INT <p onClass='text'>{stats[1]}</p></h1>
-            <h1 className='statsChB' >WIS <p onClass='text'>{stats[2]}</p></h1>
-            <h1 className='statsChB' >DEX <p onClass='text'>{stats[3]}</p></h1>
-            <h1 className='statsChB' >CON <p onClass='text'>{stats[4]}</p></h1>
-            <h1 className='statsChB' >CHA <p onClass='text'>{stats[5]}</p></h1>
+            <h1 className='statsChB text' >STR <p className='text statsChBnums'>{stats[0]} {stats[6] && stats[0] === 18 ? `(${stats[6]}%)` : ''}</p></h1>
+            <h1 className='statsChB text' >INT <p className='text statsChBnums'>{stats[1]}</p></h1>
+            <h1 className='statsChB text' >WIS <p className='text statsChBnums'>{stats[2]}</p></h1>
+            <h1 className='statsChB text' >DEX <p className='text statsChBnums'>{stats[3]}</p></h1>
+            <h1 className='statsChB text' >CON <p className='text statsChBnums'>{stats[4]}</p></h1>
+            <h1 className='statsChB text' >CHA <p className='text statsChBnums'>{stats[5]}</p></h1>
         </div>
         <div className='BreakChB'/>        
         <div className='ChBsavesBox'>

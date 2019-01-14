@@ -130,7 +130,7 @@ class CharacterLanding extends Component {
                         }}>
                         <input className='input' id='ImportInput' placeholder='Name' type="text" placeholder="Name" name='importName' onChange={this.handleInput}/>
                         <button className='button' id='prevStep' onClick={this.importCharacter}>Import</button>
-                        <button className='button' id='ChCreationCancel' onClick={this.props.toggle} name="importRevealed">X</button>
+                        <button className='button' id='ChCreationCancel' onClick={() => {this.props.toggle(); this.setState({importName: ''})}} name="importRevealed">X</button>
                     </div>
                     <div
                         className='Character-Box paper'

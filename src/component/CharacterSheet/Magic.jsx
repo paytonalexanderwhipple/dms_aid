@@ -47,12 +47,13 @@ class Magic extends Component {
             } else if (cLass.class_name === 'Paladin') {
                 level = cLass.level - 2;
             } 
-            if (acc.level <= level) {
+            if (acc.level < level) {
                 return cLass;
             } else {
                 return acc;
             }
         }, {level: 0, turn_undead: []});
+        console.log(turnClass);
 
         let render;
         if (this.state.revealed) {
@@ -164,37 +165,37 @@ class Magic extends Component {
                         <div
                             style={{display: clericSpells[0] ? '' : 'none'}}>
                             <p className='Spell'>1<p className='sup'>st</p></p>
-                            <p className='Spell'>{clericSpells[0] + (wis.spells[0] || 0)}</p>
+                            <p className='Spell'>{clericSpells[0] + classes.includes('Cleric') ? (wis.spells[0] || 0) : 0}</p>
                         </div>
                         <div
                             style={{display: clericSpells[1] ? '' : 'none'}}>
                             <p className='Spell'>2<p className='sup'>nd</p></p>
-                            <p className='Spell'>{clericSpells[1] + (wis.spells[1] || 0)}</p>
+                            <p className='Spell'>{clericSpells[1] + classes.includes('Cleric') ? (wis.spells[1] || 0) : 0}</p>
                         </div>
                         <div
                             style={{display: clericSpells[2] ? '' : 'none'}}>
                             <p className='Spell'>3<p className='sup'>rd</p></p>
-                            <p className='Spell'>{clericSpells[2] + (wis.spells[2] || 0)}</p>
+                            <p className='Spell'>{clericSpells[2] + classes.includes('Cleric') ? (wis.spells[2] || 0) : 0}</p>
                         </div>
                         <div
                             style={{display: clericSpells[3] ? '' : 'none'}}>
                             <p className='Spell'>4<p className='sup'>th</p></p>
-                            <p className='Spell'>{clericSpells[3] + (wis.spells[3] || 0)}</p>
+                            <p className='Spell'>{clericSpells[3] + classes.includes('Cleric') ? (wis.spells[3] || 0) : 0}</p>
                         </div>
                         <div
                             style={{display: clericSpells[4] ? '' : 'none'}}>
                             <p className='Spell'>5<p className='sup'>th</p></p>
-                            <p className='Spell'>{clericSpells[4] + (wis.spells[4] || 0)}</p>
+                            <p className='Spell'>{clericSpells[4] + classes.includes('Cleric') ? (wis.spells[4] || 0) : 0}</p>
                         </div>
                         <div
                             style={{display: clericSpells[5] ? '' : 'none'}}>
                             <p className='Spell'>6<p className='sup'>th</p></p>
-                            <p className='Spell'>{clericSpells[5] + (wis.spells[5] || 0)}</p>
+                            <p className='Spell'>{clericSpells[5] + classes.includes('Cleric') ? (wis.spells[5] || 0) : 0}</p>
                         </div>
                         <div
                             style={{display: clericSpells[6] ? '' : 'none'}}>
                             <p className='Spell'>7<p className='sup'>th</p></p>
-                            <p className='Spell'>{clericSpells[6] + (wis.spells[6] || 0)}</p>
+                            <p className='Spell'>{clericSpells[6] + classes.includes('Cleric') ?  (wis.spells[6] || 0) : 0}</p>
                         </div>
                     </div>
                 </div>

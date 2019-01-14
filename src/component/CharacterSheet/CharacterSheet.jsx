@@ -64,6 +64,7 @@ class CharacterSheet extends Component {
 
     removeCharacter = () => {
         const { campaign_id, character_id } = this.state.character;
+        this.props.toggleLoad();
         axios.delete(`/api/character?campaign_id=${campaign_id}&character_id=${character_id}`)
             .then(async res => {
                 const { campaign_id, name } = this.props.currentCampaign.campaignDetails

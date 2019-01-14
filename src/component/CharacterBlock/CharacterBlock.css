@@ -17,13 +17,13 @@
     outline: none;
 }
 .ChBframe {
-    border: 1px solid var(--color7);
     flex-basis: 100px;
     flex-shrink: 0;
     width: 125px;
     align-self: center;
     display: flex;
     justify-content: center;
+    overflow: hidden;
 }
 .CharacterCard {
     position: relative;
@@ -36,9 +36,9 @@
     margin-top: 20px;
 }
 .ChBimage {
-    height: 98px;
+    max-height: 98px;
     align-self: center;
-    max-width: 123px;
+    width: 123px;
 }
 .nameTextChB {
     font-size: 14px;
@@ -70,6 +70,11 @@
 .statsChB {
     font-size: 10px;
     margin-right: 3px;
+    font-weight: bold
+}
+.statsChBnums {
+    font-size: 10px;
+    font-weight: normal;
 }
 .ChBsavesBox {
     margin-top: 3px;
