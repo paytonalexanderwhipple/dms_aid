@@ -73,7 +73,6 @@ class CharacterCreation3 extends Component {
                 return cLass
             }
         });
-        console.log('c3', this.props);
         const classOptions = eligableClasses.map(cLass => {
             return (
                 <option value={cLass}>

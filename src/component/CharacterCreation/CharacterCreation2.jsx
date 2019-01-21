@@ -37,8 +37,6 @@ class CharacterCreation2 extends Component {
         const { campaign_id, name } = this.props.currentCampaign.campaignDetails;
 
         const { str, int, wis, dex, con, cha } = this.props.characterCreation;
-
-        console.log(this.props);
  
         const eligableRaces = this.props.characterData.races.filter(race => {
             const { min_stats, max_stats} = race;
