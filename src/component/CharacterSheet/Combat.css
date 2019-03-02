@@ -1,46 +1,55 @@
 .quantityMarker {
-    height: 5px;
-    width: 5px;
-    flex-shrink: 0;
-    background: #444;
-    border: #222 solid 1px;
-    border-radius: 50%;
-    margin: 1px 1px 0px 0px
+  height: 5px;
+  width: 5px;
+  flex-shrink: 0;
+  background: #444;
+  border: #222 solid 1px;
+  border-radius: 50%;
+  margin: 1px 1px 0px 0px;
 }
 .qm100 {
-    background: gold
+  background: gold;
 }
 .qm20 {
-    background: silver;
+  background: silver;
 }
 .qm5 {
-    background: burlywood;
+  background: #d1a684;
 }
 .quantityBox {
-    height: 12px;
-    width: 60px;
-    display: flex;
-    flex-wrap: wrap-reverse;
-    align-content: flex-start;
+  height: 12px;
+  width: 60px;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  align-content: flex-start;
 }
 .Saves {
-    border: 1px black solid;
-    border-radius: 20px;
-    padding: 1px;
+  border: 1px black solid;
+  border-radius: 20px;
+  padding: 1px;
 }
 .Justify-End {
-    margin-left: 5px;
-    justify-content: space-between;
+  margin-left: 5px;
+  justify-content: space-between;
 }
 .Thac {
-    border: 1px black solid;
-    border-left: .5px;
-    border-right: .5px;
-    height: 15px;
-    width: 20px;
+  border: 1px black solid;
+  border-left: 0.5px;
+  border-right: 0.5px;
+  height: 15px;
+  width: 20px;
+}
+.WeaponBox {
+  border: 1px dotted var(--color10);
+  padding: 2px;
+  width: 100%;
+  height: fit-content;
+}
+.WeaponsContainer {
+  display: flex;
 }
 @media (max-width: 415px) {
-    .THAC2 {
-        display: none;
-    }
+  .THAC2 {
+    display: none;
+  }
 }

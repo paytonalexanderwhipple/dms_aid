@@ -1,9 +1,9 @@
 module.exports = {
   str: (str, classes, exeptionalStrength) => {
     if (
-      classes.includes("Fighter") ||
+      (classes.includes("Fighter") ||
       classes.includes("Paladin") ||
-      (classes.includes("Ranger") && str == 18)
+      classes.includes("Ranger")) && str == 18
     ) {
       if (99 < exeptionalStrength)
         return {

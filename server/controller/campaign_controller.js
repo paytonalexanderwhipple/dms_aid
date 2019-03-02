@@ -156,7 +156,6 @@ module.exports = {
       });
       return { ...weapon, ammoDetails };
     });
-    let counter = 0;
     const characterDetails = await Promise.all(
       characterData.map(async character => {
         const classDetails = [];
