@@ -194,8 +194,8 @@ class CharacterLanding extends Component {
           <button
             className="button"
             id="ChCreationCancel"
-            onClick={() => {
-              this.props.toggle();
+            onClick={event => {
+              this.props.toggle(event);
               this.setState({ importName: "" });
             }}
             name="importRevealed"
